@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
+const usersRoutes = require('./routes/users');
+const scorecardRoutes = require('./routes/scorecards');
 require('dotenv').config();
 
 const app = express();
@@ -22,9 +24,9 @@ mongoose.connect(process.env.URI, {
 
 app.use(cors({ origin: true, credentials: true }));
 
-const usersRoutes = require('./routes/users');
+app.use('/api/users', usersRoutes);
 
-app.use('/', usersRoutes);
+app.use('/api/scorecards', scorecardRoutes);
 
 const port = process.env.PORT;
 
