@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const CourseSchema = new Schema({
-  courseName: { type: String, required: true },
-  courseLocation: { type: String, required: true },
-  coursePar: { type: Number, required: true },
-  courseImage: { type: String, required: true },
+  name: { type: String, required: true },
+  state: { type: String, required: true },
+  city: { type: String, required: true },
+  par: { type: Number, required: true },
   holes: [{
     holeNumber: { type: Number, required: true },
     par: { type: Number, required: true },
