@@ -4,8 +4,8 @@ import App from './app.jsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AuthContextProvider } from './context/authContext.jsx';
-import Signup from './components/signup/signupPage.jsx';
-import Login from './components/login/loginPage.jsx';
+import Signup from './components/Signup/signupPage.jsx';
+import Login from './components/Login/loginPage.jsx';
 
 const router = createBrowserRouter([
   {
