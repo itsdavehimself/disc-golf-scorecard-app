@@ -16,7 +16,7 @@ const ScorecardSchema = new Schema({
         {
           holeNumber: { type: Number, required: true },
           holePar: { type: Number, required: true },
-          score: { type: Number, required: true },
+          score: { type: Number, required: false },
         },
       ],
     },
