@@ -1,6 +1,6 @@
 export const getTest = async () => {
   try {
-    const res = await fetch('http://localhost:8080/test', {
+    const res = await fetch('http://localhost:8080/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -8,5 +8,7 @@ export const getTest = async () => {
       },
     });
     return await res.json();
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
