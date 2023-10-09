@@ -62,22 +62,6 @@ exports.loginUser = (req, res, next) => {
 // Signup user
 
 exports.signupUser = [
-  body('first_name')
-    .trim()
-    .isLength({ min: 1 })
-    .escape()
-    .withMessage('Please enter a first name')
-    .isAlpha()
-    .withMessage('First name must only contain alphabetic characters'),
-
-  body('last_name')
-    .trim()
-    .isLength({ min: 1 })
-    .escape()
-    .withMessage('Please enter a last name')
-    .isAlpha()
-    .withMessage('Last name must only contain alphabetic characters'),
-
   body('email')
     .trim()
     .isEmail()
@@ -87,7 +71,8 @@ exports.signupUser = [
 
   body('username')
     .trim()
-    .isLength({ min: 4, max: 20 })
+    .isLength({ min: 4, max: 14 })
+    .withMessage('Username must be between 4 and 14 characters long')
     .escape()
     .withMessage('Please enter a valid username')
     .isAlphanumeric()
@@ -108,8 +93,6 @@ exports.signupUser = [
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     const user = new User({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
       email: req.body.email,
       username: req.body.username,
       password: hashedPassword,

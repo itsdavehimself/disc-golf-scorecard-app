@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
-export const useSignup = () => {
+export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signup = async (email, username, password) => {
+  const login = async (username, password) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('http://localhost:8080/signup', {
+    const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email,
         username,
         password,
       }),
@@ -34,5 +33,5 @@ export const useSignup = () => {
     }
   };
 
-  return { signup, isLoading, error };
+  return { login, isLoading, error };
 };
