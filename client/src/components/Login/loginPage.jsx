@@ -19,6 +19,7 @@ const Login = () => {
         type="text"
         onChange={(e) => setUsername(e.target.value)}
         value={username}
+        autoComplete="username"
       ></input>
       <label>Password: </label>
       <input
