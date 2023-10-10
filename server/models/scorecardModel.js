@@ -11,7 +11,16 @@ const ScorecardSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   players: [
     {
-      name: { type: String },
+      type: {
+        type: String,
+        enum: ['User', 'Friend'],
+        required: true,
+      },
+      reference: {
+        type: Schema.Types.ObjectId,
+        refPath: 'players.type',
+        required: true,
+      },
       scores: [
         {
           holeNumber: { type: Number, required: true },
