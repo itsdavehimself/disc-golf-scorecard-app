@@ -10,7 +10,7 @@ export default function Navbar() {
     logout();
   };
   return (
-    <nav>
+    <header>
       {!user && (
         <div>
           <Link to={'/login'}>
@@ -22,6 +22,6 @@ export default function Navbar() {
         </div>
       )}
       {user && <button onClick={handleClick}>Logout</button>}
-    </nav>
+    </header>
   );
 }
