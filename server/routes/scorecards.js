@@ -2,7 +2,6 @@ const express = require('express');
 const {
   createScorecard, getAllScorecards, getScorecard, deleteScorecard, updateScorecard,
 } = require('../controllers/scorecardController');
-const Scorecard = require('../models/scorecardModel');
 
 const router = express.Router();
 
