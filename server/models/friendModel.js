@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const FriendSchema = new Schema({
   name: { type: String, required: true, maxLength: 15 },
   scorecards: [{ type: Schema.Types.ObjectId, ref: 'Scorecard', required: false }],
+  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 module.exports = mongoose.model('Friend', FriendSchema);

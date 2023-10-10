@@ -4,7 +4,9 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/userModel');
+const Friend = require('../models/friendModel');
 
 const createToken = (_id) => jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' });
 
@@ -86,7 +88,7 @@ exports.signupUser = [
     })
     .withMessage('Please enter a valid password'),
 
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const errors = validationResult(req);
 
     const salt = await bcrypt.genSalt(10);
@@ -108,3 +110,43 @@ exports.signupUser = [
     }
   }),
 ];
+
+exports.getFriends = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  const { friends } = user;
+  res.status(200).json(friends);
+});
+
+exports.updateFriends = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'User does not exist' });
+  }
+
+  try {
+    const newFriend = new Friend({
+      name: req.body.name,
+      createdBy: id,
+    });
+
+    const savedFriend = await newFriend.save();
+
+    const friendId = savedFriend._id;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: id },
+      { $push: { friends: friendId } },
+      { new: true },
+    );
+
+    if (!updatedUser) {
+      return res.status(400).json({ error: 'User does not exist' });
+    }
+
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});

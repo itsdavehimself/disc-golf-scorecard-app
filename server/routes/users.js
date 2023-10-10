@@ -2,14 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-const { loginUser, signupUser } = require('../controllers/userController');
-
-// Login route
+const {
+  loginUser, signupUser, getFriends, updateFriends,
+} = require('../controllers/userController');
 
 router.post('/login', loginUser);
 
-// Signup route
-
 router.post('/signup', signupUser);
+
+router.get('/friends/:id', getFriends);
+
+router.patch('/friends/:id', updateFriends);
 
 module.exports = router;
