@@ -5,6 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const usersRoutes = require('./routes/users');
 const scorecardRoutes = require('./routes/scorecards');
+const courseRoutes = require('./routes/courses');
 require('dotenv').config();
 
 const app = express();
@@ -27,6 +28,8 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/api/users', usersRoutes);
 
 app.use('/api/scorecards', scorecardRoutes);
+
+app.use('/api/courses', courseRoutes);
 
 const port = process.env.PORT;
 
