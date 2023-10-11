@@ -4,17 +4,19 @@ const Scorecard = require('../models/scorecardModel');
 
 // Get all scorecard documents
 exports.getAllScorecards = asyncHandler(async (req, res) => {
-  const scorecards = await Scorecard.find({}).sort({ date: -1 });
+  const userId = req.user._id;
+  const scorecards = await Scorecard.find({ userId }).sort({ date: -1 });
   res.status(200).json(scorecards);
 });
 
 // Create new scorecard
 exports.createScorecard = asyncHandler(async (req, res) => {
   const {
-    course, date, startTime, endTime, notes, userId, players,
+    course, date, startTime, endTime, notes, players,
   } = req.body;
 
   try {
+    const userId = req.user._id;
     const scorecard = await Scorecard.create({
       course, date, startTime, endTime, notes, userId, players,
     });
