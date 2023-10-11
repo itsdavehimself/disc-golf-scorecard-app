@@ -6,6 +6,7 @@ const passport = require('passport');
 const usersRoutes = require('./routes/users');
 const scorecardRoutes = require('./routes/scorecards');
 const courseRoutes = require('./routes/courses');
+const friendRoutes = require('./routes/friends');
 require('dotenv').config();
 
 const app = express();
@@ -30,6 +31,8 @@ app.use('/api/users', usersRoutes);
 app.use('/api/scorecards', scorecardRoutes);
 
 app.use('/api/courses', courseRoutes);
+
+app.use('/api/friends', friendRoutes);
 
 const port = process.env.PORT;
 
