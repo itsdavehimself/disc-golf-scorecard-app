@@ -2,8 +2,11 @@ const express = require('express');
 const {
   createScorecard, getAllScorecards, getScorecard, deleteScorecard, updateScorecard,
 } = require('../controllers/scorecardController');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 // Get all scorecard documents
 router.get('/', getAllScorecards);
