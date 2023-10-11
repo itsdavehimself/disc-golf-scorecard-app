@@ -14,12 +14,12 @@ const ScorecardSchema = new Schema({
       type: {
         type: String,
         enum: ['User', 'Friend'],
-        required: true,
+        required: false,
       },
       reference: {
         type: Schema.Types.ObjectId,
         refPath: 'players.type',
-        required: true,
+        required: false,
       },
       scores: [
         {
