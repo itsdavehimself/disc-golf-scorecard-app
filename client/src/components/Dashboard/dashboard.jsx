@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ScorecardDetails from '../ScorecardDetails/scorecardDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
   const [scorecards, setScorecards] = useState(null);
@@ -34,6 +35,10 @@ export default function Dashboard() {
 
   return (
     <div className="home">
+      <Link to="/newround">
+        <button>Start a round</button>
+      </Link>
+
       <div className="scorecards">
         {scorecards &&
           scorecards.map((scorecard) => (
