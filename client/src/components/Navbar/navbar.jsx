@@ -21,7 +21,15 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-      {user && <button onClick={handleClick}>Logout</button>}
+      {user && (
+        <>
+          <Link to="/">
+            <button>Home</button>
+          </Link>
+
+          <button onClick={handleClick}>Logout</button>
+        </>
+      )}
     </header>
   );
 }
