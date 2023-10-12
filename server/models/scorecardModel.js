@@ -11,6 +11,7 @@ const ScorecardSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   players: [
     {
+      name: { type: String, required: true },
       type: {
         type: String,
         enum: ['User', 'Friend'],
