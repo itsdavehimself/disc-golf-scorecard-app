@@ -39,6 +39,7 @@ export default function ScorecardForm() {
       }));
 
       return {
+        name: player.name,
         type: player.type,
         reference: player.reference,
         scores: playerScores,
@@ -81,9 +82,11 @@ export default function ScorecardForm() {
     const value = e.target.value;
     const playerId = value;
     const playerType = e.target.name;
+    const playerName = e.target.getAttribute('data-player-name');
 
     if (e.target.checked) {
       const playerObject = {
+        name: playerName,
         type: playerType,
         reference: playerId,
         scores: [],
@@ -146,6 +149,7 @@ export default function ScorecardForm() {
           <input
             type="checkbox"
             name="User"
+            data-player-name={user.user.username}
             id="player1"
             value={user.user._id}
             onChange={handleCheckboxChange}
@@ -157,6 +161,7 @@ export default function ScorecardForm() {
             <input
               type="checkbox"
               name="Friend"
+              data-player-name={friend.name}
               id={`player${index + 2}`}
               value={friend._id}
               onChange={handleCheckboxChange}
