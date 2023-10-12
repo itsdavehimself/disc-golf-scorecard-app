@@ -9,6 +9,7 @@ const CourseSchema = new Schema({
   par: { type: Number, required: true },
   holes: [{
     holeNumber: { type: Number, required: true },
+    distance: { type: Number, required: true },
     par: { type: Number, required: true },
   }],
 
