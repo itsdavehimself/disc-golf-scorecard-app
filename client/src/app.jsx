@@ -6,6 +6,8 @@ import Login from './components/Login/loginPage';
 import Signup from './components/Signup/signupPage';
 import Dashboard from './components/Dashboard/dashboard';
 import ScorecardForm from './components/ScorecardForms/scorecardForm';
+import Scorecard from './components/Scorecard/scorecard';
+import NotFound from './components/NotFound/notFound';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -60,6 +62,20 @@ export default function App() {
                 )
               }
             />
+            <Route
+              path="/scorecard/:id"
+              element={
+                user ? (
+                  <Scorecard />
+                ) : (
+                  <>
+                    <Navigate to="/login" />
+                    <Login />
+                  </>
+                )
+              }
+            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </BrowserRouter>
