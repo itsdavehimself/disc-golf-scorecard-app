@@ -29,12 +29,13 @@ exports.createScorecard = asyncHandler(async (req, res) => {
 // Get a single scorecard
 exports.getScorecard = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const userId = req.user._id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Scorecard does not exist' });
   }
 
-  const scorecard = await Scorecard.findById(id);
+  const scorecard = await Scorecard.find({ $and: [{ userId }, { _id: id }] });
 
   if (!scorecard) {
     return res.status(404).json({ error: 'Scorecard does not exist' });
