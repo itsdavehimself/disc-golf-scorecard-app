@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function ScorecardForm() {
   const [course, setCourse] = useState(null);
@@ -8,7 +9,9 @@ export default function ScorecardForm() {
   const [isLoading, setIsLoading] = useState(true);
   const [friends, setFriends] = useState([]);
   const [error, setError] = useState(null);
+  const [newScorecardId, setNewScorecardId] = useState(null);
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,9 +68,12 @@ export default function ScorecardForm() {
 
     if (response.ok) {
       setError(null);
+      const scorecardId = json._id;
+      setNewScorecardId(scorecardId);
       console.log('new scorecard added');
       setCourse(null);
       setPlayers([]);
+      navigate(`/scorecard/${scorecardId}`);
     }
   };
 
