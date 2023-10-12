@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ScorecardDetails({ scorecard }) {
   const [courseName, setCourseName] = useState('');
   const [holes, setHoles] = useState('');
+  const navigate = useNavigate();
+
+  const openScorecard = () => {
+    navigate(`/scorecard/${scorecard._id}`);
+  };
 
   useEffect(() => {
     async function fetchCourseName() {
@@ -24,7 +30,7 @@ export default function ScorecardDetails({ scorecard }) {
   }, [scorecard.course]);
 
   return (
-    <div className="scorecard-details">
+    <div onClick={openScorecard} className="scorecard-details">
       <h4 className="scorecard-course">{courseName}</h4>
       <p>{holes} holes</p>
       <p className="date">{scorecard.date}</p>
