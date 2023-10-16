@@ -69,7 +69,13 @@ exports.signupUser = [
     .isEmail()
     .escape()
     .withMessage('Please enter a valid email address')
-    .normalizeEmail(),
+    .normalizeEmail()
+    .custom(async (email) => {
+      const existingEmail = await User.findOne({ email });
+      if (existingEmail) {
+        throw new Error('Email already in use');
+      }
+    }),
 
   body('username')
     .trim()
@@ -78,7 +84,13 @@ exports.signupUser = [
     .escape()
     .withMessage('Please enter a valid username')
     .isAlphanumeric()
-    .withMessage('Usernames must only contain letters A-Z or numbers 0-9'),
+    .withMessage('Usernames must only contain letters A-Z or numbers 0-9')
+    .custom(async (username) => {
+      const existingUsername = await User.findOne({ username });
+      if (existingUsername) {
+        throw new Error('Username already in use');
+      }
+    }),
 
   body('password')
     .trim()
