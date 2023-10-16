@@ -86,7 +86,7 @@ const Signup = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col">
-          <label>Email: </label>
+          <label>Email </label>
           <input
             className={`${
               isEmailError
@@ -104,7 +104,7 @@ const Signup = () => {
           )}
         </div>
         <div className="flex flex-col">
-          <label>Username: </label>
+          <label>Username </label>
           <input
             className={`${
               isUsernameError
@@ -124,7 +124,7 @@ const Signup = () => {
           )}
         </div>
         <div className="flex flex-col">
-          <label>Password: </label>
+          <label>Password </label>
           <input
             className={`${
               isPasswordError
