@@ -5,6 +5,7 @@ import LandingPage from './components/LandingPage/landingPage';
 import Login from './components/Login/loginPage';
 import Signup from './components/Signup/signupPage';
 import Dashboard from './components/Dashboard/dashboard';
+import Sidebar from './components/Sidebar/sidebar';
 import ScorecardForm from './components/ScorecardForms/scorecardForm';
 import Scorecard from './components/Scorecard/scorecard';
 import NotFound from './components/NotFound/notFound';
@@ -20,7 +21,8 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <div className="pages">
+        <div className="flex flex-row h-screen w-screen">
+          {user && <Sidebar />}
           <Routes>
             <Route path="/" element={user ? <Dashboard /> : <LandingPage />} />
             <Route
