@@ -6,6 +6,7 @@ export default {
       emerald: '#27CE8E',
       honeydew: '#EBFFF7',
       'black-olive': '#29332F',
+      mint: '#E7F3F0',
       jade: '#22A875',
       'off-white': '#FCFFFE',
       'white-smoke': '#F5F5F5',
@@ -13,6 +14,7 @@ export default {
       vermillion: '#FF312E',
       red: '#FF7A78',
       rose: '#FFDEDD',
+      white: '#ffffff',
     },
     extend: {
       backgroundImage: {
@@ -26,6 +28,10 @@ export default {
         200: '200%',
         cover: 'cover',
         contain: 'contain',
+      },
+      translate: {
+        '70r': '70%',
+        '78r': '78%',
       },
     },
   },
