@@ -72,7 +72,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col bg-off-white h-screen pt-18 px-7 gap-4 items-center justify-center w-screen">
+    <div className="flex flex-col bg-off-white h-screen pt-18  gap-4 items-center justify-center w-screen">
       <div className="flex flex-col gap-4">
         <h3 className="flex flex-col md:items-center md:text-center justify-center text-black-olive text-4xl font-semibold">
           Ace or tree, <br></br>track it here.
@@ -82,7 +82,7 @@ const Signup = () => {
         </p>
       </div>
       <form
-        className="flex flex-col gap-5 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4"
+        className="flex flex-col gap-5 w-screen sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 px-7"
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col">
