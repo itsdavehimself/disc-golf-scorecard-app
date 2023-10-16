@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar/navbar';
 import { useAuthContext } from './hooks/useAuthContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import LandingPage from './components/LandingPage/landingPage';
 import Login from './components/Login/loginPage';
 import Signup from './components/Signup/signupPage';
@@ -12,6 +13,11 @@ import NotFound from './components/NotFound/notFound';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSideBarOpen(!isSideBarOpen);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -20,7 +26,7 @@ export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar toggleSidebar={toggleSidebar} isSideBarOpen={isSideBarOpen} />
         <div className="flex flex-row h-screen w-screen">
           {user && <Sidebar />}
           <Routes>
