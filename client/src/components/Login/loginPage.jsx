@@ -42,8 +42,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 h-screen bg-off-white pt-36 justify-start items-center w-screen">
-      <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-6 h-screen bg-off-white justify-center items-center w-screen">
+      <div className="flex flex-col gap-8">
         <div>
           <h1 className="text-5xl text-black-olive">ChainSeeker</h1>
         </div>
@@ -51,7 +51,7 @@ const Login = () => {
           Login to your account
         </h3>
       </div>
-      <div className="bg-off-white w-screen py-12 px-7 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
+      <div className="bg-off-white w-screen py-6 px-7 sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4">
         <form
           className="flex flex-col gap-5 text-black-olive login"
           onSubmit={handleSubmit}
