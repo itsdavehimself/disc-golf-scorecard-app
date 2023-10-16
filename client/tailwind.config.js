@@ -10,6 +10,9 @@ export default {
       'off-white': '#FCFFFE',
       'white-smoke': '#F5F5F5',
       transparent: 'rgba(0,0,0,0)',
+      vermillion: '#FF312E',
+      red: '#FF7A78',
+      rose: '#FFDEDD',
     },
     extend: {
       backgroundImage: {
