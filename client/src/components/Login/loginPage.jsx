@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 h-screen bg-off-white pt-36 justify-start items-center">
+    <div className="flex flex-col gap-6 h-screen bg-off-white pt-36 justify-start items-center w-screen">
       <div className="flex flex-col gap-10">
         <div>
           <h1 className="text-5xl text-black-olive">ChainSeeker</h1>
