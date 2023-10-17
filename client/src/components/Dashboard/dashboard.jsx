@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Dashboard() {
   const [scorecards, setScorecards] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -34,12 +35,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="home">
-      <Link to="/newround">
-        <button>Start a round</button>
-      </Link>
-
-      <div className="scorecards">
+    <div className="flex flex-col bg-off-white w-full px-4">
+      <div className=" pt-16 items-center md:items-start">
+        <h2 className="hidden md:flex">Dashboard</h2>
+        <div className="md:hidden my-4">
+          <Link to="/newround">
+            <button className="w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+              Start a round
+            </button>
+          </Link>
+        </div>
+      </div>
+      <div>
         {scorecards &&
           scorecards.map((scorecard) => (
             <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
