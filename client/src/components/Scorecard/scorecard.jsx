@@ -10,8 +10,11 @@ export default function Scorecard() {
   const [courseExists, setCourseExists] = useState(false);
   const [courseName, setCourseName] = useState('');
   const [date, setDate] = useState(null);
+  const [holes, setHoles] = useState([]);
+  const [numberOfHoles, setNumberOfHoles] = useState(null);
   const [startTime, setStartTime] = useState('');
   const [location, setLocation] = useState('');
+  const [players, setPlayers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +27,12 @@ export default function Scorecard() {
         },
       );
       const scorecardJson = await scorecardResponse.json();
+
+      if (scorecardJson.scorecard.length < 1) {
+        setIsLoading(false);
+        return;
+      }
+
       const courseResponse = await fetch(
         `http://localhost:8080/api/courses/${scorecardJson.scorecard[0].course}`,
       );
@@ -42,6 +51,12 @@ export default function Scorecard() {
           const courseCity = courseJson.course.city;
           const courseState = courseJson.course.state;
           setLocation(`${courseCity}, ${courseState}`);
+          const playerObjects = scorecardJson.scorecard[0].players;
+          const playerNames = playerObjects.map((player) => player.name);
+          setPlayers(playerNames);
+          setNumberOfHoles(courseJson.course.holes.length);
+          const holeObjects = courseJson.course.holes;
+          setHoles(holeObjects);
         }
         setIsLoading(false);
       }
@@ -60,10 +75,25 @@ export default function Scorecard() {
     <div>
       {courseExists ? (
         <>
-          <h1>{courseName}</h1>
+          <h1>
+            {courseName} - {numberOfHoles} holes
+          </h1>
           <p>
             {date} at {startTime}, {location}
           </p>
+          <div>
+            {players.map((player, index) => (
+              <div key={index}>{player}</div>
+            ))}
+          </div>
+          {holes.map((hole) => (
+            <div key={hole._id}>
+              <div>Hole {hole.holeNumber}</div>
+              <div>Par {hole.par}</div>
+              <div>{hole.distance}ft</div>
+              <input type="text"></input>
+            </div>
+          ))}
         </>
       ) : (
         <div>Scorecard does not exist</div>
