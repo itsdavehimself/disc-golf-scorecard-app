@@ -26,7 +26,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
   const isNewRoundRoute = location.pathname === '/newround';
 
   return (
-    <nav>
+    <nav className="z-50 absolute">
       {!user && (
         <div className="bg-off-white fixed w-full">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,7 +153,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 {!isNewRoundRoute && (
                   <Link to="/newround">
                     <button className="bg-jade px-3 py-2 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
-                      Start round
+                      Start a round
                     </button>
                   </Link>
                 )}
@@ -211,25 +211,33 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
           >
             <div className="md:hidden">
               <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white flex flex-col text-left text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <Link to={'/'}>
+                  <button
+                    onClick={toggleSidebar}
+                    className=" text-black-olive  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
+                  >
+                    Dashboard
+                  </button>
+                </Link>
                 <Link to={'/scorecards'}>
                   <button
-                    onClick={handleMenu}
+                    onClick={toggleSidebar}
                     className=" text-black-olive  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Scorecards
                   </button>
                 </Link>
-                <Link to={'/login'}>
+                <Link to={'/friends'}>
                   <button
-                    onClick={handleMenu}
+                    onClick={toggleSidebar}
                     className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Friends
                   </button>
                 </Link>
-                <Link to={'/login'}>
+                <Link to={'/courses'}>
                   <button
-                    onClick={handleMenu}
+                    onClick={toggleSidebar}
                     className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Courses
