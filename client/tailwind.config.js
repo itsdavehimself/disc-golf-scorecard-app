@@ -6,6 +6,7 @@ export default {
       emerald: '#27CE8E',
       honeydew: '#EBFFF7',
       'black-olive': '#29332F',
+      gray: '#6E6E6E',
       mint: '#E7F3F0',
       jade: '#22A875',
       'off-white': '#FCFFFE',
