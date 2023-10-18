@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
+import PropTypes from 'prop-types';
 
 export default function Navbar({ toggleSidebar, isSideBarOpen }) {
   const { logout } = useLogout();
@@ -251,3 +252,8 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  toggleSidebar: PropTypes.func,
+  isSideBarOpen: PropTypes.bool,
+};
