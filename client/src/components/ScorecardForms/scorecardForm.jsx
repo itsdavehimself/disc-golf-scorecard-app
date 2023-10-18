@@ -6,7 +6,28 @@ import {
   faAngleDown,
   faMagnifyingGlass,
   faUser,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
+
+let useClickOutside = (handler) => {
+  const domNode = useRef();
+
+  useEffect(() => {
+    const outsideHandler = (e) => {
+      if (domNode.current && !domNode.current.contains(e.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', outsideHandler);
+
+    return () => {
+      document.removeEventListener('mousedown', outsideHandler);
+    };
+  });
+
+  return domNode;
+};
 
 export default function ScorecardForm() {
   const [course, setCourse] = useState(null);
@@ -20,13 +41,58 @@ export default function ScorecardForm() {
   const [friends, setFriends] = useState([]);
   const [searchValueInput, setSearchValueInput] = useState('');
   const [userScorecards, setUserScorecards] = useState(null);
+  const [addFriendOpen, setAddFriendOpen] = useState(false);
+  const [newFriendName, setNewFriendName] = useState(null);
+  const [newFriendNameError, setNewFriendNameError] = useState(false);
 
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const [error, setError] = useState(null);
-  const [newScorecardId, setNewScorecardId] = useState(null);
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
+  const handleFriendNameChange = (e) => {
+    const friendNameInput = e.target.value;
+    setNewFriendName(friendNameInput);
+    if (friendNameInput === '') {
+      setNewFriendNameError(true);
+    } else {
+      setNewFriendNameError(false);
+    }
+  };
+
+  const handleNewFriendSubmit = async (e) => {
+    e.preventDefault();
+    if (!newFriendName || newFriendName === '') {
+      setNewFriendNameError(true);
+      return;
+    }
+    if (newFriendNameError) {
+      return;
+    }
+    const newFriendResponse = await fetch(
+      `http://localhost:8080/api/users/friends/`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify({
+          name: newFriendName,
+        }),
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    const json = await newFriendResponse.json();
+
+    if (!newFriendResponse.ok) {
+      setError(json.error);
+    }
+
+    if (newFriendResponse.ok) {
+      console.log(json);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,11 +150,41 @@ export default function ScorecardForm() {
     if (response.ok) {
       setError(null);
       const scorecardId = json._id;
-      setNewScorecardId(scorecardId);
-      console.log('new scorecard added');
-      setCourse(null);
-      setPlayers([]);
-      navigate(`/scorecard/${scorecardId}`);
+      const friendsPlaying = players.filter(
+        (player) => player.type === 'Friend',
+      );
+      if (friendsPlaying.length > 0) {
+        await Promise.all(
+          friendsPlaying.map(async (friend) => {
+            const friendResponse = await fetch(
+              `http://localhost:8080/api/friends/${friend.reference}`,
+              {
+                method: 'PUT',
+                body: JSON.stringify({
+                  scorecards: [json._id],
+                }),
+                headers: {
+                  Authorization: `Bearer ${user.token}`,
+                  'Content-Type': 'application/json',
+                },
+              },
+            );
+            if (!friendResponse.ok) {
+              setError(json.error);
+            }
+
+            if (friendResponse.ok) {
+              setCourse(null);
+              setPlayers([]);
+              navigate(`/scorecard/${scorecardId}`);
+            }
+          }),
+        );
+      } else {
+        setCourse(null);
+        setPlayers([]);
+        navigate(`/scorecard/${scorecardId}`);
+      }
     }
   };
 
@@ -121,8 +217,6 @@ export default function ScorecardForm() {
         );
         target.setAttribute('data-player-checked', 'false');
       }
-
-      console.log(players);
     }
   };
 
@@ -165,20 +259,14 @@ export default function ScorecardForm() {
     }
   }, [user]);
 
-  const dropDownRef = useRef();
+  const outsideDropDown = useClickOutside(() => {
+    setIsSelectOpen(false);
+  });
 
-  useEffect(() => {
-    const dropDownHandler = (e) => {
-      if (!dropDownRef.current.contains(e.target)) {
-        setIsSelectOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', dropDownHandler);
-
-    return () => {
-      document.removeEventListener('mousedown', dropDownHandler);
-    };
+  const outsideAddFriend = useClickOutside(() => {
+    setAddFriendOpen(false);
+    setNewFriendName(null);
+    setNewFriendNameError(false);
   });
 
   if (isLoading) {
@@ -186,136 +274,150 @@ export default function ScorecardForm() {
   }
 
   return (
-    <div className="pt-16 w-full text-black-olive px-4">
-      <form onSubmit={handleSubmit}>
-        <div
-          ref={dropDownRef}
-          className="relative font-md w-full hover:cursor-pointer"
-        >
+    <>
+      {addFriendOpen && (
+        <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
           <div
-            className="bg-honeydew w-full p-2 flex items-center justify-between rounded-md h-12"
-            onClick={() => setIsSelectOpen(!isSelectOpen)}
+            ref={outsideAddFriend}
+            className="relative w-full h-2/3 mx-4 bg-off-white rounded-md"
           >
-            {courseName ? (
-              <div>
-                <div className="text-sm">
-                  <span className="font-semibold">{courseName}</span> -{' '}
-                  {courseHoles} holes
-                </div>
-                <div className="text-xs">
-                  {courseCity}, {courseState}
-                </div>
-              </div>
-            ) : (
-              'Select course'
-            )}
-            <FontAwesomeIcon
-              icon={faAngleDown}
-              className={`${isSelectOpen && 'rotate-180'}`}
-            />
-          </div>
-          <input type="hidden" />
-
-          <ul
-            className={`bg-honeydew overflow-y-auto mt-2 rounded-md shadow-md ${
-              isSelectOpen
-                ? 'max-h-60 w-full absolute'
-                : 'max-h-0 w-full absolute'
-            }`}
-          >
-            <div className="flex items-center justify-center bg-honeydew pl-2 sticky top-0">
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-sm" />
+            <div>Add friend</div>
+            <p>
+              Create a profile to track scores and statistics for your friend.
+            </p>
+            <form onSubmit={handleNewFriendSubmit}>
+              <label className="text-black-olive">Friend&apos;s name</label>
               <input
+                onChange={handleFriendNameChange}
                 type="text"
-                onChange={(e) => {
-                  setSearchValueInput(e.target.value);
-                }}
-                value={searchValueInput}
-                placeholder="Search course"
-                className="bg-honeydew w-full p-1 outline-none pl-2"
+                className={`${
+                  newFriendNameError
+                    ? 'ring-red ring-2'
+                    : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+                } text-black-olive rounded-md shadow-md p-2 focus:outline-none`}
               ></input>
-            </div>
-            {coursesArr.map((courseItem) => (
-              <li
-                className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
-                  courseItem.name === courseName && 'bg-emerald'
-                } ${
-                  courseItem.name
-                    .toLowerCase()
-                    .startsWith(searchValueInput.toLowerCase()) ||
-                  courseItem.city
-                    .toLowerCase()
-                    .startsWith(searchValueInput.toLowerCase())
-                    ? 'block'
-                    : 'hidden'
-                }`}
-                key={courseItem._id}
-                onClick={() => {
-                  setCourse(courseItem._id);
-                  setCourseName(courseItem.name);
-                  setCourseCity(courseItem.city);
-                  setCourseState(courseItem.state);
-                  setCourseHoles(courseItem.holes.length);
-                  setSearchValueInput('');
-                  setIsSelectOpen(!isSelectOpen);
-                }}
-              >
-                <div>
-                  <span className="font-semibold">{courseItem.name}</span> -{' '}
-                  {courseItem.holes.length} holes
+              {newFriendNameError && (
+                <div className="text-sm pt-1 text-vermillion">
+                  Please enter a name
                 </div>
-                <div className="text-xs">
-                  {courseItem.city}, {courseItem.state}
-                </div>
-              </li>
-            ))}
-          </ul>
+              )}
+              <button className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+                Add friend
+              </button>
+            </form>
+          </div>
         </div>
-        <h3>Who&apos;s playing?</h3>
-        <div className="users-playing flex flex-col gap-2">
+      )}
+
+      <div className="pt-16 w-full text-black-olive px-4">
+        <form onSubmit={handleSubmit}>
           <div
-            data-player-name={user.user.username}
-            data-player-id="player1"
-            data-player-value={user.user._id}
-            data-player-type="User"
-            data-player-checked="false"
-            onClick={handleCheckboxChange}
+            ref={outsideDropDown}
+            className="relative font-md w-full hover:cursor-pointer"
           >
             <div
-              className={`flex items-center justify-between px-2 py-3 text-sm hover:cursor-pointer rounded-md ${
-                players.some((player) => player.reference === user.user._id)
-                  ? 'bg-emerald'
-                  : 'bg-honeydew'
+              className="bg-honeydew w-full p-2 flex items-center justify-between rounded-md h-12"
+              onClick={() => setIsSelectOpen(!isSelectOpen)}
+            >
+              {courseName ? (
+                <div>
+                  <div className="text-sm">
+                    <span className="font-semibold">{courseName}</span> -{' '}
+                    {courseHoles} holes
+                  </div>
+                  <div className="text-xs">
+                    {courseCity}, {courseState}
+                  </div>
+                </div>
+              ) : (
+                'Select course'
+              )}
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className={`${isSelectOpen && 'rotate-180'}`}
+              />
+            </div>
+            <input type="hidden" />
+
+            <ul
+              className={`bg-honeydew overflow-y-auto mt-2 rounded-md shadow-md ${
+                isSelectOpen
+                  ? 'max-h-60 w-full absolute'
+                  : 'max-h-0 w-full absolute'
               }`}
             >
-              <div className="flex items-center gap-2">
-                <div className="text-xs">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    className="bg-jade p-1.5 rounded-full font-xs"
-                  />
-                </div>
-                <div className="font-semibold">{user.user.username}</div>
+              <div className="flex items-center justify-center bg-honeydew pl-2 sticky top-0">
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="text-sm" />
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setSearchValueInput(e.target.value);
+                  }}
+                  value={searchValueInput}
+                  placeholder="Search course"
+                  className="bg-honeydew w-full p-1 outline-none pl-2"
+                ></input>
               </div>
-              <div className="text-xs">
-                {userScorecards.length}{' '}
-                {userScorecards.length === 1 ? 'Round Played' : 'Rounds Played'}
-              </div>
+              {coursesArr.map((courseItem) => (
+                <li
+                  className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
+                    courseItem.name === courseName && 'bg-emerald'
+                  } ${
+                    courseItem.name
+                      .toLowerCase()
+                      .startsWith(searchValueInput.toLowerCase()) ||
+                    courseItem.city
+                      .toLowerCase()
+                      .startsWith(searchValueInput.toLowerCase())
+                      ? 'block'
+                      : 'hidden'
+                  }`}
+                  key={courseItem._id}
+                  onClick={() => {
+                    setCourse(courseItem._id);
+                    setCourseName(courseItem.name);
+                    setCourseCity(courseItem.city);
+                    setCourseState(courseItem.state);
+                    setCourseHoles(courseItem.holes.length);
+                    setSearchValueInput('');
+                    setIsSelectOpen(!isSelectOpen);
+                  }}
+                >
+                  <div>
+                    <span className="font-semibold">{courseItem.name}</span> -{' '}
+                    {courseItem.holes.length} holes
+                  </div>
+                  <div className="text-xs">
+                    {courseItem.city}, {courseItem.state}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex items-center justify-between my-4">
+            <h3>Who&apos;s playing?</h3>
+            <div
+              onClick={() => {
+                setAddFriendOpen(!addFriendOpen);
+              }}
+              className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md"
+            >
+              <FontAwesomeIcon icon={faUserPlus} />{' '}
+              <span className="text-xs">Add friend</span>
             </div>
           </div>
-          {friends.map((friend, index) => (
+          <div className="users-playing flex flex-col gap-2">
             <div
-              key={friend._id}
-              data-player-name={friend.name}
-              data-player-id={`players${index + 2}`}
-              data-player-value={friend._id}
-              data-player-type="Friend"
+              data-player-name={user.user.username}
+              data-player-id="player1"
+              data-player-value={user.user._id}
+              data-player-type="User"
               data-player-checked="false"
               onClick={handleCheckboxChange}
             >
               <div
                 className={`flex items-center justify-between px-2 py-3 text-sm hover:cursor-pointer rounded-md ${
-                  players.some((player) => player.reference === friend._id)
+                  players.some((player) => player.reference === user.user._id)
                     ? 'bg-emerald'
                     : 'bg-honeydew'
                 }`}
@@ -327,20 +429,64 @@ export default function ScorecardForm() {
                       className="bg-jade p-1.5 rounded-full font-xs"
                     />
                   </div>
-                  <div className="font-semibold">{friend.name}</div>
+                  <div className="font-semibold">{user.user.username}</div>
                 </div>
                 <div className="text-xs">
-                  {friend.scorecards.length}{' '}
-                  {friend.scorecards.length === 1
+                  {userScorecards.length}{' '}
+                  {userScorecards.length === 1
                     ? 'Round Played'
                     : 'Rounds Played'}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        <button>Start round</button>
-      </form>
-    </div>
+            {friends.map((friend, index) => (
+              <div
+                key={friend._id}
+                data-player-name={friend.name}
+                data-player-id={`players${index + 2}`}
+                data-player-value={friend._id}
+                data-player-type="Friend"
+                data-player-checked="false"
+                onClick={handleCheckboxChange}
+              >
+                <div
+                  className={`flex items-center justify-between px-2 py-3 text-sm hover:cursor-pointer rounded-md ${
+                    players.some((player) => player.reference === friend._id)
+                      ? 'bg-emerald'
+                      : 'bg-honeydew'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="text-xs">
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="bg-jade p-1.5 rounded-full font-xs"
+                      />
+                    </div>
+                    <div className="font-semibold">{friend.name}</div>
+                  </div>
+                  <div className="text-xs">
+                    {friend.scorecards.length}{' '}
+                    {friend.scorecards.length === 1
+                      ? 'Round Played'
+                      : 'Rounds Played'}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <button
+              disabled={players.length === 0}
+              className={`w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors ${
+                players.length === 0
+                  ? 'bg-washed-jade text-disabled-font-jade'
+                  : null
+              }`}
+            >
+              Start round
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
