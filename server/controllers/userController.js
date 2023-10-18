@@ -131,16 +131,12 @@ exports.getFriends = asyncHandler(async (req, res) => {
 });
 
 exports.updateFriends = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'User does not exist' });
-  }
+  const userId = req.user._id;
 
   try {
     const newFriend = new Friend({
       name: req.body.name,
-      createdBy: id,
+      createdBy: userId,
     });
 
     const savedFriend = await newFriend.save();
@@ -148,7 +144,7 @@ exports.updateFriends = asyncHandler(async (req, res) => {
     const friendId = savedFriend._id;
 
     const updatedUser = await User.findOneAndUpdate(
-      { _id: id },
+      { _id: userId },
       { $push: { friends: friendId } },
       { new: true },
     );
@@ -157,7 +153,7 @@ exports.updateFriends = asyncHandler(async (req, res) => {
       return res.status(400).json({ error: 'User does not exist' });
     }
 
-    return res.status(200).json(updatedUser);
+    return res.status(200).json(savedFriend);
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }
