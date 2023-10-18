@@ -26,12 +26,16 @@ exports.getFriend = asyncHandler(async (req, res) => {
 
 exports.updateFriendScorecards = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const { scorecards } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Friend does not exist' });
   }
 
-  const friend = await Friend.findOneAndUpdate({ _id: id }, { ...req.body });
+  const friend = await Friend.findOneAndUpdate(
+    { _id: id },
+    { $push: { scorecards: { $each: scorecards } } },
+  );
 
   if (!friend) {
     return res.status(404).json({ error: 'Friend does not exist' });
