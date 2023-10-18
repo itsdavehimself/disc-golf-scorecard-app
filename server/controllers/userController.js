@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/userModel');
 const Friend = require('../models/friendModel');
+const requireAuth = require('../middleware/requireAuth');
 
 const createToken = (_id) => jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' });
 
@@ -131,30 +132,31 @@ exports.getFriends = asyncHandler(async (req, res) => {
 });
 
 exports.updateFriends = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
+  requireAuth(req, res, () => {
+    const userId = req.user._id;
 
-  try {
-    const newFriend = new Friend({
-      name: req.body.name,
-      createdBy: userId,
-    });
+    try {
+      const newFriend = new Friend({
+        name: req.body.name,
+        createdBy: userId,
+      });
 
-    const savedFriend = await newFriend.save();
+      newFriend.save().then((savedFriend) => {
+        const friendId = savedFriend._id;
 
-    const friendId = savedFriend._id;
-
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: userId },
-      { $push: { friends: friendId } },
-      { new: true },
-    );
-
-    if (!updatedUser) {
-      return res.status(400).json({ error: 'User does not exist' });
+        User.findOneAndUpdate(
+          { _id: userId },
+          { $push: { friends: friendId } },
+          { new: true },
+        ).then((updatedUser) => {
+          if (!updatedUser) {
+            return res.status(400).json({ error: 'User does not exist' });
+          }
+          return res.status(200).json(savedFriend);
+        });
+      });
+    } catch (error) {
+      return res.status(500).json({ error: 'Internal server error' });
     }
-
-    return res.status(200).json(savedFriend);
-  } catch (error) {
-    return res.status(500).json({ error: 'Internal server error' });
-  }
+  });
 });
