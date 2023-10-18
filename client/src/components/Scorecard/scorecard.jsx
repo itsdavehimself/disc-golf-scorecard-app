@@ -52,7 +52,6 @@ export default function Scorecard() {
           const courseState = courseJson.course.state;
           setLocation(`${courseCity}, ${courseState}`);
           const playerObjects = scorecardJson.scorecard[0].players;
-          // const playerNames = playerObjects.map((player) => player.name);
           setPlayers(playerObjects);
           setNumberOfHoles(courseJson.course.holes.length);
           const holeObjects = courseJson.course.holes;
