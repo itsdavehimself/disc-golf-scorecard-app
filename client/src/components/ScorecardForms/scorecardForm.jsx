@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useFriendListContext } from '../../hooks/useFriendContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -30,6 +31,7 @@ let useClickOutside = (handler) => {
 };
 
 export default function ScorecardForm() {
+  const { friends, dispatch } = useFriendListContext();
   const [course, setCourse] = useState(null);
   const [courseName, setCourseName] = useState(null);
   const [courseCity, setCourseCity] = useState('');
@@ -38,7 +40,6 @@ export default function ScorecardForm() {
   const [players, setPlayers] = useState([]);
   const [coursesArr, setCoursesArr] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [friends, setFriends] = useState([]);
   const [searchValueInput, setSearchValueInput] = useState('');
   const [userScorecards, setUserScorecards] = useState(null);
   const [addFriendOpen, setAddFriendOpen] = useState(false);
@@ -90,7 +91,8 @@ export default function ScorecardForm() {
     }
 
     if (newFriendResponse.ok) {
-      console.log(json);
+      dispatch({ type: 'CREATE_FRIEND', payload: json });
+      setAddFriendOpen(false);
     }
   };
 
@@ -246,7 +248,8 @@ export default function ScorecardForm() {
 
         setCoursesArr(courses);
         setCourse(courses[0]._id);
-        setFriends(friends);
+        dispatch({ type: 'SET_FRIENDS', payload: friends });
+        console.log(friends);
         setUserScorecards(scorecards);
         setIsLoading(false);
       } catch (error) {
@@ -257,7 +260,7 @@ export default function ScorecardForm() {
     if (user) {
       fetchData();
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   const outsideDropDown = useClickOutside(() => {
     setIsSelectOpen(false);
