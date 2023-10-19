@@ -53,7 +53,7 @@ export default function Scorecard() {
       reference: player.reference,
       scores: holeInfoArray.map((holeData, index) => ({
         holeNumber: holeData.holeNumber,
-        par: holeData.par,
+        holePar: holeData.par,
         score: player.scores[index],
       })),
     }));
@@ -157,7 +157,7 @@ export default function Scorecard() {
     <div className="flex flex-col w-screen bg-honeydew pt-16">
       {courseExists ? (
         <>
-          <h1>
+          <h1 className="text-xl">
             {courseName} - {numberOfHoles} holes
           </h1>
           <p>
@@ -223,7 +223,12 @@ export default function Scorecard() {
       ) : (
         <div>Scorecard does not exist</div>
       )}
-      <button onClick={handleScorecardSubmit}>Click</button>
+      <button
+        className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
+        onClick={handleScorecardSubmit}
+      >
+        Save scorecard
+      </button>
     </div>
   );
 }
