@@ -249,7 +249,6 @@ export default function ScorecardForm() {
         setCoursesArr(courses);
         setCourse(courses[0]._id);
         dispatch({ type: 'SET_FRIENDS', payload: friends });
-        console.log(friends);
         setUserScorecards(scorecards);
         setIsLoading(false);
       } catch (error) {
