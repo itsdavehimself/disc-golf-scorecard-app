@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ScorecardDetails from '../ScorecardDetails/scorecardDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
+import DashboardStats from './dashboardStats';
 
 export default function Dashboard() {
   const [scorecards, setScorecards] = useState(null);
@@ -17,7 +18,6 @@ export default function Dashboard() {
         },
       });
       const json = await response.json();
-      console.log(json);
 
       if (response.ok) {
         setScorecards(json);
@@ -38,6 +38,7 @@ export default function Dashboard() {
     <div className="flex flex-col bg-off-white w-full px-4">
       <div className=" pt-16 items-center md:items-start">
         <h2 className="hidden md:flex">Dashboard</h2>
+        <DashboardStats scorecards={scorecards} />
         <div className="md:hidden my-4">
           <Link to="/newround">
             <button className="w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
