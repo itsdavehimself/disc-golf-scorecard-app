@@ -6,7 +6,7 @@ export default function DashboardStats({ scorecards }) {
     if (scorecards.length === 0) {
       return currentDate;
     }
-    new Date(scorecards[0].date);
+    return new Date(scorecards[0].date);
   };
 
   const thirtyDaysAgo = new Date();
