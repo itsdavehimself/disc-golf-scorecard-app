@@ -2,15 +2,21 @@ import PropTypes from 'prop-types';
 
 export default function DashboardStats({ scorecards }) {
   const currentDate = new Date();
+  const latestDate = () => {
+    if (scorecards.length === 0) {
+      return currentDate;
+    }
+    new Date(scorecards[0].date);
+  };
+
   const thirtyDaysAgo = new Date();
-  const latestDate = new Date(scorecards[0].date);
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
   const gamesLastThirtyDays = scorecards.filter((scorecard) => {
     const scorecardDate = new Date(scorecard.date);
     return scorecardDate >= thirtyDaysAgo && scorecardDate <= currentDate;
   });
 
-  const timeDifference = currentDate - latestDate;
+  const timeDifference = currentDate - latestDate();
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
   return (
