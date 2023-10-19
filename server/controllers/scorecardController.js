@@ -64,18 +64,45 @@ exports.deleteScorecard = asyncHandler(async (req, res) => {
 // Update a single scorecard
 exports.updateScorecard = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const userId = req.user._id;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: 'Scorecard does not exist' });
   }
 
-  const scorecard = await Scorecard.findOneAndUpdate({ _id: id }, {
-    ...req.body,
+  const updatePromises = req.body.players.map(async (updatedPlayer) => {
+    const { reference, scores } = updatedPlayer;
+    console.log(updatedPlayer);
+
+    const scorecard = await Scorecard.findOneAndUpdate(
+      { $and: [{ userId }, { _id: id }] },
+      {
+        $set: {
+          'players.$[player].scores': scores,
+        },
+      },
+      {
+        arrayFilters: [
+          {
+            'player.reference': reference,
+          },
+        ],
+        new: true,
+      },
+    );
+
+    if (!scorecard) {
+      return Promise.reject(new Error('Scorecard does not exist'));
+    }
+
+    return scorecard;
   });
 
-  if (!scorecard) {
-    return res.status(400).json({ error: 'Scorecard does not exist' });
+  try {
+    const updatedScorecards = await Promise.all(updatePromises);
+    res.status(200).json({ message: 'Scorecards updated successfully', updatedScorecards });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: 'Failed to update scorecards' });
   }
-
-  res.status(200).json(scorecard);
 });
