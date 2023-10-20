@@ -10,6 +10,7 @@ import Sidebar from './components/Sidebar/sidebar';
 import ScorecardForm from './components/ScorecardForms/scorecardForm';
 import Scorecard from './components/Scorecard/scorecard';
 import NotFound from './components/NotFound/notFound';
+import AllScorecards from './components/AllScorecards/AllScorecards';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -75,6 +76,19 @@ export default function App() {
               element={
                 user ? (
                   <Scorecard />
+                ) : (
+                  <>
+                    <Navigate to="/login" />
+                    <Login />
+                  </>
+                )
+              }
+            />
+            <Route
+              path="/scorecards"
+              element={
+                user ? (
+                  <AllScorecards />
                 ) : (
                   <>
                     <Navigate to="/login" />
