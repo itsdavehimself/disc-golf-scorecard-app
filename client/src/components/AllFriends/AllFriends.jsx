@@ -6,6 +6,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 export default function AllFriends() {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValueInput, setSearchValueInput] = useState('');
 
   const { user } = useAuthContext();
 
@@ -35,18 +36,32 @@ export default function AllFriends() {
 
   return (
     <div className="flex flex-col bg-off-white w-full px-4 pt-16">
-      <div className="flex flex-row items-center justify-between pt-5">
+      <div className="flex flex-row items-center justify-between pt-4 pb-2">
         <div className="flex text-sm text-black-olive items-center font-semibold">
           Your friends
         </div>
         <div className="text-sm">{friends.length} players</div>
       </div>
-
+      <input
+        type="text"
+        onChange={(e) => {
+          setSearchValueInput(e.target.value);
+        }}
+        value={searchValueInput}
+        placeholder="Search friend"
+        className="bg-honeydew w-full p-1 outline-none pl-2"
+      ></input>
       <div>
         {friends &&
           friends.map((friend) => (
             <div
-              className="p-2 my-2 bg-white rounded-md shadow-sm text-black-olive text-sm hover:cursor-pointer active:bg-honeydew"
+              className={`p-2 my-2 bg-white rounded-md shadow-sm text-black-olive text-sm hover:cursor-pointer active:bg-honeydew ${
+                friend.name
+                  .toLowerCase()
+                  .startsWith(searchValueInput.toLowerCase())
+                  ? 'block'
+                  : 'hidden'
+              }`}
               key={friend._id}
             >
               <div className="flex items-center justify-between">
