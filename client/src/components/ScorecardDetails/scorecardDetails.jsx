@@ -69,7 +69,8 @@ export default function ScorecardDetails({ scorecard }) {
             <div>
               <div className="text-xs font-semibold">{player.name}</div>
               <div className="text-xs">
-                {playerScores[index] === coursePar ? (
+                {playerScores[index] === coursePar ||
+                playerScores[index] === 0 ? (
                   'E'
                 ) : (
                   <>
