@@ -47,11 +47,23 @@ export default function Dashboard() {
           </Link>
         </div>
       </div>
+      <div className="flex text-sm text-black-olive items-center font-semibold">
+        Last 3 rounds
+      </div>
       <div>
         {scorecards &&
-          scorecards.map((scorecard) => (
-            <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
-          ))}
+          scorecards
+            .slice(0, 3)
+            .map((scorecard) => (
+              <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
+            ))}
+      </div>
+      <div className="flex text-black-olive justify-center items-center font-semibold">
+        <Link to={'/scorecards'}>
+          <button className="flex py-2 px-3 rounded-md text-sm text-black-olive font-semibold cursor-pointer">
+            See all rounds
+          </button>
+        </Link>
       </div>
     </div>
   );
