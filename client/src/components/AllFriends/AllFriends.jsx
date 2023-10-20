@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function AllFriends() {
   const [friends, setFriends] = useState([]);
@@ -42,15 +42,21 @@ export default function AllFriends() {
         </div>
         <div className="text-sm">{friends.length} players</div>
       </div>
-      <input
-        type="text"
-        onChange={(e) => {
-          setSearchValueInput(e.target.value);
-        }}
-        value={searchValueInput}
-        placeholder="Search friend"
-        className="bg-honeydew w-full p-1 outline-none pl-2"
-      ></input>
+      <div className="flex items-center justify-center bg-honeydew pl-2 sticky top-0">
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="text-sm text-black-olive"
+        />
+        <input
+          type="text"
+          onChange={(e) => {
+            setSearchValueInput(e.target.value);
+          }}
+          value={searchValueInput}
+          placeholder="Search friend"
+          className="bg-honeydew w-full p-1 outline-none pl-2"
+        ></input>
+      </div>
       <div>
         {friends &&
           friends.map((friend) => (
