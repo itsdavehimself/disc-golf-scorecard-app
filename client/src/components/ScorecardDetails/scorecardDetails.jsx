@@ -10,12 +10,19 @@ export default function ScorecardDetails({ scorecard }) {
   const [holes, setHoles] = useState('');
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
+  const [coursePar, setCoursePar] = useState(null);
 
   const navigate = useNavigate();
 
   const openScorecard = () => {
     navigate(`/scorecard/${scorecard._id}`);
   };
+
+  const playerScores = scorecard.players.map((player) => {
+    const arr = player.scores.map((score) => score.score);
+    const scoreSum = arr.reduce((acc, current) => acc + current);
+    return scoreSum;
+  });
 
   useEffect(() => {
     async function fetchCourseName() {
@@ -26,6 +33,7 @@ export default function ScorecardDetails({ scorecard }) {
         if (response.ok) {
           const courseData = await response.json();
           setCourseName(courseData.course.name);
+          setCoursePar(courseData.course.par);
           setHoles(courseData.course.holes.length);
           const scorecardDate = parseISO(scorecard.date);
           const formattedDate = format(scorecardDate, 'MMM d, yyyy');
@@ -38,7 +46,7 @@ export default function ScorecardDetails({ scorecard }) {
       }
     }
     fetchCourseName();
-  }, [scorecard.course, scorecard.date]);
+  }, [scorecard.course, scorecard.date, coursePar]);
 
   return (
     <div
@@ -52,7 +60,7 @@ export default function ScorecardDetails({ scorecard }) {
         {date} at {startTime}
       </p>
       <div className="flex items-center justify-start pt-4 gap-4">
-        {scorecard.players.map((player) => (
+        {scorecard.players.map((player, index) => (
           <div key={player._id} className="flex items-center gap-2">
             <FontAwesomeIcon
               icon={faUser}
@@ -60,7 +68,17 @@ export default function ScorecardDetails({ scorecard }) {
             />
             <div>
               <div className="text-xs font-semibold">{player.name}</div>
-              <div className="text-xs">+10 (50)</div>
+              <div className="text-xs">
+                {playerScores[index] === coursePar ? (
+                  'E'
+                ) : (
+                  <>
+                    {playerScores[index] > coursePar ? '+' : ''}
+                    {playerScores[index] - coursePar}
+                  </>
+                )}{' '}
+                ({playerScores[index]})
+              </div>
             </div>
           </div>
         ))}
