@@ -36,7 +36,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col bg-off-white w-full px-4">
-      <div className=" pt-16 items-center md:items-start">
+      <div className="pt-16 items-center md:items-start">
         <h2 className="hidden md:flex">Dashboard</h2>
         <DashboardStats scorecards={scorecards} />
         <div className="md:hidden my-4">
