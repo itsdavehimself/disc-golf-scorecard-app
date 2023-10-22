@@ -12,6 +12,7 @@ import Scorecard from './components/Scorecard/scorecard';
 import NotFound from './components/NotFound/notFound';
 import AllScorecards from './components/AllScorecards/AllScorecards';
 import AllFriends from './components/AllFriends/AllFriends';
+import FriendProfile from './components/FriendProfile/FriendProfile';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -103,6 +104,19 @@ export default function App() {
               element={
                 user ? (
                   <AllFriends />
+                ) : (
+                  <>
+                    <Navigate to="/login" />
+                    <Login />
+                  </>
+                )
+              }
+            />
+            <Route
+              path="/friends/:id"
+              element={
+                user ? (
+                  <FriendProfile />
                 ) : (
                   <>
                     <Navigate to="/login" />

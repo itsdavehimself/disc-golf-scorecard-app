@@ -9,6 +9,23 @@ exports.getAllScorecards = asyncHandler(async (req, res) => {
   res.status(200).json(scorecards);
 });
 
+// Get all scorecards from specific user
+exports.getUsersScorecards = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Scorecard does not exist' });
+  }
+
+  const scorecards = await Scorecard.find({ 'players.reference': id });
+
+  if (!scorecards) {
+    return res.status(404).json({ error: 'Scorecard does not exist' });
+  }
+
+  res.status(200).json({ scorecards });
+});
+
 // Create new scorecard
 exports.createScorecard = asyncHandler(async (req, res) => {
   const {

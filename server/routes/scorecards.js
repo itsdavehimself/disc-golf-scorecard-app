@@ -1,6 +1,11 @@
 const express = require('express');
 const {
-  createScorecard, getAllScorecards, getScorecard, deleteScorecard, updateScorecard,
+  createScorecard,
+  getAllScorecards,
+  getScorecard,
+  deleteScorecard,
+  updateScorecard,
+  getUsersScorecards,
 } = require('../controllers/scorecardController');
 const requireAuth = require('../middleware/requireAuth');
 
@@ -10,6 +15,9 @@ router.use(requireAuth);
 
 // Get all scorecard documents
 router.get('/', getAllScorecards);
+
+// Get all scorecards from specific user ID
+router.get('/user/:id', getUsersScorecards);
 
 // Create new scorecard document
 router.post('/', createScorecard);
