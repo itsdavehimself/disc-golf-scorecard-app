@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function AllFriends() {
   const [friends, setFriends] = useState([]);
@@ -10,23 +11,33 @@ export default function AllFriends() {
 
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    const fetchFriends = async () => {
-      const response = await fetch('http://localhost:8080/api/friends', {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-      const json = await response.json();
+  const navigate = useNavigate();
 
-      if (response.ok) {
-        setFriends(json);
-        setIsLoading(false);
+  const openFriend = (friendId) => {
+    navigate(`/friends/${friendId}`);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/friends', {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const json = await response.json();
+
+        if (response.ok) {
+          setFriends(json);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
     if (user) {
-      fetchFriends();
+      fetchData();
     }
   }, [user]);
 
@@ -61,6 +72,7 @@ export default function AllFriends() {
         {friends &&
           friends.map((friend) => (
             <div
+              onClick={() => openFriend(friend._id)}
               className={`p-2 my-2 bg-white rounded-md shadow-sm text-black-olive text-sm hover:cursor-pointer active:bg-honeydew ${
                 friend.name
                   .toLowerCase()
