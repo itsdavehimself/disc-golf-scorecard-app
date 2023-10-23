@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ScoresBarChart from '../ScoresBarChart/scoresBarChart';
+import PlayedCourses from '../PlayedCourses/playedCourses';
 
 export default function FriendProfile() {
   const { id } = useParams();
@@ -22,6 +23,8 @@ export default function FriendProfile() {
   const [doubleBogeys, setDoubleBogeys] = useState(0);
   const [tripleBogeys, setTripleBogeys] = useState(0);
   const [throws, setThrows] = useState(0);
+  const [courses, setCourses] = useState([]);
+  const [bestRound, setBestRound] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,19 +102,51 @@ export default function FriendProfile() {
 
         const scoresArray = [];
         const parArray = [];
+        const otherScoresArr = [];
 
         totalScorecards.forEach((scorecard) => {
           scorecard.players.forEach((player) => {
             if (player.reference === id) {
+              const gameObj = {
+                scorecard: player.scores,
+                scorecardId: scorecard._id,
+                course: scorecard.course,
+                date: scorecard.date,
+              };
+              otherScoresArr.push(gameObj);
+
               player.scores.forEach((score) => {
                 scoresArray.push(score.score);
-              });
-              player.scores.forEach((score) => {
                 parArray.push(score.holePar);
               });
             }
           });
         });
+
+        const sumData = otherScoresArr.map((gameObj) => {
+          const sumHolePar = gameObj.scorecard.reduce(
+            (sum, score) => sum + score.holePar,
+            0,
+          );
+          const sumScores = gameObj.scorecard.reduce(
+            (sum, score) => sum + score.score,
+            0,
+          );
+          const difference = sumScores - sumHolePar;
+          return {
+            scorecardId: gameObj.scorecardId,
+            course: gameObj.course,
+            date: gameObj.date,
+            difference,
+          };
+        });
+
+        const bestGame = sumData.reduce((minObj, obj) => {
+          if (obj.difference < minObj.difference) {
+            return obj;
+          }
+          return minObj;
+        }, sumData[0]);
 
         let acesCount = 0;
         let eaglesCount = 0;
@@ -151,6 +186,16 @@ export default function FriendProfile() {
           totalThrows += score;
         });
 
+        const courseList = [];
+        totalScorecards.forEach((scorecard) => {
+          const course = scorecard.course;
+          if (!courseList.includes(course)) {
+            courseList.push(course);
+          }
+        });
+
+        setBestRound(bestGame);
+        setCourses(courseList);
         setHoles(scoresArray.length);
         setThrows(totalThrows);
         setUserWins(userPoints);
@@ -193,7 +238,7 @@ export default function FriendProfile() {
         <div className="flex flex-row justify-between items-center">
           <div className="text-center">
             <div>{totalScorecards.length}</div>
-            <div>ROUNDS</div>
+            <div>{totalScorecards.length === 1 ? 'ROUND' : 'ROUNDS'}</div>
           </div>
           <div className="text-center">
             <div>{holes}</div>
@@ -204,6 +249,13 @@ export default function FriendProfile() {
             <div>THROWS</div>
           </div>
         </div>
+        <div>
+          <div>
+            {courses.length} {courses.length === 1 ? 'Course' : 'Courses'}{' '}
+            Played
+          </div>
+          <PlayedCourses courses={courses} bestRound={bestRound} />
+        </div>
         <div className="pt-6">
           <div className="text-center text-sm font-semibold">
             Your stats vs. {friend.name}
@@ -211,15 +263,17 @@ export default function FriendProfile() {
           <div className="w-10/12 mx-auto py-2 flex items-center space-x-2 border border-black-olive rounded-xl">
             <div className="flex-1 border-r border-black-olive text-center">
               <div className="text-xl font-bold">{userWins}</div>
-              <div className="text-sm">WINS</div>
+              <div className="text-sm">{userWins === 1 ? 'WIN' : 'WINS'}</div>
             </div>
             <div className="flex-1 border-r border-black-olive text-center">
               <div className="text-xl font-bold">{friendWins}</div>
-              <div className="text-sm">LOSSES</div>
+              <div className="text-sm">
+                {friendWins === 1 ? 'LOSS' : 'LOSSES'}
+              </div>
             </div>
             <div className="flex-1 text-center">
               <div className="text-xl font-bold">{ties}</div>
-              <div className="text-sm">TIES</div>
+              <div className="text-sm">{ties === 1 ? 'TIE' : 'TIES'}</div>
             </div>
           </div>
         </div>
@@ -231,6 +285,7 @@ export default function FriendProfile() {
           bogey={bogey}
           doubleBogeys={doubleBogeys}
           tripleBogeys={tripleBogeys}
+          name={friend.name}
         />
       </div>
     </div>
