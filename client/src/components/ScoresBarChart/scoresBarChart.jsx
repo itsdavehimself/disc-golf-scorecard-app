@@ -31,6 +31,7 @@ export default function ScoresBarChart({
   bogey,
   doubleBogeys,
   tripleBogeys,
+  name,
 }) {
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -44,7 +45,7 @@ export default function ScoresBarChart({
     },
     layout: {
       padding: {
-        right: 20,
+        right: 28,
       },
     },
     responsive: true,
@@ -59,7 +60,7 @@ export default function ScoresBarChart({
         display: false,
       },
       title: {
-        display: true,
+        display: false,
         text: 'Par performance',
         font: {
           size: 14,
@@ -126,14 +127,17 @@ export default function ScoresBarChart({
             'brown',
           ],
           borderColor: 'black',
-          borderWidth: 2,
+          borderWidth: 1,
         },
       ],
     });
   }, [aces, eagles, birdies, pars, bogey, doubleBogeys, tripleBogeys]);
 
   return (
-    <div className="w-full md:col-span-2 relative h-80 m-auto bg-off-white">
+    <div className="w-full md:col-span-2 relative h-72 m-auto bg-off-white">
+      <div className="text-sm font-semibold text-black-olive text-center">
+        {name}&apos;s par performance
+      </div>
       <Bar data={chartData} options={chartOptions} />
     </div>
   );
@@ -147,4 +151,5 @@ ScoresBarChart.propTypes = {
   bogey: PropTypes.number,
   doubleBogeys: PropTypes.number,
   tripleBogeys: PropTypes.number,
+  name: PropTypes.string,
 };
