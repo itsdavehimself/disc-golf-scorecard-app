@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import ScoresBarChart from '../ScoresBarChart/scoresBarChart';
 
 export default function FriendProfile() {
   const { id } = useParams();
@@ -198,6 +199,15 @@ export default function FriendProfile() {
             </div>
           </div>
         </div>
+        <ScoresBarChart
+          aces={aces}
+          eagles={eagles}
+          birdies={birdies}
+          pars={pars}
+          bogey={bogey}
+          doubleBogeys={doubleBogeys}
+          tripleBogeys={tripleBogeys}
+        />
       </div>
     </div>
   );
