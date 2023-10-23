@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function PlayedCourses({ courses, bestRound }) {
   const [playedCourses, setPlayedCourses] = useState([]);
-  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [isCoursesOpen, setIsCoursesOpen] = useState(false);
   const [bestRoundCourseName, setBestRoundCourseName] = useState('');
 
   useEffect(() => {
@@ -37,10 +39,14 @@ export default function PlayedCourses({ courses, bestRound }) {
 
   return (
     <div>
-      <div onClick={() => setCoursesOpen(!coursesOpen)}>
+      <div onClick={() => setIsCoursesOpen(!isCoursesOpen)}>
         Show all played courses
+        <FontAwesomeIcon
+          icon={faAngleDown}
+          className={`${isCoursesOpen && 'rotate-180'}`}
+        />
       </div>
-      <div className={`text-sm ${coursesOpen ? 'h-auto' : 'hidden'}`}>
+      <div className={`text-sm ${isCoursesOpen ? 'h-auto' : 'hidden'}`}>
         {playedCourses.map((course) => (
           <div key={course._id}>
             <div className="font-semibold">{course.name}</div>
