@@ -10,6 +10,7 @@ export default function FriendProfile() {
   const [isLoading, setIsLoading] = useState(true);
   const [totalScorecards, setTotalScorecards] = useState(null);
   const [scorecardsWithUser, setScorecardsWithUser] = useState(null);
+  const [holes, setHoles] = useState(0);
   const [userWins, setUserWins] = useState(0);
   const [friendWins, setFriendWins] = useState(0);
   const [ties, setTies] = useState(0);
@@ -20,6 +21,7 @@ export default function FriendProfile() {
   const [bogey, setBogey] = useState(0);
   const [doubleBogeys, setDoubleBogeys] = useState(0);
   const [tripleBogeys, setTripleBogeys] = useState(0);
+  const [throws, setThrows] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +145,14 @@ export default function FriendProfile() {
             trpBogeyCount++;
           }
         }
+
+        let totalThrows = 0;
+        scoresArray.forEach((score) => {
+          totalThrows += score;
+        });
+
+        setHoles(scoresArray.length);
+        setThrows(totalThrows);
         setUserWins(userPoints);
         setFriendWins(friendPoints);
         setTies(ties);
@@ -178,6 +188,20 @@ export default function FriendProfile() {
           <div>
             Has played in {scorecardsWithUser.length}{' '}
             {scorecardsWithUser.length === 1 ? ' round' : ' rounds'} with you
+          </div>
+        </div>
+        <div className="flex flex-row justify-between items-center">
+          <div className="text-center">
+            <div>{totalScorecards.length}</div>
+            <div>ROUNDS</div>
+          </div>
+          <div className="text-center">
+            <div>{holes}</div>
+            <div>HOLES</div>
+          </div>
+          <div className="text-center">
+            <div>{throws}</div>
+            <div>THROWS</div>
           </div>
         </div>
         <div className="pt-6">
