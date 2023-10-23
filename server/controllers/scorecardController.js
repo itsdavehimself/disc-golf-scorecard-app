@@ -89,7 +89,6 @@ exports.updateScorecard = asyncHandler(async (req, res) => {
 
   const updatePromises = req.body.players.map(async (updatedPlayer) => {
     const { reference, scores } = updatedPlayer;
-    console.log(updatedPlayer);
 
     const scorecard = await Scorecard.findOneAndUpdate(
       { $and: [{ userId }, { _id: id }] },
