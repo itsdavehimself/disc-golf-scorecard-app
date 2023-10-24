@@ -15,7 +15,6 @@ export default function PlayedCourses({ courses, bestRound }) {
         if (response.ok) {
           const courseData = await response.json();
 
-          // Find the matching course
           const matchingCourse = courseData.find(
             (course) => course._id === bestRound.course,
           );
