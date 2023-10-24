@@ -18,26 +18,22 @@ export default function AllFriends() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/friends', {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
-        const json = await response.json();
+    const fetchFriends = async () => {
+      const response = await fetch('http://localhost:8080/api/friends', {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = await response.json();
 
-        if (response.ok) {
-          setFriends(json);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error(error);
+      if (response.ok) {
+        setFriends(json);
+        setIsLoading(false);
       }
     };
 
     if (user) {
-      fetchData();
+      fetchFriends();
     }
   }, [user]);
 
