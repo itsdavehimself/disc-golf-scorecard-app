@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ScoresBarChart from '../ScoresBarChart/scoresBarChart';
 import PlayedCourses from '../PlayedCourses/playedCourses';
+import { calculateAllFriendStatistics } from '../../utilities/dataUtilities';
 
 export default function FriendProfile() {
   const { id } = useParams();
@@ -64,132 +65,49 @@ export default function FriendProfile() {
         });
 
         setScorecardsWithUser(scorecardsWithUser);
-        const userScoresArr = [];
-        const friendScoresArr = [];
-        let userPoints = 0;
-        let friendPoints = 0;
-        let ties = 0;
 
-        scorecardsWithUser.forEach((scorecard) => {
-          scorecard.players.forEach((player) => {
-            if (player.type === 'User') {
-              const totalScore = player.scores.reduce(
-                (sum, score) => sum + score.score,
-                0,
-              );
-              userScoresArr.push(totalScore);
-            } else if (player.reference === id) {
-              const totalScore = player.scores.reduce(
-                (sum, score) => sum + score.score,
-                0,
-              );
-              friendScoresArr.push(totalScore);
-            }
-          });
-        });
+        const {
+          userPoints,
+          friendPoints,
+          ties,
+          rawScoresArr,
+          parArray,
+          gameObjArr,
+          bestGame,
+          acesCount,
+          eaglesCount,
+          birdiesCount,
+          parsCount,
+          bogeyCount,
+          dblBogeyCount,
+          trpBogeyCount,
+          totalThrows,
+        } = calculateAllFriendStatistics(
+          scorecardsWithUser,
+          id,
+          gameObjArr,
+          rawScoresArr,
+          parArray,
+          totalScorecards,
+        );
 
-        for (
-          let i = 0;
-          i < Math.min(userScoresArr.length, friendScoresArr.length);
-          i++
-        ) {
-          const userScore = userScoresArr[i];
-          const friendScore = friendScoresArr[i];
-
-          if (userScore > friendScore) {
-            friendPoints++;
-          } else if (userScore < friendScore) {
-            userPoints++;
-          } else if (userScore === friendScore) {
-            ties++;
-          }
-        }
-
-        const scoresArray = [];
-        const parArray = [];
-        const otherScoresArr = [];
-
-        totalScorecards.forEach((scorecard) => {
-          scorecard.players.forEach((player) => {
-            if (player.reference === id) {
-              const gameObj = {
-                scorecard: player.scores,
-                scorecardId: scorecard._id,
-                course: scorecard.course,
-                date: scorecard.date,
-              };
-              otherScoresArr.push(gameObj);
-
-              player.scores.forEach((score) => {
-                scoresArray.push(score.score);
-                parArray.push(score.holePar);
-              });
-            }
-          });
-        });
-
-        const sumData = otherScoresArr.map((gameObj) => {
-          const sumHolePar = gameObj.scorecard.reduce(
-            (sum, score) => sum + score.holePar,
-            0,
-          );
-          const sumScores = gameObj.scorecard.reduce(
-            (sum, score) => sum + score.score,
-            0,
-          );
-          const difference = sumScores - sumHolePar;
-          return {
-            scorecardId: gameObj.scorecardId,
-            course: gameObj.course,
-            date: gameObj.date,
-            difference,
-          };
-        });
-
-        const bestGame = sumData.reduce((minObj, obj) => {
-          if (obj.difference < minObj.difference) {
-            return obj;
-          }
-          return minObj;
-        }, sumData[0]);
-
-        let acesCount = 0;
-        let eaglesCount = 0;
-        let birdiesCount = 0;
-        let parsCount = 0;
-        let bogeyCount = 0;
-        let dblBogeyCount = 0;
-        let trpBogeyCount = 0;
-
-        for (
-          let i = 0;
-          i < Math.min(scoresArray.length, parArray.length);
-          i++
-        ) {
-          const score = scoresArray[i];
-          const par = parArray[i];
-
-          if (score === 1) {
-            acesCount++;
-          } else if (score === par - 2) {
-            eaglesCount++;
-          } else if (score === par - 1) {
-            birdiesCount++;
-          } else if (score === par) {
-            parsCount++;
-          } else if (score === par + 1) {
-            bogeyCount++;
-          } else if (score === par + 2) {
-            dblBogeyCount++;
-          } else if (score === par + 3) {
-            trpBogeyCount++;
-          }
-        }
-
-        let totalThrows = 0;
-        scoresArray.forEach((score) => {
-          totalThrows += score;
-        });
+        // const { rawScoresArr, parArray, gameObjArr } =
+        //   getScoreArrays(totalScorecards);
+        // const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
+        //   scorecardsWithUser,
+        //   id,
+        // );
+        // const bestGame = calculateBestGame(gameObjArr);
+        // const {
+        //   acesCount,
+        //   eaglesCount,
+        //   birdiesCount,
+        //   parsCount,
+        //   bogeyCount,
+        //   dblBogeyCount,
+        //   trpBogeyCount,
+        // } = calculateParPerformance(rawScoresArr, parArray);
+        // const totalThrows = calculateThrows(rawScoresArr);
 
         const courseList = [];
         totalScorecards.forEach((scorecard) => {
@@ -214,7 +132,7 @@ export default function FriendProfile() {
         setPlayedCourses(matchingCourses);
         setBestRound(bestGame);
         setCourses(courseList);
-        setHoles(scoresArray.length);
+        setHoles(rawScoresArr.length);
         setThrows(totalThrows);
         setUserWins(userPoints);
         setFriendWins(friendPoints);
