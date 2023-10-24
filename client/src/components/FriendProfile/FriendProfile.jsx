@@ -69,7 +69,6 @@ export default function FriendProfile() {
         });
 
         setScorecardsWithUser(scorecardsWithUser);
-        console.log(totalScorecards);
 
         const rawScoresArr = [];
         const parArray = [];
