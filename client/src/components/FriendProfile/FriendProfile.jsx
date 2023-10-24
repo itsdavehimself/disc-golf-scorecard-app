@@ -25,6 +25,8 @@ export default function FriendProfile() {
   const [throws, setThrows] = useState(0);
   const [courses, setCourses] = useState([]);
   const [bestRound, setBestRound] = useState([]);
+  const [playedCourses, setPlayedCourses] = useState([]);
+  const [bestRoundCourseName, setBestRoundCourseName] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,10 +47,13 @@ export default function FriendProfile() {
             },
           },
         );
-
-        const [friend, scorecards] = await Promise.all([
+        const courseResponse = await fetch(
+          `http://localhost:8080/api/courses/`,
+        );
+        const [friend, scorecards, coursesJSON] = await Promise.all([
           friendDataResponse,
           scorecardsResponse,
+          courseResponse,
         ]).then((responses) => Promise.all(responses.map((res) => res.json())));
 
         setFriend(friend.friend);
@@ -194,6 +199,19 @@ export default function FriendProfile() {
           }
         });
 
+        const matchingCourse = coursesJSON.find(
+          (course) => course._id === bestGame.course,
+        );
+
+        if (matchingCourse) {
+          setBestRoundCourseName(matchingCourse);
+        }
+
+        const matchingCourses = coursesJSON.filter((course) =>
+          courses.includes(course._id),
+        );
+
+        setPlayedCourses(matchingCourses);
         setBestRound(bestGame);
         setCourses(courseList);
         setHoles(scoresArray.length);
@@ -215,7 +233,7 @@ export default function FriendProfile() {
     };
 
     fetchData();
-  }, [id, user, totalScorecards]);
+  }, [id, user, totalScorecards, bestRound.course, courses]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -254,7 +272,23 @@ export default function FriendProfile() {
             {courses.length} {courses.length === 1 ? 'Course' : 'Courses'}{' '}
             Played
           </div>
-          <PlayedCourses courses={courses} bestRound={bestRound} />
+          <PlayedCourses
+            bestRound={bestRound}
+            playedCourses={playedCourses}
+            bestRoundCourseName={bestRoundCourseName}
+          />
+        </div>
+        <div>
+          <div>Best round</div>
+          <span className="font-semibold">
+            {bestRound.difference === 0
+              ? 'E'
+              : bestRound.difference > 0
+              ? `+${bestRound.difference}`
+              : bestRound.difference}
+          </span>{' '}
+          at {bestRoundCourseName.name} {bestRoundCourseName.city},{' '}
+          {bestRoundCourseName.state}
         </div>
         <div className="pt-6">
           <div className="text-center text-sm font-semibold">
