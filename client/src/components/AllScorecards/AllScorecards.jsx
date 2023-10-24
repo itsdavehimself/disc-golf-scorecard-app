@@ -10,24 +10,59 @@ export default function AllScorecards() {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    const fetchScorecards = async () => {
-      const response = await fetch('http://localhost:8080/api/scorecards', {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-      const json = await response.json();
+    async function fetchData() {
+      try {
+        const scorecardResponse = await fetch(
+          'http://localhost:8080/api/scorecards',
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          },
+        );
+        if (scorecardResponse.ok) {
+          const scorecardJSON = await scorecardResponse.json();
 
-      if (response.ok) {
-        setScorecards(json);
-        setIsLoading(false);
+          const coursePromises = [];
+
+          for (const scorecard of scorecardJSON) {
+            const coursePromise = fetch(
+              `http://localhost:8080/api/courses/${scorecard.course}`,
+            );
+            coursePromises.push(coursePromise);
+          }
+
+          const courseResponses = await Promise.all(coursePromises);
+          const roundDataArr = [];
+
+          for (let i = 0; i < courseResponses.length; i++) {
+            if (courseResponses[i].ok) {
+              const courseData = await courseResponses[i].json();
+              const roundData = {
+                city: courseData.course.city,
+                holes: courseData.course.holes,
+                name: courseData.course.name,
+                par: courseData.course.par,
+                state: courseData.course.state,
+                _id: scorecardJSON[i]._id,
+                course: scorecardJSON[i].course,
+                players: scorecardJSON[i].players,
+                date: scorecardJSON[i].date,
+                startTime: scorecardJSON[i].startTime,
+                userId: scorecardJSON[i].userId,
+              };
+              roundDataArr.push(roundData);
+            }
+          }
+          setScorecards(roundDataArr);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    };
-
-    if (user) {
-      fetchScorecards();
     }
-  }, [user]);
+    fetchData();
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
