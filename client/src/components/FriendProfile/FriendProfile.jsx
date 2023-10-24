@@ -69,6 +69,7 @@ export default function FriendProfile() {
         });
 
         setScorecardsWithUser(scorecardsWithUser);
+        console.log(totalScorecards);
 
         const rawScoresArr = [];
         const parArray = [];
@@ -153,7 +154,7 @@ export default function FriendProfile() {
   }, [id, user]);
 
   const filterLastFiveRounds = () => {
-    const filteredScorecards = totalScorecards.slice(0, 5);
+    const filteredScorecards = totalScorecards.slice(-5);
     const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
       return scorecard.players.some((player) => player.type === 'User');
     });
