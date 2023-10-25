@@ -33,6 +33,7 @@ export default function AllCourses() {
 
   return (
     <div className="flex flex-col bg-off-white w-full px-4 pt-20">
+      <div className="font-semibold pb-2">All courses</div>
       <div className="flex items-center justify-center bg-honeydew pl-2 rounded-md">
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
