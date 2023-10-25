@@ -31,7 +31,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar toggleSidebar={toggleSidebar} isSideBarOpen={isSideBarOpen} />
-        <div className="flex flex-row h-screen w-screen">
+        <div className="flex flex-row w-screen min-h-screen">
           {user && <Sidebar />}
           <Routes>
             <Route path="/" element={user ? <Dashboard /> : <LandingPage />} />
