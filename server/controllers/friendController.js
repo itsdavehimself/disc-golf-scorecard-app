@@ -40,6 +40,29 @@ exports.updateFriendScorecards = asyncHandler(async (req, res) => {
   if (!friend) {
     return res.status(404).json({ error: 'Friend does not exist' });
   }
-
   res.status(200).json({ friend });
+});
+
+exports.deleteFriendScorecard = asyncHandler(async (req, res) => {
+  const { friendId, scorecardId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(friendId) || !mongoose.Types.ObjectId.isValid(scorecardId)) {
+    return res.status(404).json({ error: 'Friend or Scorecard does not exist' });
+  }
+
+  try {
+    const updatedFriend = await Friend.findByIdAndUpdate(
+      friendId,
+      { $pull: { scorecards: scorecardId } },
+      { new: true },
+    );
+
+    if (!updatedFriend) {
+      return res.status(400).json({ error: 'Friend or Scorecard does not exist' });
+    }
+
+    res.status(200).json(updatedFriend);
+  } catch (error) {
+    res.status(500).json({ error: 'Server Error' });
+  }
 });
