@@ -65,26 +65,6 @@ export default function Dashboard() {
     fetchData();
   });
 
-  // useEffect(() => {
-  //   const fetchScorecards = async () => {
-  //     const response = await fetch('http://localhost:8080/api/scorecards', {
-  //       headers: {
-  //         Authorization: `Bearer ${user.token}`,
-  //       },
-  //     });
-  //     const json = await response.json();
-
-  //     if (response.ok) {
-  //       setScorecards(json);
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   if (user) {
-  //     fetchScorecards();
-  //   }
-  // }, [user]);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
