@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,6 +8,27 @@ import {
   faThumbTack,
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
+import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
+
+let useClickOutside = (handler) => {
+  const domNode = useRef();
+
+  useEffect(() => {
+    const outsideHandler = (e) => {
+      if (domNode.current && !domNode.current.contains(e.target)) {
+        handler();
+      }
+    };
+
+    document.addEventListener('mousedown', outsideHandler);
+
+    return () => {
+      document.removeEventListener('mousedown', outsideHandler);
+    };
+  });
+
+  return domNode;
+};
 
 export default function Scorecard() {
   const { id } = useParams();
@@ -24,6 +45,7 @@ export default function Scorecard() {
   const [playerScores, setPlayerScores] = useState({});
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const handleInputChange = (event, playerId, holeNumber) => {
     let value = event.target.value;
@@ -155,96 +177,117 @@ export default function Scorecard() {
     }
   }, [user, id]);
 
+  const outsideConfirmDelete = useClickOutside(() => {
+    setIsConfirmOpen(false);
+  });
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="flex flex-col w-screen bg-honeydew pt-16 text-black-olive">
-      {courseExists ? (
-        <>
-          <h1 className="text-2xl font-semibold">{courseName}</h1>
-          <div className="flex gap-2">
-            <p>
-              <FontAwesomeIcon icon={faThumbTack} className="pr-1" />
-              {holes.length} holes
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faClock} className="pr-1" />
-              {date} at {startTime}
-            </p>
-          </div>
-
-          <p>
-            <FontAwesomeIcon icon={faLocationDot} className="pr-1" />
-            {location}
-          </p>
-          <div className="grid grid-cols-2">
-            <div className="grid grid-cols-3">
-              <div className="flex items-center justify-center">Hole</div>
-              <div className="flex items-center justify-center">Dist</div>
-              <div className="flex items-center justify-center">Par</div>
-            </div>
-            <div className={`grid grid-cols-${players.length}`}>
-              {players.map((player, index) => (
-                <div
-                  className="flex items-center justify-center overflow-x-hidden"
-                  key={index}
-                >
-                  {player.name}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div>
-              {holes.map((hole) => (
-                <div className="grid grid-cols-3" key={hole._id}>
-                  <div className="flex items-center justify-center text-sm">
-                    {hole.holeNumber}
-                  </div>
-                  <div className="flex items-center justify-center text-sm">
-                    {hole.distance}ft
-                  </div>
-                  <div className="flex items-center justify-center text-sm">
-                    {hole.par}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className={`grid grid-cols-${holes.length}`}>
-              {holes.map((hole) => (
-                <div
-                  className={`grid grid-cols-${players.length} justify-items-center`}
-                  key={hole.holeNumber}
-                >
-                  {players.map((player) => (
-                    <input
-                      type="text"
-                      className="w-6 text-center"
-                      key={player._id}
-                      value={
-                        playerScores[player.reference][hole.holeNumber - 1]
-                      }
-                      onChange={(e) =>
-                        handleInputChange(e, player.reference, hole.holeNumber)
-                      }
-                    ></input>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        <div>Scorecard does not exist</div>
+    <>
+      {isConfirmOpen && (
+        <ConfirmDeleteModal
+          setIsConfirmOpen={setIsConfirmOpen}
+          outsideConfirmDelete={outsideConfirmDelete}
+        />
       )}
-      <button
-        className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
-        onClick={handleScorecardSubmit}
-      >
-        Save scorecard
-      </button>
-    </div>
+      <div className="flex flex-col w-screen h-screen bg-honeydew pt-16 text-black-olive">
+        {courseExists ? (
+          <>
+            <h1 className="text-2xl font-semibold">{courseName}</h1>
+            <div className="flex gap-2">
+              <p>
+                <FontAwesomeIcon icon={faThumbTack} className="pr-1" />
+                {numberOfHoles} holes
+              </p>
+              <p>
+                <FontAwesomeIcon icon={faClock} className="pr-1" />
+                {date} at {startTime}
+              </p>
+            </div>
+
+            <p>
+              <FontAwesomeIcon icon={faLocationDot} className="pr-1" />
+              {location}
+            </p>
+            <div className="grid grid-cols-2">
+              <div className="grid grid-cols-3">
+                <div className="flex items-center justify-center">Hole</div>
+                <div className="flex items-center justify-center">Dist</div>
+                <div className="flex items-center justify-center">Par</div>
+              </div>
+              <div className={`grid grid-cols-${players.length}`}>
+                {players.map((player, index) => (
+                  <div
+                    className="flex items-center justify-center overflow-x-hidden"
+                    key={index}
+                  >
+                    {player.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div>
+                {holes.map((hole) => (
+                  <div className="grid grid-cols-3" key={hole._id}>
+                    <div className="flex items-center justify-center text-sm">
+                      {hole.holeNumber}
+                    </div>
+                    <div className="flex items-center justify-center text-sm">
+                      {hole.distance}ft
+                    </div>
+                    <div className="flex items-center justify-center text-sm">
+                      {hole.par}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className={`grid grid-cols-${holes.length}`}>
+                {holes.map((hole) => (
+                  <div
+                    className={`grid grid-cols-${players.length} justify-items-center`}
+                    key={hole.holeNumber}
+                  >
+                    {players.map((player) => (
+                      <input
+                        type="text"
+                        className="w-6 text-center"
+                        key={player._id}
+                        value={
+                          playerScores[player.reference][hole.holeNumber - 1]
+                        }
+                        onChange={(e) =>
+                          handleInputChange(
+                            e,
+                            player.reference,
+                            hole.holeNumber,
+                          )
+                        }
+                      ></input>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div>Scorecard does not exist</div>
+        )}
+        <div className="flex flex-col gap-4 pt-4 justify-center items-center">
+          <button
+            className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors w-3/4"
+            onClick={handleScorecardSubmit}
+          >
+            Save scorecard
+          </button>
+          <button onClick={() => setIsConfirmOpen(true)}>
+            Delete scorecard
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
