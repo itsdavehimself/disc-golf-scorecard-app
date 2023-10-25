@@ -47,8 +47,8 @@ export default function Scorecard() {
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
   const navigate = useNavigate();
+  const nameForModal = 'scorecard';
 
   const handleInputChange = (event, playerId, holeNumber) => {
     let value = event.target.value;
@@ -201,6 +201,7 @@ export default function Scorecard() {
           setIsConfirmOpen={setIsConfirmOpen}
           outsideConfirmDelete={outsideConfirmDelete}
           handleConfirmDelete={handleConfirmDelete}
+          nameForModal={nameForModal}
         />
       )}
       <div className="flex flex-col w-screen h-screen bg-honeydew pt-16 text-black-olive">
