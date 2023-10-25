@@ -13,6 +13,7 @@ import NotFound from './components/NotFound/notFound';
 import AllScorecards from './components/AllScorecards/AllScorecards';
 import AllFriends from './components/AllFriends/AllFriends';
 import FriendProfile from './components/FriendProfile/FriendProfile';
+import AllCourses from './components/AllCourses/allCourses';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -117,6 +118,19 @@ export default function App() {
               element={
                 user ? (
                   <FriendProfile />
+                ) : (
+                  <>
+                    <Navigate to="/login" />
+                    <Login />
+                  </>
+                )
+              }
+            />
+            <Route
+              path="/courses"
+              element={
+                user ? (
+                  <AllCourses />
                 ) : (
                   <>
                     <Navigate to="/login" />
