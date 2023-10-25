@@ -2,6 +2,12 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faLocationDot,
+  faThumbTack,
+  faClock,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Scorecard() {
   const { id } = useParams();
@@ -154,14 +160,24 @@ export default function Scorecard() {
   }
 
   return (
-    <div className="flex flex-col w-screen bg-honeydew pt-16">
+    <div className="flex flex-col w-screen bg-honeydew pt-16 text-black-olive">
       {courseExists ? (
         <>
-          <h1 className="text-xl">
-            {courseName} - {numberOfHoles} holes
-          </h1>
+          <h1 className="text-2xl font-semibold">{courseName}</h1>
+          <div className="flex gap-2">
+            <p>
+              <FontAwesomeIcon icon={faThumbTack} className="pr-1" />
+              {holes.length} holes
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faClock} className="pr-1" />
+              {date} at {startTime}
+            </p>
+          </div>
+
           <p>
-            {date} at {startTime}, {location}
+            <FontAwesomeIcon icon={faLocationDot} className="pr-1" />
+            {location}
           </p>
           <div className="grid grid-cols-2">
             <div className="grid grid-cols-3">
