@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect, useState, useRef } from 'react';
 import { format, parseISO } from 'date-fns';
@@ -9,6 +9,7 @@ import {
   faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
+import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -46,6 +47,8 @@ export default function Scorecard() {
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event, playerId, holeNumber) => {
     let value = event.target.value;
@@ -116,6 +119,12 @@ export default function Scorecard() {
     if (saveScorecardResponse.ok) {
       return;
     }
+  };
+
+  const handleConfirmDelete = () => {
+    deleteScorecard(id, user, players);
+    setIsConfirmOpen(false);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -191,6 +200,7 @@ export default function Scorecard() {
         <ConfirmDeleteModal
           setIsConfirmOpen={setIsConfirmOpen}
           outsideConfirmDelete={outsideConfirmDelete}
+          handleConfirmDelete={handleConfirmDelete}
         />
       )}
       <div className="flex flex-col w-screen h-screen bg-honeydew pt-16 text-black-olive">

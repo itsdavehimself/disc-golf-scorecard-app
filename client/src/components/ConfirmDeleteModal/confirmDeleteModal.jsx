@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 export default function ConfirmDeleteModal({
   outsideConfirmDelete,
   setIsConfirmOpen,
+  handleConfirmDelete,
 }) {
   return (
     <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black-olive">
@@ -14,7 +15,10 @@ export default function ConfirmDeleteModal({
           Are you sure you want to delete this scorecard?
         </p>
         <div className="grid grid-rows-auto gap-2 justify-center items-center w-full">
-          <button className="bg-red py-3 rounded-md text-off-white font-semibold cursor-pointer transition-colors w-48">
+          <button
+            onClick={handleConfirmDelete}
+            className="bg-red py-3 rounded-md text-off-white font-semibold cursor-pointer transition-colors w-48"
+          >
             Delete
           </button>
           <button
@@ -31,6 +35,7 @@ export default function ConfirmDeleteModal({
 
 ConfirmDeleteModal.propTypes = {
   setIsConfirmOpen: PropTypes.func,
+  handleConfirmDelete: PropTypes.func,
   outsideConfirmDelete: PropTypes.shape({
     current: PropTypes.instanceOf(Element),
   }),
