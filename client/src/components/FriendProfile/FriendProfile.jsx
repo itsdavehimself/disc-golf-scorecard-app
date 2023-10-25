@@ -180,92 +180,6 @@ export default function FriendProfile() {
     fetchData();
   }, [id, user]);
 
-  const filterLastFiveRounds = () => {
-    const filteredScorecards = totalScorecards.slice(-5);
-    const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
-      return scorecard.players.some((player) => player.type === 'User');
-    });
-
-    setScorecardsWithUser(scorecardsWithUser);
-
-    const rawScoresArr = [];
-    const parArray = [];
-    const gameObjArr = [];
-
-    filteredScorecards.forEach((scorecard) => {
-      scorecard.players.forEach((player) => {
-        if (player.reference === id) {
-          const gameObj = {
-            scorecard: player.scores,
-            scorecardId: scorecard._id,
-            course: scorecard.course,
-            date: scorecard.date,
-          };
-          gameObjArr.push(gameObj);
-
-          player.scores.forEach((score) => {
-            rawScoresArr.push(score.score);
-            parArray.push(score.holePar);
-          });
-        }
-      });
-    });
-
-    const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
-      scorecardsWithUser,
-      id,
-    );
-    const bestGame = calculateBestGame(gameObjArr);
-    const {
-      acesCount,
-      eaglesCount,
-      birdiesCount,
-      parsCount,
-      bogeyCount,
-      dblBogeyCount,
-      trpBogeyCount,
-    } = calculateParPerformance(rawScoresArr, parArray);
-    const totalThrows = calculateThrows(rawScoresArr);
-
-    const courseList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      if (!courseList.includes(course)) {
-        courseList.push(course);
-      }
-    });
-
-    const matchingCourse = playedCourses.find(
-      (course) => course._id === bestGame.course,
-    );
-
-    if (matchingCourse) {
-      setBestRoundCourseName(matchingCourse);
-    }
-
-    const matchingCourses = playedCourses.filter((course) =>
-      courseList.includes(course._id),
-    );
-
-    setFilterYear('Year');
-    setTotalScorecards(filteredScorecards);
-    setPlayedCourses(matchingCourses);
-    setBestRound(bestGame);
-    setHoles(rawScoresArr.length);
-    setThrows(totalThrows);
-    setUserWins(userPoints);
-    setFriendWins(friendPoints);
-    setTies(ties);
-    setAces(acesCount);
-    setBirdies(birdiesCount);
-    setEagles(eaglesCount);
-    setPars(parsCount);
-    setBogey(bogeyCount);
-    setDoubleBogeys(dblBogeyCount);
-    setTripleBogeys(trpBogeyCount);
-    setIsLoading(false);
-  };
-
   const showAllResults = () => {
     const scorecardsWithUser = allScorecards.filter((scorecard) => {
       return scorecard.players.some((player) => player.type === 'User');
@@ -348,7 +262,177 @@ export default function FriendProfile() {
     setBogey(bogeyCount);
     setDoubleBogeys(dblBogeyCount);
     setTripleBogeys(trpBogeyCount);
-    setIsLoading(false);
+  };
+
+  const filterLastFiveRounds = () => {
+    const filteredScorecards = allScorecards.slice(-5);
+    const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
+      return scorecard.players.some((player) => player.type === 'User');
+    });
+
+    setScorecardsWithUser(scorecardsWithUser);
+
+    const rawScoresArr = [];
+    const parArray = [];
+    const gameObjArr = [];
+
+    filteredScorecards.forEach((scorecard) => {
+      scorecard.players.forEach((player) => {
+        if (player.reference === id) {
+          const gameObj = {
+            scorecard: player.scores,
+            scorecardId: scorecard._id,
+            course: scorecard.course,
+            date: scorecard.date,
+          };
+          gameObjArr.push(gameObj);
+
+          player.scores.forEach((score) => {
+            rawScoresArr.push(score.score);
+            parArray.push(score.holePar);
+          });
+        }
+      });
+    });
+
+    const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
+      scorecardsWithUser,
+      id,
+    );
+    const bestGame = calculateBestGame(gameObjArr);
+    const {
+      acesCount,
+      eaglesCount,
+      birdiesCount,
+      parsCount,
+      bogeyCount,
+      dblBogeyCount,
+      trpBogeyCount,
+    } = calculateParPerformance(rawScoresArr, parArray);
+    const totalThrows = calculateThrows(rawScoresArr);
+
+    const courseList = [];
+    filteredScorecards.forEach((scorecard) => {
+      const course = scorecard.course;
+      if (!courseList.includes(course)) {
+        courseList.push(course);
+      }
+    });
+
+    const matchingCourse = allCourses.find(
+      (course) => course._id === bestGame.course,
+    );
+
+    if (matchingCourse) {
+      setBestRoundCourseName(matchingCourse);
+    }
+
+    const matchingCourses = allCourses.filter((course) =>
+      courseList.includes(course._id),
+    );
+
+    setFilterYear('Year');
+    setTotalScorecards(filteredScorecards);
+    setPlayedCourses(matchingCourses);
+    setBestRound(bestGame);
+    setHoles(rawScoresArr.length);
+    setThrows(totalThrows);
+    setUserWins(userPoints);
+    setFriendWins(friendPoints);
+    setTies(ties);
+    setAces(acesCount);
+    setBirdies(birdiesCount);
+    setEagles(eaglesCount);
+    setPars(parsCount);
+    setBogey(bogeyCount);
+    setDoubleBogeys(dblBogeyCount);
+    setTripleBogeys(trpBogeyCount);
+  };
+
+  const filterByYear = (year) => {
+    const filteredScorecards = [];
+    allScorecards.forEach((scorecard) => {
+      const scorecardYear = scorecard.date.substring(0, 4);
+
+      if (scorecardYear === year) {
+        filteredScorecards.push(scorecard);
+      }
+    });
+
+    const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
+      return scorecard.players.some((player) => player.type === 'User');
+    });
+    setScorecardsWithUser(scorecardsWithUser);
+    const rawScoresArr = [];
+    const parArray = [];
+    const gameObjArr = [];
+    filteredScorecards.forEach((scorecard) => {
+      scorecard.players.forEach((player) => {
+        if (player.reference === id) {
+          const gameObj = {
+            scorecard: player.scores,
+            scorecardId: scorecard._id,
+            course: scorecard.course,
+            date: scorecard.date,
+          };
+          gameObjArr.push(gameObj);
+          player.scores.forEach((score) => {
+            rawScoresArr.push(score.score);
+            parArray.push(score.holePar);
+          });
+        }
+      });
+    });
+    const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
+      scorecardsWithUser,
+      id,
+    );
+    const bestGame = calculateBestGame(gameObjArr);
+    const {
+      acesCount,
+      eaglesCount,
+      birdiesCount,
+      parsCount,
+      bogeyCount,
+      dblBogeyCount,
+      trpBogeyCount,
+    } = calculateParPerformance(rawScoresArr, parArray);
+    const totalThrows = calculateThrows(rawScoresArr);
+
+    const courseList = [];
+    filteredScorecards.forEach((scorecard) => {
+      const course = scorecard.course;
+      if (!courseList.includes(course)) {
+        courseList.push(course);
+      }
+    });
+    const matchingCourse = allCourses.find(
+      (course) => course._id === bestGame.course,
+    );
+
+    if (matchingCourse) {
+      setBestRoundCourseName(matchingCourse);
+    }
+
+    const matchingCourses = allCourses.filter((course) =>
+      courseList.includes(course._id),
+    );
+
+    setTotalScorecards(filteredScorecards);
+    setPlayedCourses(matchingCourses);
+    setBestRound(bestGame);
+    setHoles(rawScoresArr.length);
+    setThrows(totalThrows);
+    setUserWins(userPoints);
+    setFriendWins(friendPoints);
+    setTies(ties);
+    setAces(acesCount);
+    setBirdies(birdiesCount);
+    setEagles(eaglesCount);
+    setPars(parsCount);
+    setBogey(bogeyCount);
+    setDoubleBogeys(dblBogeyCount);
+    setTripleBogeys(trpBogeyCount);
   };
 
   const outsideYearMenu = useClickOutside(() => {
@@ -367,6 +451,7 @@ export default function FriendProfile() {
           allScorecards={allScorecards}
           setFilterYear={setFilterYear}
           setIsYearMenuOpen={setIsYearMenuOpen}
+          filterByYear={filterByYear}
         />
       )}
       <div className="flex flex-col bg-off-white w-full px-4 text-black-olive">
