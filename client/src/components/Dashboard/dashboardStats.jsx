@@ -30,7 +30,9 @@ export default function DashboardStats({ scorecards }) {
         <div className="text-xs">LAST 30 DAYS</div>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <div className="font-semibold">{daysDifference} Days</div>
+        <div className="font-semibold">
+          {daysDifference} {daysDifference === 1 ? 'Day' : 'Days'}
+        </div>
         <div className="text-xs">LAST PLAYED</div>
       </div>
     </div>
