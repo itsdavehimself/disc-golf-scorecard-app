@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const User = require('../models/userModel');
 const Friend = require('../models/friendModel');
 const requireAuth = require('../middleware/requireAuth');
