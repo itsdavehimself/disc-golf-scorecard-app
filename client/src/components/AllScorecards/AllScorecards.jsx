@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import ScorecardDetails from '../ScorecardDetails/scorecardDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import DashboardStats from '../Dashboard/dashboardStats';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValueInput, setSearchValueInput] = useState('');
 
   const { user } = useAuthContext();
 
@@ -71,13 +74,32 @@ export default function AllScorecards() {
   return (
     <div className="flex flex-col bg-off-white w-full px-4 pt-16">
       <DashboardStats scorecards={scorecards} />
-      <div className="flex text-sm text-black-olive items-center font-semibold pt-5">
-        All rounds
+      <div className="flex text-sm text-black-olive items-center font-semibold pt-3 pb-2">
+        All Rounds
+      </div>
+      <div className="flex items-center justify-center bg-honeydew pl-2">
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className="text-sm text-black-olive"
+        />
+        <input
+          type="text"
+          onChange={(e) => {
+            setSearchValueInput(e.target.value);
+          }}
+          value={searchValueInput}
+          placeholder="Search by friend or course name"
+          className="bg-honeydew w-full p-1 outline-none pl-2"
+        ></input>
       </div>
       <div>
         {scorecards &&
           scorecards.map((scorecard) => (
-            <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
+            <ScorecardDetails
+              key={scorecard._id}
+              scorecard={scorecard}
+              searchValueInput={searchValueInput}
+            />
           ))}
       </div>
     </div>

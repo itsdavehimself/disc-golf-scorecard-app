@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-export default function ScorecardDetails({ scorecard }) {
+export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   const navigate = useNavigate();
 
   const openScorecard = () => {
@@ -21,10 +21,20 @@ export default function ScorecardDetails({ scorecard }) {
   const formattedDate = format(scorecardDate, 'MMM d, yyyy');
   const formattedTime = format(scorecardDate, 'p');
 
+  const matchesPlayer = scorecard.players.some((player) =>
+    player.name.toLowerCase().startsWith(searchValueInput.toLowerCase()),
+  );
+
   return (
     <div
       onClick={openScorecard}
-      className="p-2 my-2 bg-white rounded-md shadow-sm text-black-olive text-sm hover:cursor-pointer active:bg-honeydew"
+      className={`p-2 my-2 bg-white rounded-md shadow-sm text-black-olive text-sm hover:cursor-pointer active:bg-honeydew ${
+        scorecard.name
+          .toLowerCase()
+          .startsWith(searchValueInput.toLowerCase()) || matchesPlayer
+          ? 'block'
+          : 'hidden'
+      }`}
     >
       <h4>
         <span className="font-semibold">{scorecard.name}</span> -{' '}
@@ -64,4 +74,5 @@ export default function ScorecardDetails({ scorecard }) {
 
 ScorecardDetails.propTypes = {
   scorecard: PropTypes.object.isRequired,
+  searchValueInput: PropTypes.string,
 };
