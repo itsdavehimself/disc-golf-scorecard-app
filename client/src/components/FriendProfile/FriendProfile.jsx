@@ -1,8 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import ScoresBarChart from '../ScoresBarChart/scoresBarChart';
 import PlayedCourses from '../PlayedCourses/playedCourses';
+import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
+import { deleteFriend } from '../../utilities/deleteFriendUtility';
 
 import {
   calculateWinLossTieStats,
@@ -58,6 +60,9 @@ export default function FriendProfile() {
   const [bestRoundCourseName, setBestRoundCourseName] = useState({});
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
   const [filterYear, setFilterYear] = useState('Year');
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const nameForModal = 'player';
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -439,12 +444,30 @@ export default function FriendProfile() {
     setIsYearMenuOpen(false);
   });
 
+  const outsideConfirmDelete = useClickOutside(() => {
+    setIsConfirmOpen(false);
+  });
+
+  const handleConfirmDelete = () => {
+    deleteFriend(id, user);
+    setIsConfirmOpen(false);
+    navigate('/friends');
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
+      {isConfirmOpen && (
+        <ConfirmDeleteModal
+          setIsConfirmOpen={setIsConfirmOpen}
+          outsideConfirmDelete={outsideConfirmDelete}
+          handleConfirmDelete={handleConfirmDelete}
+          nameForModal={nameForModal}
+        />
+      )}
       {isYearMenuOpen && (
         <YearFilterModal
           outsideYearMenu={outsideYearMenu}
@@ -537,17 +560,22 @@ export default function FriendProfile() {
                 <div className="text-sm">{ties === 1 ? 'TIE' : 'TIES'}</div>
               </div>
             </div>
+            <div>
+              <ScoresBarChart
+                aces={aces}
+                eagles={eagles}
+                birdies={birdies}
+                pars={pars}
+                bogey={bogey}
+                doubleBogeys={doubleBogeys}
+                tripleBogeys={tripleBogeys}
+                name={friend.name}
+              />
+            </div>
           </div>
-          <ScoresBarChart
-            aces={aces}
-            eagles={eagles}
-            birdies={birdies}
-            pars={pars}
-            bogey={bogey}
-            doubleBogeys={doubleBogeys}
-            tripleBogeys={tripleBogeys}
-            name={friend.name}
-          />
+        </div>
+        <div className="pt-4">
+          <button onClick={() => setIsConfirmOpen(true)}>Delete friend</button>
         </div>
       </div>
     </>
