@@ -11,7 +11,7 @@ import {
   calculateParPerformance,
   calculateBestGame,
   calculateThrows,
-} from '../../utilities/dataUtilities';
+} from '../../utilities/friendProfileDataUtilities';
 import YearFilterModal from '../YearFilterModal/yearFilterModal';
 
 let useClickOutside = (handler) => {
