@@ -18,6 +18,8 @@ export default function YearFilterModal({
     }
   });
 
+  const yearOptionsDescending = yearOptions.sort((a, b) => b - a);
+
   function countOccurrences(arr, yearToCount) {
     return arr.reduce((count, year) => {
       return year === yearToCount ? count + 1 : count;
@@ -26,7 +28,7 @@ export default function YearFilterModal({
 
   const yearCounts = [];
 
-  yearOptions.forEach((year) => {
+  yearOptionsDescending.forEach((year) => {
     const occurrences = countOccurrences(years, year);
     const yearObject = {
       year: year,
@@ -34,8 +36,6 @@ export default function YearFilterModal({
     };
     yearCounts.push(yearObject);
   });
-
-  const yearCountsReversed = yearCounts.slice().reverse();
 
   return (
     <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
@@ -45,8 +45,8 @@ export default function YearFilterModal({
       >
         <p className="text-center">Choose a year to view stats</p>
         <div className="grid grid-rows-auto gap-2">
-          {yearCountsReversed.length > 0 ? (
-            yearCountsReversed.map((yearObj) => (
+          {yearCounts.length > 0 ? (
+            yearCounts.map((yearObj) => (
               <div
                 key={yearObj.year}
                 onClick={() => {
