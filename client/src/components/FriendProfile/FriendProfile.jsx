@@ -150,9 +150,9 @@ export default function FriendProfile() {
           }
         });
 
-        const matchingCourse = coursesJSON.find(
-          (course) => course._id === bestGame.course,
-        );
+        const matchingCourse = coursesJSON.find((course) => {
+          return bestGame && course._id === bestGame.course;
+        });
 
         if (matchingCourse) {
           setBestRoundCourseName(matchingCourse);
@@ -239,9 +239,9 @@ export default function FriendProfile() {
       }
     });
 
-    const matchingCourse = allCourses.find(
-      (course) => course._id === bestGame.course,
-    );
+    const matchingCourse = allCourses.find((course) => {
+      return bestGame && course._id === bestGame.course;
+    });
 
     if (matchingCourse) {
       setBestRoundCourseName(matchingCourse);
@@ -324,9 +324,9 @@ export default function FriendProfile() {
       }
     });
 
-    const matchingCourse = allCourses.find(
-      (course) => course._id === bestGame.course,
-    );
+    const matchingCourse = allCourses.find((course) => {
+      return bestGame && course._id === bestGame.course;
+    });
 
     if (matchingCourse) {
       setBestRoundCourseName(matchingCourse);
@@ -411,9 +411,10 @@ export default function FriendProfile() {
         courseList.push(course);
       }
     });
-    const matchingCourse = allCourses.find(
-      (course) => course._id === bestGame.course,
-    );
+
+    const matchingCourse = allCourses.find((course) => {
+      return bestGame && course._id === bestGame.course;
+    });
 
     if (matchingCourse) {
       setBestRoundCourseName(matchingCourse);
@@ -530,15 +531,24 @@ export default function FriendProfile() {
           </div>
           <div>
             <div>Best round</div>
-            <span className="font-semibold">
-              {bestRound.difference === 0
-                ? 'E'
-                : bestRound.difference > 0
-                ? `+${bestRound.difference}`
-                : bestRound.difference}
-            </span>{' '}
-            at {bestRoundCourseName.name} {bestRoundCourseName.city},{' '}
-            {bestRoundCourseName.state}
+            {bestRound ? (
+              <>
+                <span className="font-semibold">
+                  {bestRound.difference === 0
+                    ? 'E'
+                    : bestRound.difference > 0
+                    ? `+${bestRound.difference}`
+                    : bestRound.difference}
+                </span>
+                <span>
+                  {' '}
+                  at {bestRoundCourseName.name} {bestRoundCourseName.city},{' '}
+                  {bestRoundCourseName.state}
+                </span>
+              </>
+            ) : (
+              'No Round Data'
+            )}
           </div>
           <div className="pt-6">
             <div className="text-center text-sm font-semibold">
