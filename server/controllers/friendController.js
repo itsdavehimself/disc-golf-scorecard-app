@@ -66,3 +66,19 @@ exports.deleteFriendScorecard = asyncHandler(async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
+
+exports.deleteFriend = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'Friend does not exist' });
+  }
+
+  const friend = await Friend.findOneAndDelete({ _id: id });
+
+  if (!friend) {
+    return res.status(404).json({ error: 'Friend does not exist' });
+  }
+
+  res.status(200).json({ friend });
+});
