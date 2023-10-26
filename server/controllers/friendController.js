@@ -50,6 +50,12 @@ exports.deleteFriendScorecard = asyncHandler(async (req, res) => {
     return res.status(404).json({ error: 'Friend or Scorecard does not exist' });
   }
 
+  const friend = await Friend.findById(friendId);
+
+  if (!friend) {
+    return;
+  }
+
   try {
     const updatedFriend = await Friend.findByIdAndUpdate(
       friendId,
