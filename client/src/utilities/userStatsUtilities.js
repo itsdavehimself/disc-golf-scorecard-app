@@ -6,20 +6,26 @@ export function createScoreAndParArrays(scorecards) {
   scorecards.forEach((scorecard) => {
     scorecard.players.forEach((player) => {
       if (player.type === 'User') {
-        const gameObj = {
-          scorecard: player.scores,
-          scorecardId: scorecard._id,
-          course: scorecard.course,
-          date: scorecard.date,
-        };
+        let shouldAddGameObj = true;
 
         player.scores.forEach((score) => {
           if (score && score.score > 0) {
             rawScoresArr.push(score.score);
             parArray.push(score.holePar);
-            gameObjArr.push(gameObj);
+          } else {
+            shouldAddGameObj = false;
           }
         });
+
+        if (shouldAddGameObj) {
+          const gameObj = {
+            scorecard: player.scores,
+            scorecardId: scorecard._id,
+            course: scorecard.course,
+            date: scorecard.date,
+          };
+          gameObjArr.push(gameObj);
+        }
       }
     });
   });
