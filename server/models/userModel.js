@@ -10,7 +10,6 @@ const UserSchema = new Schema({
     type: String, required: true, unique: true, maxLength: 30,
   },
   password: { type: String, required: true },
-  friends: [{ type: Schema.Types.ObjectId, ref: 'Friend', required: false }],
 });
 
 module.exports = mongoose.model('User', UserSchema);
