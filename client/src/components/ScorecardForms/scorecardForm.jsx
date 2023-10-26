@@ -72,9 +72,9 @@ export default function ScorecardForm() {
       return;
     }
     const newFriendResponse = await fetch(
-      `http://localhost:8080/api/users/friends/`,
+      `http://localhost:8080/api/friends/`,
       {
-        method: 'PATCH',
+        method: 'POST',
         body: JSON.stringify({
           name: newFriendName,
         }),
