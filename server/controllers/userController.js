@@ -129,33 +129,3 @@ exports.getFriends = asyncHandler(async (req, res) => {
   const { friends } = user;
   res.status(200).json(friends);
 });
-
-exports.updateFriends = asyncHandler(async (req, res) => {
-  requireAuth(req, res, () => {
-    const userId = req.user._id;
-
-    try {
-      const newFriend = new Friend({
-        name: req.body.name,
-        createdBy: userId,
-      });
-
-      newFriend.save().then((savedFriend) => {
-        const friendId = savedFriend._id;
-
-        User.findOneAndUpdate(
-          { _id: userId },
-          { $push: { friends: friendId } },
-          { new: true },
-        ).then((updatedUser) => {
-          if (!updatedUser) {
-            return res.status(400).json({ error: 'User does not exist' });
-          }
-          return res.status(200).json(savedFriend);
-        });
-      });
-    } catch (error) {
-      return res.status(500).json({ error: 'Internal server error' });
-    }
-  });
-});
