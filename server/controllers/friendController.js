@@ -24,6 +24,26 @@ exports.getFriend = asyncHandler(async (req, res) => {
   res.status(200).json({ friend });
 });
 
+exports.addFriend = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  console.log(userId);
+
+  const newFriend = new Friend({
+    name: req.body.name,
+    createdBy: userId,
+  });
+
+  if (!newFriend) {
+    return res.status(400).json({ error: 'Error creating new friend' });
+  }
+
+  if (newFriend) {
+    newFriend.save();
+  }
+
+  return res.status(200).json(newFriend);
+});
+
 exports.updateFriendScorecards = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { scorecards } = req.body;
