@@ -14,6 +14,7 @@ import AllScorecards from './components/AllScorecards/AllScorecards';
 import AllFriends from './components/AllFriends/AllFriends';
 import FriendProfile from './components/FriendProfile/FriendProfile';
 import AllCourses from './components/AllCourses/allCourses';
+import MyStats from './containers/myStats';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -131,6 +132,19 @@ export default function App() {
               element={
                 user ? (
                   <AllCourses />
+                ) : (
+                  <>
+                    <Navigate to="/login" />
+                    <Login />
+                  </>
+                )
+              }
+            />
+            <Route
+              path="/mystats"
+              element={
+                user ? (
+                  <MyStats />
                 ) : (
                   <>
                     <Navigate to="/login" />

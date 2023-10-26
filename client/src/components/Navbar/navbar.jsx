@@ -195,10 +195,10 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
             <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white md:w-1/4 lg:w-1/5">
               <div className="flex flex-col text-right items-end text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3 gap-4 text-black">
                 <Link to="/mystats">
-                  <button>My Stats</button>
+                  <button onClick={handleMenu}>My Stats</button>
                 </Link>
                 <Link to="/settings">
-                  <button>Settings</button>
+                  <button onClick={handleMenu}>Settings</button>
                 </Link>
                 <button onClick={handleClick}>Logout</button>
               </div>
