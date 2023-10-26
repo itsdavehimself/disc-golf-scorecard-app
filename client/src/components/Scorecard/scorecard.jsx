@@ -204,7 +204,7 @@ export default function Scorecard() {
           nameForModal={nameForModal}
         />
       )}
-      <div className="flex flex-col w-screen h-screen bg-honeydew pt-16 text-black-olive">
+      <div className="flex flex-col w-screen h-screen bg-honeydew pt-20 text-black-olive px-4">
         {courseExists ? (
           <>
             <h1 className="text-2xl font-semibold">{courseName}</h1>
@@ -223,64 +223,72 @@ export default function Scorecard() {
               <FontAwesomeIcon icon={faLocationDot} className="pr-1" />
               {location}
             </p>
-            <div className="grid grid-cols-2">
-              <div className="grid grid-cols-3">
-                <div className="flex items-center justify-center">Hole</div>
-                <div className="flex items-center justify-center">Dist</div>
-                <div className="flex items-center justify-center">Par</div>
-              </div>
-              <div className={`grid grid-cols-${players.length}`}>
-                {players.map((player, index) => (
-                  <div
-                    className="flex items-center justify-center overflow-x-hidden"
-                    key={index}
-                  >
-                    {player.name}
-                  </div>
-                ))}
-              </div>
+            <div>
+              <div className="font-semibold">Scorecard</div>
             </div>
-            <div className="grid grid-cols-2">
-              <div>
-                {holes.map((hole) => (
-                  <div className="grid grid-cols-3" key={hole._id}>
-                    <div className="flex items-center justify-center text-sm">
-                      {hole.holeNumber}
-                    </div>
-                    <div className="flex items-center justify-center text-sm">
-                      {hole.distance}ft
-                    </div>
-                    <div className="flex items-center justify-center text-sm">
-                      {hole.par}
-                    </div>
+            <div className="flex flex-col px-4">
+              <div className="grid grid-cols-2">
+                <div className="grid grid-cols-3 px-8">
+                  <div className="flex items-center justify-center text-xs">
+                    Hole
                   </div>
-                ))}
+                  <div className="flex items-center justify-center text-xs">
+                    Dist
+                  </div>
+                  <div className="flex items-center justify-center text-xs">
+                    Par
+                  </div>
+                </div>
+                <div className={`grid grid-cols-${players.length} gap-10`}>
+                  {players.map((player, index) => (
+                    <div className="flex text-xs justify-center" key={index}>
+                      {player.name}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className={`grid grid-cols-${holes.length}`}>
-                {holes.map((hole) => (
-                  <div
-                    className={`grid grid-cols-${players.length} justify-items-center`}
-                    key={hole.holeNumber}
-                  >
-                    {players.map((player) => (
-                      <input
-                        type="text"
-                        className="w-6 text-center"
-                        key={player._id}
-                        value={
-                          playerScores[player.reference][hole.holeNumber - 1]
-                        }
-                        onChange={(e) =>
-                          handleInputChange(
-                            e,
-                            player.reference,
-                            hole.holeNumber,
-                          )
-                        }
-                      ></input>
-                    ))}
-                  </div>
-                ))}
+              <div className="grid grid-cols-2">
+                <div>
+                  {holes.map((hole) => (
+                    <div className="grid grid-cols-3 h-7 px-8" key={hole._id}>
+                      <div className="flex items-center justify-center text-xs font-semibold">
+                        {hole.holeNumber}
+                      </div>
+                      <div className="flex items-center justify-center text-xs">
+                        {hole.distance}ft
+                      </div>
+                      <div className="flex items-center justify-center text-xs">
+                        {hole.par}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className={`grid grid-cols-auto`}>
+                  {holes.map((hole) => (
+                    <div
+                      className={`grid grid-cols-${players.length} justify-items-center gap-10`}
+                      key={hole.holeNumber}
+                    >
+                      {players.map((player) => (
+                        <input
+                          type="text"
+                          className="w-6 text-center rounded-sm"
+                          key={player._id}
+                          value={
+                            playerScores[player.reference][hole.holeNumber - 1]
+                          }
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              player.reference,
+                              hole.holeNumber,
+                            )
+                          }
+                        ></input>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </>
