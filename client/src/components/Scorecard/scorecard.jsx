@@ -204,26 +204,25 @@ export default function Scorecard() {
           nameForModal={nameForModal}
         />
       )}
-      <div className="flex flex-col w-screen h-screen bg-honeydew pt-20 text-black-olive px-4">
+      <div className="flex flex-col w-screen h-screen bg-off-white pt-20 text-black-olive px-4">
         {courseExists ? (
           <>
-            <h1 className="text-2xl font-semibold">{courseName}</h1>
+            <h1 className="text-xl font-semibold">{courseName}</h1>
             <div className="flex gap-2">
               <p>
-                <FontAwesomeIcon icon={faThumbTack} className="pr-1" />
+                <FontAwesomeIcon icon={faThumbTack} className="pr-1 text-sm" />
                 {numberOfHoles} holes
               </p>
               <p>
-                <FontAwesomeIcon icon={faClock} className="pr-1" />
+                <FontAwesomeIcon icon={faClock} className="pr-1 text-sm" />
                 {date} at {startTime}
               </p>
             </div>
-
             <p>
-              <FontAwesomeIcon icon={faLocationDot} className="pr-1" />
+              <FontAwesomeIcon icon={faLocationDot} className="pr-1 text-sm" />
               {location}
             </p>
-            <div>
+            <div className="py-4">
               <div className="font-semibold">Scorecard</div>
             </div>
             <div className="flex flex-col px-4">
@@ -241,8 +240,13 @@ export default function Scorecard() {
                 </div>
                 <div className={`grid grid-cols-${players.length} gap-10`}>
                   {players.map((player, index) => (
-                    <div className="flex text-xs justify-center" key={index}>
-                      {player.name}
+                    <div
+                      className="flex text-xs justify-center font-semibold"
+                      key={index}
+                    >
+                      {player.name.length > 6
+                        ? player.name.substring(0, 6) + '...'
+                        : player.name}
                     </div>
                   ))}
                 </div>
@@ -272,7 +276,35 @@ export default function Scorecard() {
                       {players.map((player) => (
                         <input
                           type="text"
-                          className="w-6 text-center rounded-sm"
+                          className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
+                            ${
+                              playerScores[player.reference][
+                                hole.holeNumber - 1
+                              ] === 1
+                                ? 'bg-jade text-off-white'
+                                : playerScores[player.reference][
+                                    hole.holeNumber - 1
+                                  ] ===
+                                  hole.par - 2
+                                ? 'bg-washed-jade text-off-white'
+                                : playerScores[player.reference][
+                                    hole.holeNumber - 1
+                                  ] ===
+                                  hole.par - 1
+                                ? 'bg-disabled-font-jade text-off-white'
+                                : playerScores[player.reference][
+                                    hole.holeNumber - 1
+                                  ] ===
+                                  hole.par + 1
+                                ? 'bg-rose'
+                                : playerScores[player.reference][
+                                    hole.holeNumber - 1
+                                  ] ===
+                                  hole.par + 2
+                                ? 'bg-red'
+                                : 'bg-white'
+                            }
+                          `}
                           key={player._id}
                           value={
                             playerScores[player.reference][hole.holeNumber - 1]
