@@ -45,7 +45,7 @@ export default function YearFilterModal({
       >
         <p className="text-center">Choose a year to view stats</p>
         <div className="grid grid-rows-auto gap-2">
-          {yearCountsReversed &&
+          {yearCountsReversed.length > 0 ? (
             yearCountsReversed.map((yearObj) => (
               <div
                 key={yearObj.year}
@@ -62,7 +62,10 @@ export default function YearFilterModal({
                   Played
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="text-center font-semibold">No Data Available</div>
+          )}
         </div>
         <button onClick={() => setIsYearMenuOpen(false)}>Cancel</button>
       </div>
