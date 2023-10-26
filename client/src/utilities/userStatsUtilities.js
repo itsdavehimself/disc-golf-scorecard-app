@@ -1,9 +1,9 @@
-export function createScoreAndParArrays(scorecardsJSON) {
+export function createScoreAndParArrays(scorecards) {
   const rawScoresArr = [];
   const parArray = [];
   const gameObjArr = [];
 
-  scorecardsJSON.scorecards.forEach((scorecard) => {
+  scorecards.forEach((scorecard) => {
     scorecard.players.forEach((player) => {
       if (player.type === 'User') {
         const gameObj = {
@@ -58,7 +58,7 @@ export function findMostPlayedCourse(playedCourses, allCourses) {
     (course) => course._id === mostFrequentCourseId,
   );
 
-  return mostPlayedCourse;
+  return { mostPlayedCourse, maxCount };
 }
 
 export function calculateBestGame(gameObjArr) {
@@ -88,4 +88,45 @@ export function calculateBestGame(gameObjArr) {
   }, sumData[0]);
 
   return bestGame;
+}
+
+export function calculateParPerformance(rawScoresArr, parArray) {
+  let acesCount = 0;
+  let eaglesCount = 0;
+  let birdiesCount = 0;
+  let parsCount = 0;
+  let bogeysCount = 0;
+  let dblBogeyCount = 0;
+  let trpBogeyCount = 0;
+
+  for (let i = 0; i < Math.min(rawScoresArr.length, parArray.length); i++) {
+    const score = rawScoresArr[i];
+    const par = parArray[i];
+
+    if (score === 1) {
+      acesCount++;
+    } else if (score === par - 2) {
+      eaglesCount++;
+    } else if (score === par - 1) {
+      birdiesCount++;
+    } else if (score === par) {
+      parsCount++;
+    } else if (score === par + 1) {
+      bogeysCount++;
+    } else if (score === par + 2) {
+      dblBogeyCount++;
+    } else if (score === par + 3) {
+      trpBogeyCount++;
+    }
+  }
+
+  return {
+    acesCount,
+    eaglesCount,
+    birdiesCount,
+    parsCount,
+    bogeysCount,
+    dblBogeyCount,
+    trpBogeyCount,
+  };
 }
