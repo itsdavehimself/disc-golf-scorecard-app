@@ -7,6 +7,7 @@ import {
   faLocationDot,
   faThumbTack,
   faClock,
+  faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
 import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
@@ -40,9 +41,11 @@ export default function Scorecard() {
   const [date, setDate] = useState(null);
   const [holes, setHoles] = useState([]);
   const [numberOfHoles, setNumberOfHoles] = useState(null);
+  const [par, setPar] = useState(null);
   const [startTime, setStartTime] = useState('');
   const [location, setLocation] = useState('');
   const [players, setPlayers] = useState([]);
+  const [filteredPlayerScores, setFilteredPlayerScores] = useState([]);
   const [playerScores, setPlayerScores] = useState({});
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
@@ -67,6 +70,22 @@ export default function Scorecard() {
 
     updatedPlayerScores[playerId][holeNumber - 1] = parseInt(value, 10);
     setPlayerScores(updatedPlayerScores);
+  };
+
+  const calculatePlayerTotals = () => {
+    const totals = {};
+    const performances = {};
+
+    filteredPlayerScores.forEach((player, index) => {
+      const scores = player.scoreArray;
+      const pars = player.holeParArray;
+      const totalScore = scores.reduce((total, score) => total + score, 0);
+      const currentParTotal = pars.reduce((total, par) => total + par, 0);
+      totals[index] = totalScore;
+      performances[index] = totalScore - currentParTotal;
+    });
+
+    return { totals, performances };
   };
 
   const createPlayersWithScoresObj = () => {
@@ -151,6 +170,29 @@ export default function Scorecard() {
 
       if (scorecardResponse.ok && courseResponse.ok) {
         if (scorecardJson.scorecard.length === 1) {
+          const filteredScores = scorecardJson.scorecard[0].players.map(
+            (player) => {
+              const holeParArray = player.scores.map((score) => score.holePar);
+              const scoreArray = player.scores.map((score) => score.score);
+
+              const filteredHoleParArray = holeParArray.filter((par, index) => {
+                const diff = scoreArray[index] - par;
+                return diff !== -par;
+              });
+
+              const filteredScoreArray = scoreArray.filter((score, index) => {
+                const diff = score - holeParArray[index];
+                return diff !== -holeParArray[index];
+              });
+
+              return {
+                holeParArray: filteredHoleParArray,
+                scoreArray: filteredScoreArray,
+              };
+            },
+          );
+
+          setFilteredPlayerScores(filteredScores);
           setScorecardId(scorecardJson.scorecard[0]._id);
           setCourseExists(true);
           const scorecardDate = parseISO(scorecardJson.scorecard[0].date);
@@ -160,6 +202,7 @@ export default function Scorecard() {
           setStartTime(formattedTime);
           setCourseName(courseJson.course.name);
           const courseCity = courseJson.course.city;
+          setPar(courseJson.course.par);
           const courseState = courseJson.course.state;
           setLocation(`${courseCity}, ${courseState}`);
           const playerObjects = scorecardJson.scorecard[0].players;
@@ -222,8 +265,19 @@ export default function Scorecard() {
               <FontAwesomeIcon icon={faLocationDot} className="pr-1 text-sm" />
               {location}
             </p>
-            <div className="py-4">
-              <div className="font-semibold">Scorecard</div>
+            <div className="flex justify-between py-4">
+              <div className="flex font-semibold">Scorecard</div>
+              <div className="flex gap-2">
+                <button
+                  className="bg-jade rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
+                  onClick={handleScorecardSubmit}
+                >
+                  Save scores
+                </button>
+                <button onClick={() => setIsConfirmOpen(true)}>
+                  <FontAwesomeIcon icon={faTrashCan} className="text-lg" />
+                </button>
+              </div>
             </div>
             <div className="flex flex-col px-4">
               <div className="grid grid-cols-2">
@@ -274,9 +328,10 @@ export default function Scorecard() {
                       key={hole.holeNumber}
                     >
                       {players.map((player) => (
-                        <input
-                          type="text"
-                          className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
+                        <>
+                          <input
+                            type="text"
+                            className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
                             ${
                               playerScores[player.reference][
                                 hole.holeNumber - 1
@@ -305,39 +360,43 @@ export default function Scorecard() {
                                 : 'bg-white'
                             }
                           `}
-                          key={player._id}
-                          value={
-                            playerScores[player.reference][hole.holeNumber - 1]
-                          }
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              player.reference,
-                              hole.holeNumber,
-                            )
-                          }
-                        ></input>
+                            key={player._id}
+                            value={
+                              playerScores[player.reference][
+                                hole.holeNumber - 1
+                              ]
+                            }
+                            onChange={(e) =>
+                              handleInputChange(
+                                e,
+                                player.reference,
+                                hole.holeNumber,
+                              )
+                            }
+                          ></input>
+                        </>
                       ))}
                     </div>
                   ))}
                 </div>
+                <div className="flex gap-2">
+                  <div>Totals</div>
+                  <div className="flex gap-2">
+                    {players.map((player, index) => (
+                      <div key={player.reference}>
+                        {calculatePlayerTotals().performances[index]} (
+                        {calculatePlayerTotals().totals[index]})
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
+            <div className="flex font-semibold">Player overview</div>
           </>
         ) : (
           <div>Scorecard does not exist</div>
         )}
-        <div className="flex flex-col gap-4 pt-4 justify-center items-center">
-          <button
-            className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors w-3/4"
-            onClick={handleScorecardSubmit}
-          >
-            Save scorecard
-          </button>
-          <button onClick={() => setIsConfirmOpen(true)}>
-            Delete scorecard
-          </button>
-        </div>
       </div>
     </>
   );
