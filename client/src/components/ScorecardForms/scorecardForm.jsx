@@ -248,7 +248,13 @@ export default function ScorecardForm() {
 
         setCoursesArr(courses);
         setCourse(courses[0]._id);
-        dispatch({ type: 'SET_FRIENDS', payload: friends });
+        dispatch({
+          type: 'SET_FRIENDS',
+          payload: friends.sort(
+            (friendA, friendB) =>
+              friendB.scorecards.length - friendA.scorecards.length,
+          ),
+        });
         setUserScorecards(scorecards);
         setIsLoading(false);
       } catch (error) {
