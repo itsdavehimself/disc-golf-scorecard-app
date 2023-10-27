@@ -27,6 +27,11 @@ export default function AllFriends() {
       const json = await response.json();
 
       if (response.ok) {
+        json.sort(
+          (friendA, friendB) =>
+            friendB.scorecards.length - friendA.scorecards.length,
+        );
+
         setFriends(json);
         setIsLoading(false);
       }
