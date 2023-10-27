@@ -6,15 +6,42 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   const navigate = useNavigate();
+  const playerPerformances = [];
 
   const openScorecard = () => {
     navigate(`/scorecard/${scorecard._id}`);
   };
 
-  const playerScores = scorecard.players.map((player) => {
-    const arr = player.scores.map((score) => score.score);
-    const scoreSum = arr.reduce((acc, current) => acc + current);
-    return scoreSum;
+  const filteredScores = scorecard.players.map((player) => {
+    const holeParArray = player.scores.map((score) => score.holePar);
+    const scoreArray = player.scores.map((score) => score.score);
+
+    const filteredHoleParArray = holeParArray.filter((par, index) => {
+      const diff = scoreArray[index] - par;
+      return diff !== -par;
+    });
+
+    const filteredScoreArray = scoreArray.filter((score, index) => {
+      const diff = score - holeParArray[index];
+      return diff !== -holeParArray[index];
+    });
+
+    return {
+      holeParArray: filteredHoleParArray,
+      scoreArray: filteredScoreArray,
+    };
+  });
+
+  filteredScores.forEach((player) => {
+    const scores = player.scoreArray;
+    const pars = player.holeParArray;
+    const totalScore = scores.reduce((total, score) => total + score, 0);
+    const currentParTotal = pars.reduce((total, par) => total + par, 0);
+    const playerPerformanceObj = {
+      score: totalScore,
+      performance: totalScore - currentParTotal,
+    };
+    playerPerformances.push(playerPerformanceObj);
   });
 
   const scorecardDate = parseISO(scorecard.date);
@@ -53,16 +80,16 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
             <div>
               <div className="text-xs font-semibold">{player.name}</div>
               <div className="text-xs">
-                {playerScores[index] === scorecard.par ||
-                playerScores[index] === 0 ? (
+                {playerPerformances[index].score === scorecard.par ||
+                playerPerformances[index].score === 0 ? (
                   'E'
                 ) : (
                   <>
-                    {playerScores[index] > scorecard.par ? '+' : ''}
-                    {playerScores[index] - scorecard.par}
+                    {playerPerformances[index].score > scorecard.par ? '+' : ''}
+                    {playerPerformances[index].performance}
                   </>
                 )}{' '}
-                ({playerScores[index]})
+                ({playerPerformances[index].score})
               </div>
             </div>
           </div>
