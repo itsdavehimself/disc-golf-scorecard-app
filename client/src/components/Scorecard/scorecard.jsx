@@ -328,10 +328,9 @@ export default function Scorecard() {
                       key={hole.holeNumber}
                     >
                       {players.map((player) => (
-                        <>
-                          <input
-                            type="text"
-                            className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
+                        <input
+                          type="text"
+                          className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
                             ${
                               playerScores[player.reference][
                                 hole.holeNumber - 1
@@ -360,21 +359,18 @@ export default function Scorecard() {
                                 : 'bg-white'
                             }
                           `}
-                            key={player._id}
-                            value={
-                              playerScores[player.reference][
-                                hole.holeNumber - 1
-                              ]
-                            }
-                            onChange={(e) =>
-                              handleInputChange(
-                                e,
-                                player.reference,
-                                hole.holeNumber,
-                              )
-                            }
-                          ></input>
-                        </>
+                          key={player.reference}
+                          value={
+                            playerScores[player.reference][hole.holeNumber - 1]
+                          }
+                          onChange={(e) =>
+                            handleInputChange(
+                              e,
+                              player.reference,
+                              hole.holeNumber,
+                            )
+                          }
+                        ></input>
                       ))}
                     </div>
                   ))}
