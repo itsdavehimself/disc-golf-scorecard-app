@@ -72,35 +72,40 @@ export default function AllScorecards() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-4 pt-16">
+    <div className="flex flex-col bg-off-white w-full px-3 pt-16">
       <DashboardStats scorecards={scorecards} />
-      <div className="flex text-sm text-black items-center font-semibold pt-3 pb-2">
-        All Rounds
-      </div>
-      <div className="flex items-center justify-center bg-honeydew pl-2">
-        <FontAwesomeIcon
-          icon={faMagnifyingGlass}
-          className="text-sm text-black"
-        />
-        <input
-          type="text"
-          onChange={(e) => {
-            setSearchValueInput(e.target.value);
-          }}
-          value={searchValueInput}
-          placeholder="Search by friend or course name"
-          className="bg-honeydew w-full p-1 outline-none pl-2"
-        ></input>
-      </div>
-      <div>
-        {scorecards &&
-          scorecards.map((scorecard) => (
-            <ScorecardDetails
-              key={scorecard._id}
-              scorecard={scorecard}
-              searchValueInput={searchValueInput}
-            />
-          ))}
+      <div className="bg-white rounded-lg mb-2 shadow-lg">
+        <div className="flex text-lg px-3 pt-3 pb-2 text-black items-center font-semibold">
+          All Rounds
+        </div>
+        <div className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="text-sm text-black"
+          />
+          <input
+            type="text"
+            onChange={(e) => {
+              setSearchValueInput(e.target.value);
+            }}
+            value={searchValueInput}
+            placeholder="Search by friend or course name"
+            className="bg-off-white w-full p-1 outline-none pl-2 rounded-lg"
+          ></input>
+        </div>
+        <div>
+          {scorecards &&
+            scorecards.map((scorecard) => (
+              <ScorecardDetails
+                key={scorecard._id}
+                scorecard={scorecard}
+                searchValueInput={searchValueInput}
+              />
+            ))}
+        </div>
+        <div className="flex items-center justify-center pt-2 pb-4">
+          Chainseeker
+        </div>
       </div>
     </div>
   );
