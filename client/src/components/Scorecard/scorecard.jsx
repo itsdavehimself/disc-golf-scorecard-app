@@ -13,6 +13,7 @@ import {
 import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
 import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
 import { calculateParPerformance } from '../../utilities/userStatsUtilities';
+import StackedPerformanceChart from '../StackedPerformanceChart/StackedPerformanceChart';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -449,6 +450,15 @@ export default function Scorecard() {
                       ({calculatePlayerTotals().totals[index]})
                     </div>
                   </div>
+                  <StackedPerformanceChart
+                    aces={performances[index].acesCount}
+                    eagles={performances[index].eaglesCount}
+                    birdies={performances[index].birdiesCount}
+                    pars={performances[index].parsCount}
+                    bogey={performances[index].bogeysCount}
+                    doubleBogeys={performances[index].dblBogeyCount}
+                    tripleBogeys={performances[index].trpBogeyCount}
+                  />
                 </div>
               ))}
             </div>
