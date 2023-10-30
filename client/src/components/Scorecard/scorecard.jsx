@@ -42,6 +42,7 @@ export default function Scorecard() {
   const [holes, setHoles] = useState([]);
   const [numberOfHoles, setNumberOfHoles] = useState(null);
   const [par, setPar] = useState(null);
+  const [holeParArray, setHoleParArray] = useState([]);
   const [startTime, setStartTime] = useState('');
   const [location, setLocation] = useState('');
   const [players, setPlayers] = useState([]);
@@ -50,6 +51,7 @@ export default function Scorecard() {
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
   const navigate = useNavigate();
   const nameForModal = 'scorecard';
 
@@ -67,8 +69,26 @@ export default function Scorecard() {
     if (!updatedPlayerScores[playerId]) {
       updatedPlayerScores[playerId] = [];
     }
-
     updatedPlayerScores[playerId][holeNumber - 1] = parseInt(value, 10);
+
+    const extractedScores = Object.values(updatedPlayerScores);
+    const filteredScores = extractedScores.map((scores) => {
+      const filteredHoleParArray = holeParArray.filter((par, index) => {
+        const diff = scores[index] - par;
+        return diff !== -par;
+      });
+
+      const filteredScoreArray = scores.filter((score, index) => {
+        const diff = score - holeParArray[index];
+        return diff !== -holeParArray[index];
+      });
+
+      return {
+        holeParArray: filteredHoleParArray,
+        scoreArray: filteredScoreArray,
+      };
+    });
+    setFilteredPlayerScores(filteredScores);
     setPlayerScores(updatedPlayerScores);
   };
 
@@ -173,6 +193,7 @@ export default function Scorecard() {
           const filteredScores = scorecardJson.scorecard[0].players.map(
             (player) => {
               const holeParArray = player.scores.map((score) => score.holePar);
+              setHoleParArray(holeParArray);
               const scoreArray = player.scores.map((score) => score.score);
 
               const filteredHoleParArray = holeParArray.filter((par, index) => {
