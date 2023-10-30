@@ -8,9 +8,11 @@ import {
   faThumbTack,
   faClock,
   faTrashCan,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
 import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
+import { calculateParPerformance } from '../../utilities/userStatsUtilities';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -50,6 +52,8 @@ export default function Scorecard() {
   const [playerScores, setPlayerScores] = useState({});
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
+  const [performances, setPerformances] = useState([]);
+
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -89,6 +93,13 @@ export default function Scorecard() {
       };
     });
     setFilteredPlayerScores(filteredScores);
+    const performanceArray = filteredScores.map((scoreObject) => {
+      return calculateParPerformance(
+        scoreObject.scoreArray,
+        scoreObject.holeParArray,
+      );
+    });
+    setPerformances(performanceArray);
     setPlayerScores(updatedPlayerScores);
   };
 
@@ -213,6 +224,13 @@ export default function Scorecard() {
             },
           );
 
+          const performanceArray = filteredScores.map((scoreObject) => {
+            return calculateParPerformance(
+              scoreObject.scoreArray,
+              scoreObject.holeParArray,
+            );
+          });
+          setPerformances(performanceArray);
           setFilteredPlayerScores(filteredScores);
           setScorecardId(scorecardJson.scorecard[0]._id);
           setCourseExists(true);
@@ -401,8 +419,12 @@ export default function Scorecard() {
                   <div className="flex gap-2">
                     {players.map((player, index) => (
                       <div key={player.reference}>
-                        {calculatePlayerTotals().performances[index]} (
-                        {calculatePlayerTotals().totals[index]})
+                        <span className="font-semibold">
+                          {calculatePlayerTotals().performances[index] > 0
+                            ? '+' + calculatePlayerTotals().performances[index]
+                            : calculatePlayerTotals().performances[index]}
+                        </span>{' '}
+                        ({calculatePlayerTotals().totals[index]})
                       </div>
                     ))}
                   </div>
@@ -410,6 +432,26 @@ export default function Scorecard() {
               </div>
             </div>
             <div className="flex font-semibold">Player overview</div>
+            <div>
+              {players.map((player, index) => (
+                <div key={player._id}>
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-2 items-center">
+                      <FontAwesomeIcon icon={faUser} className="pr-1 text-sm" />
+                      <div>{player.name}</div>
+                    </div>
+                    <div>
+                      <span className="font-semibold">
+                        {calculatePlayerTotals().performances[index] > 0
+                          ? '+' + calculatePlayerTotals().performances[index]
+                          : calculatePlayerTotals().performances[index]}
+                      </span>{' '}
+                      ({calculatePlayerTotals().totals[index]})
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </>
         ) : (
           <div>Scorecard does not exist</div>
