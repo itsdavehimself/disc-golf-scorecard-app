@@ -20,7 +20,7 @@ export default function DashboardStats({ scorecards }) {
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
   return (
-    <div className="flex justify-between text-black py-2 my-3 px-3 bg-white rounded-lg">
+    <div className="flex justify-between text-black py-2 my-3 px-3 bg-white rounded-lg shadow-lg">
       <div className="flex flex-col items-center justify-center">
         <div className="font-semibold">{scorecards.length} Rounds</div>
         <div className="text-xs">TOTAL</div>
