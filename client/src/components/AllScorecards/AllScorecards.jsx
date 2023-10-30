@@ -74,13 +74,13 @@ export default function AllScorecards() {
   return (
     <div className="flex flex-col bg-off-white w-full px-4 pt-16">
       <DashboardStats scorecards={scorecards} />
-      <div className="flex text-sm text-black-olive items-center font-semibold pt-3 pb-2">
+      <div className="flex text-sm text-black items-center font-semibold pt-3 pb-2">
         All Rounds
       </div>
       <div className="flex items-center justify-center bg-honeydew pl-2">
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
-          className="text-sm text-black-olive"
+          className="text-sm text-black"
         />
         <input
           type="text"

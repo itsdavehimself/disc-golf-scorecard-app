@@ -307,7 +307,7 @@ export default function ScorecardForm() {
               onSubmit={handleNewFriendSubmit}
             >
               <div className="flex flex-col">
-                <label className="text-black-olive text-sm">Player name</label>
+                <label className="text-black text-sm">Player name</label>
                 <input
                   onChange={handleFriendNameChange}
                   type="text"
@@ -315,7 +315,7 @@ export default function ScorecardForm() {
                     newFriendNameError
                       ? 'ring-red ring-2'
                       : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-                  } text-black-olive rounded-md shadow-md p-2 focus:outline-none`}
+                  } text-black rounded-md shadow-md p-2 focus:outline-none`}
                 ></input>
                 <div className="h-5">
                   {newFriendNameError && (
@@ -336,7 +336,7 @@ export default function ScorecardForm() {
         </div>
       )}
 
-      <div className="pt-16 w-full text-black-olive px-4">
+      <div className="pt-16 w-full text-black px-4">
         <form onSubmit={handleSubmit}>
           <div
             ref={outsideDropDown}

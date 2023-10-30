@@ -386,7 +386,7 @@ export default function MyStats() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-4 text-black-olive pt-16">
+      <div className="flex flex-col bg-off-white w-full px-4 text-black pt-16">
         <div>{user.user.username}</div>
         <div className="flex flex-row justify-between items-center">
           <button onClick={showAllResults}>All</button>

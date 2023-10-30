@@ -74,10 +74,10 @@ const Signup = () => {
   return (
     <div className="flex flex-col bg-off-white h-screen gap-4 px-7 md:items-center justify-center w-screen">
       <div className="flex flex-col gap-4">
-        <h3 className="flex flex-col md:items-center md:text-center justify-center text-black-olive text-4xl font-semibold">
+        <h3 className="flex flex-col md:items-center md:text-center justify-center text-black text-4xl font-semibold">
           Ace or tree, <br></br>track it here.
         </h3>
-        <p className="text-black-olive text-lg">
+        <p className="text-black text-lg">
           Join ChainSeeker now. It&apos;s free!
         </p>
       </div>
@@ -92,7 +92,7 @@ const Signup = () => {
               isEmailError
                 ? 'ring-red ring-2'
                 : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black-olive rounded-md shadow-md p-2 focus:outline-none`}
+            } text-black rounded-md shadow-md p-2 focus:outline-none`}
             type="email"
             onChange={handleEmailChange}
             value={email}
@@ -110,7 +110,7 @@ const Signup = () => {
               isUsernameError
                 ? 'ring-red ring-2'
                 : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black-olive rounded-md shadow-md p-2 focus:outline-none`}
+            } text-black rounded-md shadow-md p-2 focus:outline-none`}
             type="text"
             onChange={handleUserChange}
             value={username}
@@ -130,7 +130,7 @@ const Signup = () => {
               isPasswordError
                 ? 'ring-red ring-2'
                 : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black-olive rounded-md shadow-md p-2 focus:outline-none`}
+            } text-black rounded-md shadow-md p-2 focus:outline-none`}
             type="password"
             onChange={handlePasswordChange}
             value={password}
@@ -150,7 +150,7 @@ const Signup = () => {
           Sign up!
         </button>
         {error && (
-          <div className="flex items-center justify-center text-black-olive text-sm px-3 py-2 bg-rose border rounded-md border-red">
+          <div className="flex items-center justify-center text-black text-sm px-3 py-2 bg-rose border rounded-md border-red">
             <div className="flex">{error[0].msg}</div>
           </div>
         )}

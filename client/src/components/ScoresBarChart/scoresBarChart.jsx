@@ -135,7 +135,7 @@ export default function ScoresBarChart({
 
   return (
     <div className="w-full md:col-span-2 relative h-72 m-auto bg-off-white">
-      <div className="text-sm font-semibold text-black-olive text-center">
+      <div className="text-sm font-semibold text-black text-center">
         {name}&apos;s par performance
       </div>
       <Bar data={chartData} options={chartOptions} />

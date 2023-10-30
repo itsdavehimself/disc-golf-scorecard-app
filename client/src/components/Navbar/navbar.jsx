@@ -40,7 +40,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4 font-semibold">
                   <Link to={'/login'}>
-                    <button className="text-black-olive hover:text-jade px-3 py-2 cursor-pointer rounded-md">
+                    <button className="text-black hover:text-jade px-3 py-2 cursor-pointer rounded-md">
                       Login
                     </button>
                   </Link>
@@ -66,7 +66,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                   type="button"
                   onClick={handleMenu}
                   className="inline-flex items-center justify-center text-xl px-3 py-2
-                rounded-md text-black-olive hover:text-jade hover-bg-honeydew
+                rounded-md text-black hover:text-jade hover-bg-honeydew
                 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   {open ? (
@@ -92,7 +92,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/login'}>
                   <button
                     onClick={handleMenu}
-                    className=" text-black-olive  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className=" text-black  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Login
                   </button>
@@ -100,7 +100,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/login'}>
                   <button
                     onClick={handleMenu}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     About
                   </button>
@@ -108,7 +108,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/login'}>
                   <button
                     onClick={handleMenu}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Repo
                   </button>
@@ -116,7 +116,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/login'}>
                   <button
                     onClick={handleMenu}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     David&apos;s Github
                   </button>
@@ -140,7 +140,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                   type="button"
                   onClick={toggleSidebar}
                   className="md:hidden inline-flex items-center justify-center text-xl px-3 py-2
-                rounded-md text-black-olive hover:text-jade hover-bg-honeydew
+                rounded-md text-black hover:text-jade hover-bg-honeydew
                 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   {isSideBarOpen ? (
@@ -150,7 +150,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                   )}
                 </button>
               </div>
-              <div className="hidden md:flex gap-4 items-center text-black-olive">
+              <div className="hidden md:flex gap-4 items-center text-black">
                 {!isNewRoundRoute && (
                   <Link to="/newround">
                     <button className="bg-jade px-3 py-2 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
@@ -221,7 +221,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/'}>
                   <button
                     onClick={toggleSidebar}
-                    className=" text-black-olive  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className=" text-black  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Dashboard
                   </button>
@@ -229,7 +229,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/scorecards'}>
                   <button
                     onClick={toggleSidebar}
-                    className=" text-black-olive  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className=" text-black  hover:text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Scorecards
                   </button>
@@ -237,7 +237,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to="/mystats">
                   <button
                     onClick={toggleSidebar}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     My Stats
                   </button>
@@ -245,7 +245,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/friends'}>
                   <button
                     onClick={toggleSidebar}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Friends
                   </button>
@@ -253,7 +253,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to={'/courses'}>
                   <button
                     onClick={toggleSidebar}
-                    className="text-black-olive hover-text-jade px-3 py-2 cursor-pointer rounded-md"
+                    className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
                   >
                     Courses
                   </button>

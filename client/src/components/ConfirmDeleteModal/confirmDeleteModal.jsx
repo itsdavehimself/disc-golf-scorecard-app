@@ -7,7 +7,7 @@ export default function ConfirmDeleteModal({
   nameForModal,
 }) {
   return (
-    <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black-olive">
+    <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black">
       <div
         ref={outsideConfirmDelete}
         className="relative flex flex-col justify-center gap-6 py-5 px-5 w-2/3 h-max mx-4 bg-off-white rounded-md"

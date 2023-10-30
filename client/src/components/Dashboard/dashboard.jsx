@@ -70,35 +70,37 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-4">
+    <div className="flex flex-col bg-off-white w-full px-3">
       <div className="pt-16 items-center md:items-start">
         <h2 className="hidden md:flex">Dashboard</h2>
         <DashboardStats scorecards={scorecards} />
-        <div className="md:hidden my-4">
+        <div className="md:hidden my-3">
           <Link to="/newround">
-            <button className="w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+            <button className="w-full bg-jade py-2 px-3 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
               Start a round
             </button>
           </Link>
         </div>
       </div>
-      <div className="flex text-sm text-black-olive items-center font-semibold">
-        Last 3 rounds
-      </div>
-      <div>
-        {scorecards &&
-          scorecards
-            .slice(0, 3)
-            .map((scorecard) => (
-              <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
-            ))}
-      </div>
-      <div className="flex text-black-olive justify-center items-center font-semibold">
-        <Link to={'/scorecards'}>
-          <button className="flex py-2 px-3 rounded-md text-sm text-black-olive font-semibold cursor-pointer">
-            See all rounds
-          </button>
-        </Link>
+      <div className="rounded-lg bg-white">
+        <div className="flex text-lg px-2 pt-2 text-black items-center font-semibold">
+          Last 5 rounds
+        </div>
+        <div>
+          {scorecards &&
+            scorecards
+              .slice(0, 5)
+              .map((scorecard) => (
+                <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
+              ))}
+        </div>
+        <div className="flex text-black justify-center items-center">
+          <Link to={'/scorecards'}>
+            <button className="flex pt-2 pb-4 px-3 rounded-md text-sm font-semibold text-black cursor-pointer">
+              See all rounds
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

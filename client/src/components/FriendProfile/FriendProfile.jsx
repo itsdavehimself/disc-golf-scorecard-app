@@ -478,7 +478,7 @@ export default function FriendProfile() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-4 text-black-olive">
+      <div className="flex flex-col bg-off-white w-full px-4 text-black">
         <div className="pt-16">
           <div className="text-2xl font-semibold">{friend.name}</div>
           <div className="flex flex-row justify-between items-center">
@@ -554,12 +554,12 @@ export default function FriendProfile() {
             <div className="text-center text-sm font-semibold">
               Your stats vs. {friend.name}
             </div>
-            <div className="w-10/12 mx-auto py-2 flex items-center space-x-2 border border-black-olive rounded-xl">
-              <div className="flex-1 border-r border-black-olive text-center">
+            <div className="w-10/12 mx-auto py-2 flex items-center space-x-2 border border-black rounded-xl">
+              <div className="flex-1 border-r border-black text-center">
                 <div className="text-xl font-bold">{userWins}</div>
                 <div className="text-sm">{userWins === 1 ? 'WIN' : 'WINS'}</div>
               </div>
-              <div className="flex-1 border-r border-black-olive text-center">
+              <div className="flex-1 border-r border-black text-center">
                 <div className="text-xl font-bold">{friendWins}</div>
                 <div className="text-sm">
                   {friendWins === 1 ? 'LOSS' : 'LOSSES'}

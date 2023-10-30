@@ -37,7 +37,7 @@ export default function AllCourses() {
       <div className="flex items-center justify-center bg-honeydew pl-2 rounded-md">
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
-          className="text-sm text-black-olive"
+          className="text-sm text-black"
         />
         <input
           type="text"

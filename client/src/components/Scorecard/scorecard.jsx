@@ -287,7 +287,7 @@ export default function Scorecard() {
           nameForModal={nameForModal}
         />
       )}
-      <div className="flex flex-col w-screen h-screen bg-off-white pt-20 text-black-olive px-4">
+      <div className="flex flex-col w-screen h-screen bg-off-white pt-20 text-black px-4">
         {courseExists ? (
           <>
             <h1 className="text-xl font-semibold">{courseName}</h1>
