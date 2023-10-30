@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser,
-  faAngleRight,
-  faThumbTack,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   const navigate = useNavigate();
