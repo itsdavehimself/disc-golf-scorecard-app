@@ -26,7 +26,6 @@ exports.getFriend = asyncHandler(async (req, res) => {
 
 exports.addFriend = asyncHandler(async (req, res) => {
   const userId = req.user._id;
-  console.log(userId);
 
   const newFriend = new Friend({
     name: req.body.name,
