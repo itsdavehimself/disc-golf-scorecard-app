@@ -55,7 +55,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   return (
     <div
       onClick={openScorecard}
-      className={`px-2 my-2 mx-2 rounded-lg text-black text-sm hover:cursor-pointer hover:rounded-lg hover:bg-white-smoke transition-colors group ${
+      className={`px-2 my-2 mx-2 rounded-lg text-black text-sm hover:cursor-pointer hover:bg-white-smoke transition-colors group ${
         scorecard.name
           .toLowerCase()
           .startsWith(searchValueInput.toLowerCase()) || matchesPlayer
