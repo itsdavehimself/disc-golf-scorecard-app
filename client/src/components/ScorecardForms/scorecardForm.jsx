@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleDown,
+  faCheck,
   faMagnifyingGlass,
   faUser,
   faUserPlus,
@@ -335,184 +336,206 @@ export default function ScorecardForm() {
           </div>
         </div>
       )}
-
-      <div className="pt-16 w-full text-black px-4">
-        <form onSubmit={handleSubmit}>
-          <div
-            ref={outsideDropDown}
-            className="relative font-md w-full hover:cursor-pointer"
-          >
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16">
+        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3">
+          <form onSubmit={handleSubmit}>
             <div
-              className="bg-honeydew w-full p-2 flex items-center justify-between rounded-md h-12"
-              onClick={() => setIsSelectOpen(!isSelectOpen)}
-            >
-              {courseName ? (
-                <div>
-                  <div className="text-sm">
-                    <span className="font-semibold">{courseName}</span> -{' '}
-                    {courseHoles} holes
-                  </div>
-                  <div className="text-xs">
-                    {courseCity}, {courseState}
-                  </div>
-                </div>
-              ) : (
-                'Select course'
-              )}
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                className={`${isSelectOpen && 'rotate-180'}`}
-              />
-            </div>
-            <input type="hidden" />
-
-            <ul
-              className={`bg-honeydew overflow-y-auto mt-2 rounded-md shadow-md ${
-                isSelectOpen
-                  ? 'max-h-60 w-full absolute'
-                  : 'max-h-0 w-full absolute'
-              }`}
-            >
-              <div className="flex items-center justify-center bg-honeydew pl-2 sticky top-0">
-                <FontAwesomeIcon icon={faMagnifyingGlass} className="text-sm" />
-                <input
-                  type="text"
-                  onChange={(e) => {
-                    setSearchValueInput(e.target.value);
-                  }}
-                  value={searchValueInput}
-                  placeholder="Search course"
-                  className="bg-honeydew w-full p-1 outline-none pl-2"
-                ></input>
-              </div>
-              {coursesArr.map((courseItem) => (
-                <li
-                  className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
-                    courseItem.name === courseName && 'bg-emerald'
-                  } ${
-                    courseItem.name
-                      .toLowerCase()
-                      .startsWith(searchValueInput.toLowerCase()) ||
-                    courseItem.city
-                      .toLowerCase()
-                      .startsWith(searchValueInput.toLowerCase())
-                      ? 'block'
-                      : 'hidden'
-                  }`}
-                  key={courseItem._id}
-                  onClick={() => {
-                    setCourse(courseItem._id);
-                    setCourseName(courseItem.name);
-                    setCourseCity(courseItem.city);
-                    setCourseState(courseItem.state);
-                    setCourseHoles(courseItem.holes.length);
-                    setSearchValueInput('');
-                    setIsSelectOpen(!isSelectOpen);
-                  }}
-                >
-                  <div>
-                    <span className="font-semibold">{courseItem.name}</span> -{' '}
-                    {courseItem.holes.length} holes
-                  </div>
-                  <div className="text-xs">
-                    {courseItem.city}, {courseItem.state}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex items-center justify-between my-4">
-            <h3>Who&apos;s playing?</h3>
-            <div
-              onClick={() => {
-                setAddFriendOpen(!addFriendOpen);
-              }}
-              className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md"
-            >
-              <FontAwesomeIcon icon={faUserPlus} />{' '}
-              <span className="text-xs">Add friend</span>
-            </div>
-          </div>
-          <div className="users-playing flex flex-col gap-2">
-            <div
-              data-player-name={user.user.username}
-              data-player-id="player1"
-              data-player-value={user.user._id}
-              data-player-type="User"
-              data-player-checked="false"
-              onClick={handleCheckboxChange}
+              ref={outsideDropDown}
+              className="relative font-md w-full hover:cursor-pointer"
             >
               <div
-                className={`flex items-center justify-between px-2 py-3 text-sm hover:cursor-pointer rounded-md ${
-                  players.some((player) => player.reference === user.user._id)
-                    ? 'bg-emerald'
-                    : 'bg-honeydew'
+                className="bg-off-white w-full p-2 flex items-center justify-between rounded-md h-12"
+                onClick={() => setIsSelectOpen(!isSelectOpen)}
+              >
+                {courseName ? (
+                  <div>
+                    <div className="text-sm">
+                      <span className="font-semibold">{courseName}</span> -{' '}
+                      {courseHoles} holes
+                    </div>
+                    <div className="text-xs">
+                      {courseCity}, {courseState}
+                    </div>
+                  </div>
+                ) : (
+                  'Select course'
+                )}
+                <FontAwesomeIcon
+                  icon={faAngleDown}
+                  className={`${isSelectOpen && 'rotate-180'}`}
+                />
+              </div>
+              <input type="hidden" />
+
+              <ul
+                className={`bg-off-white overflow-y-auto mt-2 rounded-md shadow-md ${
+                  isSelectOpen
+                    ? 'max-h-60 w-full absolute'
+                    : 'max-h-0 w-full absolute'
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <div className="text-xs">
-                    <FontAwesomeIcon
-                      icon={faUser}
-                      className="bg-jade p-1.5 rounded-full font-xs"
-                    />
-                  </div>
-                  <div className="font-semibold">{user.user.username}</div>
+                <div className="flex items-center justify-center bg-off-white pl-2 sticky top-0">
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="text-sm"
+                  />
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setSearchValueInput(e.target.value);
+                    }}
+                    value={searchValueInput}
+                    placeholder="Search course"
+                    className="bg-off-white w-full p-1 outline-none pl-2"
+                  ></input>
                 </div>
-                <div className="text-xs">
-                  {userScorecards.length}{' '}
-                  {userScorecards.length === 1
-                    ? 'Round Played'
-                    : 'Rounds Played'}
-                </div>
+                {coursesArr.map((courseItem) => (
+                  <li
+                    className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
+                      courseItem.name === courseName && 'bg-emerald'
+                    } ${
+                      courseItem.name
+                        .toLowerCase()
+                        .startsWith(searchValueInput.toLowerCase()) ||
+                      courseItem.city
+                        .toLowerCase()
+                        .startsWith(searchValueInput.toLowerCase())
+                        ? 'block'
+                        : 'hidden'
+                    }`}
+                    key={courseItem._id}
+                    onClick={() => {
+                      setCourse(courseItem._id);
+                      setCourseName(courseItem.name);
+                      setCourseCity(courseItem.city);
+                      setCourseState(courseItem.state);
+                      setCourseHoles(courseItem.holes.length);
+                      setSearchValueInput('');
+                      setIsSelectOpen(!isSelectOpen);
+                    }}
+                  >
+                    <div>
+                      <span className="font-semibold">{courseItem.name}</span> -{' '}
+                      {courseItem.holes.length} holes
+                    </div>
+                    <div className="text-xs">
+                      {courseItem.city}, {courseItem.state}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex items-center justify-between my-4">
+              <h3 className="font-semibold">Who&apos;s playing?</h3>
+              <div
+                onClick={() => {
+                  setAddFriendOpen(!addFriendOpen);
+                }}
+                className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md"
+              >
+                <FontAwesomeIcon icon={faUserPlus} />{' '}
+                <span className="text-xs">Add friend</span>
               </div>
             </div>
-            {friends.map((friend, index) => (
+            <div className="flex flex-col gap-2">
               <div
-                key={friend._id}
-                data-player-name={friend.name}
-                data-player-id={`players${index + 2}`}
-                data-player-value={friend._id}
-                data-player-type="Friend"
+                data-player-name={user.user.username}
+                data-player-id="player1"
+                data-player-value={user.user._id}
+                data-player-type="User"
                 data-player-checked="false"
                 onClick={handleCheckboxChange}
               >
                 <div
-                  className={`flex items-center justify-between px-2 py-3 text-sm hover:cursor-pointer rounded-md ${
-                    players.some((player) => player.reference === friend._id)
-                      ? 'bg-emerald'
-                      : 'bg-honeydew'
+                  className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg ${
+                    players.some((player) => player.reference === user.user._id)
+                      ? 'bg-off-white'
+                      : 'bg-white'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className="text-xs">
-                      <FontAwesomeIcon
-                        icon={faUser}
-                        className="bg-jade p-1.5 rounded-full font-xs"
-                      />
+                  <div className="flex items-center justify-between col-start-1 col-end-10">
+                    <div className="flex flex-row items-center gap-2">
+                      <div className="text-xs">
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          className="bg-off-white border border-white p-1.5 rounded-full font-xs text-gray"
+                        />
+                      </div>
+                      <div className="font-semibold">{user.user.username}</div>
                     </div>
-                    <div className="font-semibold">{friend.name}</div>
+                    <div className="text-xs">
+                      {userScorecards.length}{' '}
+                      {userScorecards.length === 1
+                        ? 'Round Played'
+                        : 'Rounds Played'}
+                    </div>
                   </div>
-                  <div className="text-xs">
-                    {friend.scorecards.length}{' '}
-                    {friend.scorecards.length === 1
-                      ? 'Round Played'
-                      : 'Rounds Played'}
-                  </div>
+                  {players.some(
+                    (player) => player.reference === user.user._id,
+                  ) ? (
+                    <div className="flex items-center justify-center">
+                      <FontAwesomeIcon icon={faCheck} />
+                    </div>
+                  ) : null}
                 </div>
               </div>
-            ))}
-            <button
-              disabled={players.length === 0}
-              className={`w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors ${
-                players.length === 0
-                  ? 'bg-washed-jade text-disabled-font-jade'
-                  : null
-              }`}
-            >
-              Start round
-            </button>
-          </div>
-        </form>
+              {friends.map((friend, index) => (
+                <div
+                  key={friend._id}
+                  data-player-name={friend.name}
+                  data-player-id={`players${index + 2}`}
+                  data-player-value={friend._id}
+                  data-player-type="Friend"
+                  data-player-checked="false"
+                  onClick={handleCheckboxChange}
+                >
+                  <div
+                    className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg ${
+                      players.some((player) => player.reference === friend._id)
+                        ? 'bg-off-white'
+                        : 'bg-white'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between col-start-1 col-end-10">
+                      <div className="flex items-center gap-2">
+                        <div className="text-xs">
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            className="bg-off-white border border-white p-1.5 rounded-full font-xs text-gray"
+                          />
+                        </div>
+                        <div className="font-semibold">{friend.name}</div>
+                      </div>
+                      <div className="text-xs">
+                        {friend.scorecards.length}{' '}
+                        {friend.scorecards.length === 1
+                          ? 'Round Played'
+                          : 'Rounds Played'}
+                      </div>
+                    </div>
+                    {players.some(
+                      (player) => player.reference === friend._id,
+                    ) ? (
+                      <div className="flex items-center justify-center">
+                        <FontAwesomeIcon icon={faCheck} />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
+              <button
+                disabled={players.length === 0}
+                className={`w-full bg-jade py-2 px-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors ${
+                  players.length === 0
+                    ? 'bg-washed-jade text-disabled-font-jade'
+                    : null
+                }`}
+              >
+                Start round
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
