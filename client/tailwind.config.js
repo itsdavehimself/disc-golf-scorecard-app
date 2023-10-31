@@ -6,7 +6,7 @@ export default {
       emerald: '#27CE8E',
       honeydew: '#EBFFF7',
       'disabled-font-jade': '#66DFAE',
-      black: '#0C120C',
+      black: '#282924',
       gray: '#6E6E6E',
       mint: '#E7F3F0',
       jade: '#22A875',
