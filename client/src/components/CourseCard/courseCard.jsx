@@ -5,7 +5,7 @@ import { faLocationDot, faThumbTack } from '@fortawesome/free-solid-svg-icons';
 export default function CourseCard({ course, searchValueInput }) {
   return (
     <div
-      className={`p-2 my-2 bg-white rounded-md shadow-sm text-black text-sm hover:cursor-pointer active:bg-honeydew ${
+      className={`px-2 p-1 my-2 bg-white rounded-md text-black text-sm hover:cursor-pointer active:bg-honeydew ${
         course.name.toLowerCase().startsWith(searchValueInput.toLowerCase()) ||
         course.city.toLowerCase().startsWith(searchValueInput.toLowerCase()) ||
         course.state.toLowerCase().startsWith(searchValueInput.toLowerCase())
@@ -13,7 +13,7 @@ export default function CourseCard({ course, searchValueInput }) {
           : 'hidden'
       }`}
     >
-      <div className="w-full bg-white">
+      <div className="w-full bg-white border-b border-white-smoke pb-3">
         <div>
           <img
             className="rounded-md h-40 w-full object-cover"
