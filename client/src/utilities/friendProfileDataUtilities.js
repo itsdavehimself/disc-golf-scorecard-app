@@ -58,6 +58,7 @@ export function calculateBestGame(gameObjArr) {
       scorecardId: gameObj.scorecardId,
       course: gameObj.course,
       date: gameObj.date,
+      players: gameObj.players,
       difference,
     };
   });
@@ -70,6 +71,31 @@ export function calculateBestGame(gameObjArr) {
   }, sumData[0]);
 
   return bestGame;
+}
+
+export function findMostPlayedCourse(playedCourses, allCourses) {
+  const courseCount = {};
+  let mostFrequentCourseId;
+  let maxCount = 0;
+
+  playedCourses.forEach((course) => {
+    if (courseCount[course]) {
+      courseCount[course]++;
+    } else {
+      courseCount[course] = 1;
+    }
+
+    if (courseCount[course] > maxCount) {
+      mostFrequentCourseId = course;
+      maxCount = courseCount[course];
+    }
+  });
+
+  const mostPlayedCourse = allCourses.find(
+    (course) => course._id === mostFrequentCourseId,
+  );
+
+  return { mostPlayedCourse, maxCount };
 }
 
 export function calculateParPerformance(rawScoresArr, parArray) {
