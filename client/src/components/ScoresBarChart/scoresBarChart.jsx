@@ -87,7 +87,7 @@ export default function ScoresBarChart({
           font: {
             weight: 700,
           },
-          padding: 0,
+          padding: 10,
         },
       },
     },
@@ -118,25 +118,25 @@ export default function ScoresBarChart({
             tripleBogeys,
           ],
           backgroundColor: [
-            'blue',
-            'teal',
-            'green',
-            'gray',
-            'red',
-            'purple',
-            'brown',
+            '#22a875',
+            '#6bc3a1',
+            '#afdccb',
+            '#fff',
+            '#f7bdb1',
+            '#f7927c',
+            '#f66747',
           ],
-          borderColor: 'black',
-          borderWidth: 1,
+          borderColor: '#f7f7f7',
+          borderWidth: 1.5,
         },
       ],
     });
   }, [aces, eagles, birdies, pars, bogey, doubleBogeys, tripleBogeys]);
 
   return (
-    <div className="w-full md:col-span-2 relative h-72 m-auto bg-off-white">
+    <div className="w-full md:col-span-2 relative h-72 pb-4 py-2 m-auto bg-white rounded-lg shadow-lg">
       <div className="text-sm font-semibold text-black text-center">
-        {name}&apos;s par performance
+        {name}&apos;s Par Performance
       </div>
       <Bar data={chartData} options={chartOptions} />
     </div>
