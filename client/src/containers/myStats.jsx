@@ -5,6 +5,13 @@ import { calculateThrows } from '../utilities/userStatsUtilities';
 import { findMostPlayedCourse } from '../utilities/userStatsUtilities';
 import { calculateBestGame } from '../utilities/userStatsUtilities';
 import { calculateParPerformance } from '../utilities/userStatsUtilities';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faAngleRight,
+  faThumbTack,
+} from '@fortawesome/free-solid-svg-icons';
 import YearFilterModal from '../components/YearFilterModal/yearFilterModal';
 import ScoresBarChart from '../components/ScoresBarChart/scoresBarChart';
 import PlayedCourses from '../components/PlayedCourses/playedCourses';
@@ -33,6 +40,11 @@ export default function MyStats() {
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
   const [filterYear, setFilterYear] = useState('Year');
   const [isLoading, setIsLoading] = useState(true);
+  const [filterAllSelected, setFilterAllSelected] = useState(true);
+  const [filterLastTenSelected, setFilterLastTenSelected] = useState(false);
+  const [filterYearSelected, setFilterYearSelected] = useState(false);
+
+  const navigate = useNavigate();
 
   let useClickOutside = (handler) => {
     const domNode = useRef();
@@ -52,6 +64,10 @@ export default function MyStats() {
     });
 
     return domNode;
+  };
+
+  const openScorecard = (scorecardId) => {
+    navigate(`/scorecard/${scorecardId}`);
   };
 
   useEffect(() => {
@@ -209,6 +225,10 @@ export default function MyStats() {
       tripleBogeys: trpBogeyCount,
     });
 
+    setFilterAllSelected(true);
+    setFilterLastTenSelected(false);
+    setFilterYearSelected(false);
+    setFilterYear('Year');
     setFilteredScorecards(filteredScorecards);
     setThrows(calculatedThrows);
     setPlayedCourses(filteredPlayedCourses);
@@ -219,8 +239,8 @@ export default function MyStats() {
     setPlayedHoles(rawScoresArr.length);
   };
 
-  const filterLastFiveRounds = () => {
-    const filteredScorecards = allScorecards.slice(-5);
+  const filterLastTenRounds = () => {
+    const filteredScorecards = allScorecards.slice(-10);
 
     const playedCourseIdList = [];
     filteredScorecards.forEach((scorecard) => {
@@ -280,6 +300,10 @@ export default function MyStats() {
       tripleBogeys: trpBogeyCount,
     });
 
+    setFilterAllSelected(false);
+    setFilterLastTenSelected(true);
+    setFilterYearSelected(false);
+    setFilterYear('Year');
     setFilteredScorecards(filteredScorecards);
     setThrows(calculatedThrows);
     setPlayedCourses(filteredPlayedCourses);
@@ -357,6 +381,9 @@ export default function MyStats() {
       tripleBogeys: trpBogeyCount,
     });
 
+    setFilterAllSelected(false);
+    setFilterLastTenSelected(false);
+    setFilterYearSelected(true);
     setFilteredScorecards(filteredScorecards);
     setThrows(calculatedThrows);
     setPlayedCourses(filteredPlayedCourses);
@@ -386,69 +413,127 @@ export default function MyStats() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-4 text-black pt-16">
-        <div>{user.user.username}</div>
-        <div className="flex flex-row justify-between items-center">
-          <button onClick={showAllResults}>All</button>
-          <button onClick={filterLastFiveRounds}>Last Five</button>
-          <div>
-            <div onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}>
-              {filterYear}
-            </div>
-            <div
-              className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
-            ></div>
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-20">
+        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg">
+          <button
+            className={`${
+              filterAllSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={showAllResults}
+          >
+            All
+          </button>
+          <button
+            className={`${
+              filterLastTenSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={filterLastTenRounds}
+          >
+            Last 10
+          </button>
+          <button
+            className={`${
+              filterYearSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
+          >
+            {filterYear}
+          </button>
+        </div>
+        <div
+          className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
+        ></div>
+        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
+          <div className="text-center">
+            <div className="font-semibold">{filteredScorecards.length}</div>
+            <div className="text-sm">ROUNDS</div>
+          </div>
+          <div className="text-center">
+            <div className="font-semibold">{playedHoles}</div>
+            <div className="text-sm">HOLES</div>
+          </div>
+          <div className="text-center">
+            <div className="font-semibold">{throws}</div>
+            <div className="text-sm">THROWS</div>
           </div>
         </div>
-        <div className="flex flex-row justify-between items-center">
-          <div className="text-center">
-            <div>{filteredScorecards.length}</div>
-            <div>ROUNDS</div>
-          </div>
-          <div className="text-center">
-            <div>{playedHoles}</div>
-            <div>HOLES</div>
-          </div>
-          <div className="text-center">
-            <div>{throws}</div>
-            <div>THROWS</div>
-          </div>
-        </div>
-        <div>
-          <div>
+        <div className="bg-white rounded-lg shadow-lg mb-3">
+          <div className="font-semibold px-3 py-2">
             {playedCourses.length}{' '}
             {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
           </div>
           <PlayedCourses playedCourses={playedCourses} />
-          <div>
-            <div>Most Played Course</div>
-            <div>
-              {mostPlayedCourse.name} {mostPlayedCourse.city},{' '}
-              {mostPlayedCourse.state} - {mostPlayedCount} Rounds
+          <div className="py-2 px-3">
+            <div className="font-semibold">Most Played Course</div>
+            <div className="flex flex-row gap-2 items-center">
+              <FontAwesomeIcon icon={faThumbTack} />
+              <div>
+                <p>
+                  <span className="font-semibold text-sm">
+                    {mostPlayedCourse.name}
+                  </span>{' '}
+                  <span className="text-xs">{mostPlayedCourse.city}, </span>
+                  {mostPlayedCourse.state}
+                </p>
+                <p className="text-xs">{mostPlayedCount} Rounds</p>
+              </div>
             </div>
           </div>
-          <div>
-            <div>Best Round</div>
+        </div>
+        <div
+          onClick={() => openScorecard(bestRound.scorecardId)}
+          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer"
+        >
+          <div className="col-start-1 col-end-10">
+            <div className="font-semibold pb-2">Best Round</div>
             {bestRound ? (
-              <>
+              <div>
                 <span className="font-semibold">
                   {bestRound.difference === 0
                     ? 'E'
                     : bestRound.difference > 0
                     ? `+${bestRound.difference}`
                     : bestRound.difference}
+                </span>{' '}
+                at{' '}
+                <span className="font-semibold">{bestRoundCourse.name} </span>
+                <span className="text-xs">
+                  {bestRoundCourse.city}, {bestRoundCourse.state}
                 </span>
-                <span>
-                  {' '}
-                  at {bestRoundCourse.name} {bestRoundCourse.city},{' '}
-                  {bestRoundCourse.state}
-                </span>
-              </>
+                <div>
+                  <div className="flex flex-row gap-4 pt-1">
+                    {bestRound.players.map((player) => (
+                      <div key={player.reference}>
+                        <div className="flex items-center gap-2">
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            className="text-sm bg-off-white text-gray px-1.5 py-1.5 rounded-full"
+                          />
+                          {player.name}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               'No Round Data'
             )}
           </div>
+          <div className="flex items-center justify-end pr-2">
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="text-md text-gray group-hover:text-jade transition"
+            />
+          </div>
         </div>
+
         <div>
           <ScoresBarChart
             aces={parPerformance.aces}
