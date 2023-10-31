@@ -530,7 +530,7 @@ export default function FriendProfile() {
               </div>
             </div>
             <div className="flex justify-end text-lg">
-              <button className="h-6 w-6">
+              <button className="pl-2 h-6 w-6">
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
             </div>
