@@ -480,8 +480,9 @@ export default function MyStats() {
                   <span className="font-semibold text-sm">
                     {mostPlayedCourse.name}
                   </span>{' '}
-                  <span className="text-xs">{mostPlayedCourse.city}, </span>
-                  {mostPlayedCourse.state}
+                  <span className="text-xs">
+                    {mostPlayedCourse.city}, {mostPlayedCourse.state}
+                  </span>
                 </p>
                 <p className="text-xs">{mostPlayedCount} Rounds</p>
               </div>
