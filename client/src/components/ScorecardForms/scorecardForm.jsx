@@ -303,7 +303,7 @@ export default function ScorecardForm() {
         <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
           <div
             ref={outsideAddFriend}
-            className="relative flex flex-col justify-center gap-6 py-5 px-5 w-full h-max mx-4 bg-off-white rounded-md"
+            className="relative flex flex-col justify-center gap-6 py-5 px-5 w-full h-max mx-4 bg-white rounded-lg shadow-lg"
           >
             <div className="flex flex-col">
               <div className="text-xl font-semibold">Add friend</div>
@@ -400,7 +400,8 @@ export default function ScorecardForm() {
                 {coursesArr.map((courseItem) => (
                   <li
                     className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
-                      courseItem.name === courseName && 'bg-emerald'
+                      courseItem.name === courseName &&
+                      'bg-washed-jade text-white'
                     } ${
                       courseItem.name
                         .toLowerCase()
@@ -442,7 +443,7 @@ export default function ScorecardForm() {
                 className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md"
               >
                 <FontAwesomeIcon icon={faUserPlus} />{' '}
-                <span className="text-xs">Add friend</span>
+                <span className="text-xs font-semibold">Add friend</span>
               </div>
             </div>
             <div className="flex flex-col gap-2">
