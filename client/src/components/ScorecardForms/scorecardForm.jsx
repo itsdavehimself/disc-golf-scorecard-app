@@ -257,6 +257,14 @@ export default function ScorecardForm() {
           ),
         });
         setUserScorecards(scorecards);
+        setPlayers([
+          {
+            name: user.user.username,
+            type: 'User',
+            reference: user.user._id,
+            scores: [],
+          },
+        ]);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
