@@ -23,6 +23,7 @@ export function createScoreAndParArrays(scorecards) {
             scorecardId: scorecard._id,
             course: scorecard.course,
             date: scorecard.date,
+            players: scorecard.players,
           };
           gameObjArr.push(gameObj);
         }
@@ -82,6 +83,7 @@ export function calculateBestGame(gameObjArr) {
       scorecardId: gameObj.scorecardId,
       course: gameObj.course,
       date: gameObj.date,
+      players: gameObj.players,
       difference,
     };
   });
