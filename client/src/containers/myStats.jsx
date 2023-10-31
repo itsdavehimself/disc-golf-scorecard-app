@@ -496,7 +496,7 @@ export default function MyStats() {
           <div className="col-start-1 col-end-10">
             <div className="font-semibold pb-2">Best Round</div>
             {bestRound ? (
-              <div>
+              <div className="text-sm">
                 <span className="font-semibold">
                   {bestRound.difference === 0
                     ? 'E'
