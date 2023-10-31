@@ -17,6 +17,7 @@ export default {
       transparent: 'rgba(0,0,0,0)',
       vermillion: '#FF312E',
       red: '#FF7A78',
+      'hover-red': '#ff8785',
       rose: '#FFDEDD',
       white: '#ffffff',
       modal: 'rgba(0,0,0,0.5)',
