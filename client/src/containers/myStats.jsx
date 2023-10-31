@@ -452,7 +452,9 @@ export default function MyStats() {
         <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
           <div className="text-center">
             <div className="font-semibold">{filteredScorecards.length}</div>
-            <div className="text-sm">ROUNDS</div>
+            <div className="text-sm">
+              {filteredScorecards.length === 1 ? 'ROUND' : 'ROUNDS'}
+            </div>
           </div>
           <div className="text-center">
             <div className="font-semibold">{playedHoles}</div>
