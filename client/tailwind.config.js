@@ -13,6 +13,7 @@ export default {
       'washed-jade': '#5CC79E',
       'off-white': '#f7f7f7',
       'white-smoke': '#F5F5F5',
+      'light-gray': '#fcfcfc',
       transparent: 'rgba(0,0,0,0)',
       vermillion: '#FF312E',
       red: '#FF7A78',
@@ -36,6 +37,9 @@ export default {
       translate: {
         '70r': '70%',
         '78r': '78%',
+      },
+      transitionProperty: {
+        height: 'height',
       },
     },
   },
