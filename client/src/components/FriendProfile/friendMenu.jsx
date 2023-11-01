@@ -4,7 +4,7 @@ import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function FriendMenu({ setIsConfirmOpen, setIsMenuOpen }) {
   return (
-    <div className="absolute z-50 top-24 right-8 flex flex-col bg-white rounded-lg shadow-lg h-auto w-40 border border-off-white">
+    <div className="absolute z-50 top-24 right-8 flex flex-col bg-white rounded-lg shadow-lg h-auto w-40 border border-off-white text-black">
       <button
         onClick={() => setIsMenuOpen(false)}
         className="py-3 flex flex-row items-center gap-2 pl-3"
