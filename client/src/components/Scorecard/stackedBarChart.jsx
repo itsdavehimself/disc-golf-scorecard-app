@@ -27,7 +27,6 @@ const StackedBarChart = ({ performances }) => {
         Math.round((shots / totalShots) * 100),
       );
       setProportions(calculatedProportions);
-      console.log(calculatedProportions);
     }
   }, [performances]);
 
