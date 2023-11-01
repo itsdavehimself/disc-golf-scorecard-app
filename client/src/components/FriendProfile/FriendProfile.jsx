@@ -46,6 +46,7 @@ export default function FriendProfile() {
   const { id } = useParams();
   const { user } = useAuthContext();
   const [friend, setFriend] = useState(null);
+  const [friendName, setFriendName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [totalScorecards, setTotalScorecards] = useState(null);
   const [allScorecards, setAllScorecards] = useState([]);
@@ -115,6 +116,7 @@ export default function FriendProfile() {
         ]).then((responses) => Promise.all(responses.map((res) => res.json())));
 
         setFriend(friend.friend);
+        setFriendName(friend.friend.name);
         const totalScorecards = scorecards.scorecards;
         setTotalScorecards(scorecards.scorecards);
         setAllScorecards(scorecards.scorecards);
@@ -497,7 +499,12 @@ export default function FriendProfile() {
   return (
     <>
       {isEditNameOpen && (
-        <EditNameModal setIsEditNameOpen={setIsEditNameOpen} />
+        <EditNameModal
+          setIsEditNameOpen={setIsEditNameOpen}
+          friend={friend}
+          setFriendName={setFriendName}
+          friendName={friendName}
+        />
       )}
       {isMenuOpen && (
         <FriendMenu
@@ -526,7 +533,7 @@ export default function FriendProfile() {
       <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16">
         <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2">
           <div className="col-start-1 col-end-10">
-            <div className="text-2xl font-semibold">{friend.name}</div>
+            <div className="text-2xl font-semibold">{friendName}</div>
             <div className="text-sm">
               <div className="pt-1.5">
                 Has played in{' '}
@@ -664,7 +671,7 @@ export default function FriendProfile() {
         </div>
         <div className="bg-white rounded-lg shadow-lg py-2 mb-3">
           <div className="text-center text-sm font-semibold pb-2">
-            Your stats vs. {friend.name}
+            Your stats vs. {friendName}
           </div>
           <div className="grid grid-cols-3 text-center">
             <div className="">
@@ -691,7 +698,7 @@ export default function FriendProfile() {
           bogey={bogey}
           doubleBogeys={doubleBogeys}
           tripleBogeys={tripleBogeys}
-          name={friend.name}
+          name={friendName}
         />
       </div>
     </>
