@@ -19,6 +19,7 @@ import {
   faAngleRight,
   faEllipsisVertical,
 } from '@fortawesome/free-solid-svg-icons';
+import FriendMenu from './friendMenu';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -70,6 +71,12 @@ export default function FriendProfile() {
   const [filterAllSelected, setFilterAllSelected] = useState(true);
   const [filterLastTenSelected, setFilterLastTenSelected] = useState(false);
   const [filterYearSelected, setFilterYearSelected] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleOpenMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const nameForModal = 'player';
   const navigate = useNavigate();
 
@@ -487,6 +494,12 @@ export default function FriendProfile() {
 
   return (
     <>
+      {isMenuOpen && (
+        <FriendMenu
+          setIsConfirmOpen={setIsConfirmOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      )}
       {isConfirmOpen && (
         <ConfirmDeleteModal
           setIsConfirmOpen={setIsConfirmOpen}
@@ -504,184 +517,176 @@ export default function FriendProfile() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black">
-        <div className="pt-16">
-          <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2">
-            <div className="col-start-1 col-end-10">
-              <div className="text-2xl font-semibold">{friend.name}</div>
-              <div className="text-sm">
-                <div className="pt-1.5">
-                  Has played in{' '}
-                  <span className="font-semibold">
-                    {totalScorecards.length}
-                    {totalScorecards.length === 1 ? ' round' : ' rounds'} total
-                  </span>
-                </div>
-                <div>
-                  Has played in{' '}
-                  <span className="font-semibold">
-                    {scorecardsWithUser.length}
-                    {scorecardsWithUser.length === 1
-                      ? ' round'
-                      : ' rounds'}{' '}
-                    with you
-                  </span>
-                </div>
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16">
+        <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2">
+          <div className="col-start-1 col-end-10">
+            <div className="text-2xl font-semibold">{friend.name}</div>
+            <div className="text-sm">
+              <div className="pt-1.5">
+                Has played in{' '}
+                <span className="font-semibold">
+                  {totalScorecards.length}
+                  {totalScorecards.length === 1 ? ' round' : ' rounds'} total
+                </span>
+              </div>
+              <div>
+                Has played in{' '}
+                <span className="font-semibold">
+                  {scorecardsWithUser.length}
+                  {scorecardsWithUser.length === 1 ? ' round' : ' rounds'} with
+                  you
+                </span>
               </div>
             </div>
-            <div className="flex justify-end text-lg">
-              <button className="pl-2 h-6 w-6">
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-              </button>
-            </div>
           </div>
+          <div className="flex justify-end text-lg">
+            <button onClick={handleOpenMenu} className="pl-2 h-6 w-6">
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                className="text-gray"
+              />
+            </button>
+          </div>
+        </div>
 
-          <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg">
-            <button
-              className={`${
-                filterAllSelected
-                  ? 'bg-jade text-white font-semibold'
-                  : 'bg-white text-black'
-              }  rounded-md w-full py-0.5`}
-              onClick={showAllResults}
-            >
-              All
-            </button>
-            <button
-              className={`${
-                filterLastTenSelected
-                  ? 'bg-jade text-white font-semibold'
-                  : 'bg-white text-black'
-              }  rounded-md w-full py-0.5`}
-              onClick={filterLastTenRounds}
-            >
-              Last 10
-            </button>
-            <button
-              className={`${
-                filterYearSelected
-                  ? 'bg-jade text-white font-semibold'
-                  : 'bg-white text-black'
-              }  rounded-md w-full py-0.5`}
-              onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
-            >
-              {filterYear}
-            </button>
-          </div>
-          <div
-            className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
-          ></div>
-          <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
-            <div className="text-center">
-              <div className="font-semibold">{totalScorecards.length}</div>
-              <div className="text-sm">
-                {totalScorecards.length === 1 ? 'ROUND' : 'ROUNDS'}
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="font-semibold">{holes}</div>
-              <div className="text-sm">HOLES</div>
-            </div>
-            <div className="text-center">
-              <div className="font-semibold">{throws}</div>
-              <div className="text-sm">THROWS</div>
-            </div>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg mb-3 pb-2">
-            <div className="font-semibold px-3 py-2">
-              {playedCourses.length}{' '}
-              {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
-            </div>
-            <PlayedCourses playedCourses={playedCourses} />
-          </div>
-          <div
-            onClick={() => openScorecard(bestRound.scorecardId)}
-            className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer"
+        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg">
+          <button
+            className={`${
+              filterAllSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={showAllResults}
           >
-            <div className="col-start-1 col-end-10">
-              <div className="font-semibold pb-2">Best Round</div>
-              {bestRound ? (
-                <div className="text-sm">
-                  <span className="font-semibold">
-                    {bestRound.difference === 0
-                      ? 'E'
-                      : bestRound.difference > 0
-                      ? `+${bestRound.difference}`
-                      : bestRound.difference}
-                  </span>{' '}
-                  at{' '}
-                  <span className="font-semibold">
-                    {bestRoundCourseName.name}{' '}
-                  </span>
-                  <span className="text-xs">
-                    {bestRoundCourseName.city}, {bestRoundCourseName.state}
-                  </span>
-                  <div>
-                    <div className="flex flex-row gap-4 pt-1">
-                      {bestRound.players.map((player) => (
-                        <div key={player.reference}>
-                          <div className="flex items-center gap-2">
-                            <FontAwesomeIcon
-                              icon={faUser}
-                              className="text-sm bg-off-white text-gray px-1.5 py-1.5 rounded-full"
-                            />
-                            {player.name}
-                          </div>
+            All
+          </button>
+          <button
+            className={`${
+              filterLastTenSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={filterLastTenRounds}
+          >
+            Last 10
+          </button>
+          <button
+            className={`${
+              filterYearSelected
+                ? 'bg-jade text-white font-semibold'
+                : 'bg-white text-black'
+            }  rounded-md w-full py-0.5`}
+            onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
+          >
+            {filterYear}
+          </button>
+        </div>
+        <div
+          className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
+        ></div>
+        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
+          <div className="text-center">
+            <div className="font-semibold">{totalScorecards.length}</div>
+            <div className="text-sm">
+              {totalScorecards.length === 1 ? 'ROUND' : 'ROUNDS'}
+            </div>
+          </div>
+          <div className="text-center">
+            <div className="font-semibold">{holes}</div>
+            <div className="text-sm">HOLES</div>
+          </div>
+          <div className="text-center">
+            <div className="font-semibold">{throws}</div>
+            <div className="text-sm">THROWS</div>
+          </div>
+        </div>
+        <div className="bg-white rounded-lg shadow-lg mb-3 pb-2">
+          <div className="font-semibold px-3 py-2">
+            {playedCourses.length}{' '}
+            {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
+          </div>
+          <PlayedCourses playedCourses={playedCourses} />
+        </div>
+        <div
+          onClick={() => openScorecard(bestRound.scorecardId)}
+          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer"
+        >
+          <div className="col-start-1 col-end-10">
+            <div className="font-semibold pb-2">Best Round</div>
+            {bestRound ? (
+              <div className="text-sm">
+                <span className="font-semibold">
+                  {bestRound.difference === 0
+                    ? 'E'
+                    : bestRound.difference > 0
+                    ? `+${bestRound.difference}`
+                    : bestRound.difference}
+                </span>{' '}
+                at{' '}
+                <span className="font-semibold">
+                  {bestRoundCourseName.name}{' '}
+                </span>
+                <span className="text-xs">
+                  {bestRoundCourseName.city}, {bestRoundCourseName.state}
+                </span>
+                <div>
+                  <div className="flex flex-row gap-4 pt-1">
+                    {bestRound.players.map((player) => (
+                      <div key={player.reference}>
+                        <div className="flex items-center gap-2">
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            className="text-sm bg-off-white text-gray px-1.5 py-1.5 rounded-full"
+                          />
+                          {player.name}
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ) : (
-                'No Round Data'
-              )}
-            </div>
-            <div className="flex items-center justify-end pr-2">
-              <FontAwesomeIcon
-                icon={faAngleRight}
-                className="text-md text-gray group-hover:text-jade transition"
-              />
-            </div>
+              </div>
+            ) : (
+              'No Round Data'
+            )}
           </div>
-          <div className="bg-white rounded-lg shadow-lg py-2 mb-3">
-            <div className="text-center text-sm font-semibold pb-2">
-              Your stats vs. {friend.name}
-            </div>
-            <div className="grid grid-cols-3 text-center">
-              <div className="">
-                <div className="text-xl font-bold">{userWins}</div>
-                <div className="text-sm">{userWins === 1 ? 'WIN' : 'WINS'}</div>
-              </div>
-              <div className="">
-                <div className="text-xl font-bold">{friendWins}</div>
-                <div className="text-sm">
-                  {friendWins === 1 ? 'LOSS' : 'LOSSES'}
-                </div>
-              </div>
-              <div className="">
-                <div className="text-xl font-bold">{ties}</div>
-                <div className="text-sm">{ties === 1 ? 'TIE' : 'TIES'}</div>
-              </div>
-            </div>
-          </div>
-          <ScoresBarChart
-            aces={aces}
-            eagles={eagles}
-            birdies={birdies}
-            pars={pars}
-            bogey={bogey}
-            doubleBogeys={doubleBogeys}
-            tripleBogeys={tripleBogeys}
-            name={friend.name}
-          />
-        </div>
-        <div className="flex items-center justify-center pt-3">
-          <div className="text-center bg-red py-1 px-2 rounded-md text-white font-semibold cursor-pointer hover:bg-hover-red transition-colors">
-            <button onClick={() => setIsConfirmOpen(true)}>
-              Delete friend
-            </button>
+          <div className="flex items-center justify-end pr-2">
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="text-md text-gray group-hover:text-jade transition"
+            />
           </div>
         </div>
+        <div className="bg-white rounded-lg shadow-lg py-2 mb-3">
+          <div className="text-center text-sm font-semibold pb-2">
+            Your stats vs. {friend.name}
+          </div>
+          <div className="grid grid-cols-3 text-center">
+            <div className="">
+              <div className="text-xl font-bold">{userWins}</div>
+              <div className="text-sm">{userWins === 1 ? 'WIN' : 'WINS'}</div>
+            </div>
+            <div className="">
+              <div className="text-xl font-bold">{friendWins}</div>
+              <div className="text-sm">
+                {friendWins === 1 ? 'LOSS' : 'LOSSES'}
+              </div>
+            </div>
+            <div className="">
+              <div className="text-xl font-bold">{ties}</div>
+              <div className="text-sm">{ties === 1 ? 'TIE' : 'TIES'}</div>
+            </div>
+          </div>
+        </div>
+        <ScoresBarChart
+          aces={aces}
+          eagles={eagles}
+          birdies={birdies}
+          pars={pars}
+          bogey={bogey}
+          doubleBogeys={doubleBogeys}
+          tripleBogeys={tripleBogeys}
+          name={friend.name}
+        />
       </div>
     </>
   );
