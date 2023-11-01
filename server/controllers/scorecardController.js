@@ -122,3 +122,25 @@ exports.updateScorecard = asyncHandler(async (req, res) => {
     res.status(400).json({ error: 'Failed to update scorecards' });
   }
 });
+
+exports.updateFriendsNames = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const { friendId, newName } = req.body;
+
+  try {
+    const scorecards = await Scorecard.updateMany(
+      { userId, 'players.reference': friendId },
+      { $set: { 'players.$[elem].name': newName } },
+      { arrayFilters: [{ 'elem.reference': friendId }] },
+    );
+
+    if (!scorecards) {
+      return res.status(404).json({ error: 'Scorecards not found' });
+    }
+
+    res.status(200).json({ message: 'Friend names updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});

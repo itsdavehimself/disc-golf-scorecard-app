@@ -6,6 +6,7 @@ const {
   deleteScorecard,
   updateScorecard,
   getUsersScorecards,
+  updateFriendsNames,
 } = require('../controllers/scorecardController');
 const requireAuth = require('../middleware/requireAuth');
 
@@ -30,5 +31,8 @@ router.delete('/:id', deleteScorecard);
 
 // Update a single scorecard
 router.patch('/:id', updateScorecard);
+
+// Update many scorecards with a friend's new name
+router.patch('/', updateFriendsNames);
 
 module.exports = router;
