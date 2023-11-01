@@ -105,7 +105,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                     About
                   </button>
                 </Link>
-                <Link to={'/login'}>
+                <Link to="https://github.com/itsdavehimself/disc-golf-scorecard-app">
                   <button
                     onClick={handleMenu}
                     className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
@@ -113,7 +113,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                     Repo
                   </button>
                 </Link>
-                <Link to={'/login'}>
+                <Link to="https://github.com/itsdavehimself">
                   <button
                     onClick={handleMenu}
                     className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
@@ -194,10 +194,10 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
           >
             <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white md:w-1/4 lg:w-1/5">
               <div className="flex flex-col text-right items-end text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3 gap-4 text-black">
-                <Link to={'/login'}>
+                <Link to="https://github.com/itsdavehimself/disc-golf-scorecard-app">
                   <button onClick={handleMenu}>Repo</button>
                 </Link>
-                <Link to={'/login'}>
+                <Link to="https://github.com/itsdavehimself">
                   <button onClick={handleMenu}>David&apos;s Github</button>
                 </Link>
                 <Link to="/settings">
