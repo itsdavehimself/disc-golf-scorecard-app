@@ -20,6 +20,7 @@ import {
   faEllipsisVertical,
 } from '@fortawesome/free-solid-svg-icons';
 import FriendMenu from './friendMenu';
+import EditNameModal from './editNameModal';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -72,6 +73,7 @@ export default function FriendProfile() {
   const [filterLastTenSelected, setFilterLastTenSelected] = useState(false);
   const [filterYearSelected, setFilterYearSelected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isEditNameOpen, setIsEditNameOpen] = useState(false);
 
   const handleOpenMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -494,10 +496,14 @@ export default function FriendProfile() {
 
   return (
     <>
+      {isEditNameOpen && (
+        <EditNameModal setIsEditNameOpen={setIsEditNameOpen} />
+      )}
       {isMenuOpen && (
         <FriendMenu
           setIsConfirmOpen={setIsConfirmOpen}
           setIsMenuOpen={setIsMenuOpen}
+          setIsEditNameOpen={setIsEditNameOpen}
         />
       )}
       {isConfirmOpen && (
