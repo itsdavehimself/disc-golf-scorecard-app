@@ -13,7 +13,7 @@ import {
 import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
 import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
 import { calculateParPerformance } from '../../utilities/userStatsUtilities';
-import StackedPerformanceChart from '../StackedPerformanceChart/StackedPerformanceChart';
+import StackedBarChart from './stackedBarChart';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -54,8 +54,21 @@ export default function Scorecard() {
   const [scorecardId, setScorecardId] = useState(null);
   const [error, setError] = useState(null);
   const [performances, setPerformances] = useState([]);
-
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const graphColumnWidths = performances.map((performance) =>
+    Object.values(performance).map((count) => count),
+  );
+
+  // const graphColors = [
+  //   'ace-blue',
+  //   'jade',
+  //   'birdie-green',
+  //   'white',
+  //   'bogey-red',
+  //   'dblbogey',
+  //   'trpbogey',
+  // ];
 
   const navigate = useNavigate();
   const nameForModal = 'scorecard';
@@ -287,139 +300,186 @@ export default function Scorecard() {
           nameForModal={nameForModal}
         />
       )}
-      <div className="flex flex-col w-screen h-screen bg-off-white pt-20 text-black px-4">
+      <div className="flex flex-col w-screen bg-off-white pt-16 text-black px-3">
         {courseExists ? (
           <>
-            <h1 className="text-xl font-semibold">{courseName}</h1>
-            <div className="flex gap-2">
-              <p>
-                <FontAwesomeIcon icon={faThumbTack} className="pr-1 text-sm" />
-                {numberOfHoles} holes
-              </p>
-              <p>
-                <FontAwesomeIcon icon={faClock} className="pr-1 text-sm" />
-                {date} at {startTime}
+            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2">
+              <h1 className="text-xl font-semibold">{courseName}</h1>
+              <div className="flex gap-2 text-gray text-sm pt-1">
+                <p className="flex items-center">
+                  <FontAwesomeIcon
+                    icon={faThumbTack}
+                    className="pr-1 text-xs"
+                  />
+                  {numberOfHoles} holes
+                </p>
+                <p className="flex items-center">
+                  <FontAwesomeIcon icon={faClock} className="pr-1 text-xs" />
+                  {date} at {startTime}
+                </p>
+              </div>
+              <p className="flex items-center text-gray text-sm pt-1">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="pr-1 text-xs"
+                />
+                {location}
               </p>
             </div>
-            <p>
-              <FontAwesomeIcon icon={faLocationDot} className="pr-1 text-sm" />
-              {location}
-            </p>
-            <div className="flex justify-between py-4">
-              <div className="flex font-semibold">Scorecard</div>
-              <div className="flex gap-2">
-                <button
-                  className="bg-jade rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
-                  onClick={handleScorecardSubmit}
-                >
-                  Save scores
-                </button>
-                <button onClick={() => setIsConfirmOpen(true)}>
-                  <FontAwesomeIcon icon={faTrashCan} className="text-lg" />
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-col px-4">
-              <div className="grid grid-cols-2">
-                <div className="grid grid-cols-3 px-8">
-                  <div className="flex items-center justify-center text-xs">
-                    Hole
-                  </div>
-                  <div className="flex items-center justify-center text-xs">
-                    Dist
-                  </div>
-                  <div className="flex items-center justify-center text-xs">
-                    Par
-                  </div>
-                </div>
-                <div className={`grid grid-cols-${players.length} gap-10`}>
-                  {players.map((player, index) => (
-                    <div
-                      className="flex text-xs justify-center font-semibold"
-                      key={index}
-                    >
-                      {player.name.length > 6
-                        ? player.name.substring(0, 6) + '...'
-                        : player.name}
-                    </div>
-                  ))}
+            <div className="bg-white rounded-lg shadow-lg py-3">
+              <div className="flex justify-between pb-3 px-3">
+                <div className="flex font-semibold text-lg">Scorecard</div>
+                <div className="flex gap-2">
+                  <button
+                    className="bg-jade rounded-md text-off-white font-semibold cursor-pointer px-2 hover:bg-emerald transition-colors"
+                    onClick={handleScorecardSubmit}
+                  >
+                    Save scores
+                  </button>
+                  <button onClick={() => setIsConfirmOpen(true)}>
+                    <FontAwesomeIcon icon={faTrashCan} className="text-lg" />
+                  </button>
                 </div>
               </div>
-              <div className="grid grid-cols-2">
-                <div>
-                  {holes.map((hole) => (
-                    <div className="grid grid-cols-3 h-7 px-8" key={hole._id}>
-                      <div className="flex items-center justify-center text-xs font-semibold">
-                        {hole.holeNumber}
-                      </div>
-                      <div className="flex items-center justify-center text-xs">
-                        {hole.distance}ft
-                      </div>
-                      <div className="flex items-center justify-center text-xs">
-                        {hole.par}
-                      </div>
+              <div className="flex flex-col px-4">
+                <div className="grid grid-cols-2">
+                  <div className="grid grid-cols-3 px-8">
+                    <div className="flex items-center justify-center text-xs">
+                      Hole
                     </div>
-                  ))}
+                    <div className="flex items-center justify-center text-xs">
+                      Dist
+                    </div>
+                    <div className="flex items-center justify-center text-xs">
+                      Par
+                    </div>
+                  </div>
+                  <div className={`grid grid-cols-${players.length} gap-10`}>
+                    {players.map((player, index) => (
+                      <div
+                        className="flex text-xs justify-center font-semibold"
+                        key={index}
+                      >
+                        {player.name.length > 6
+                          ? player.name.substring(0, 6) + '...'
+                          : player.name}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className={`grid grid-cols-auto`}>
-                  {holes.map((hole) => (
-                    <div
-                      className={`grid grid-cols-${players.length} justify-items-center gap-10`}
-                      key={hole.holeNumber}
-                    >
-                      {players.map((player) => (
-                        <input
-                          type="text"
-                          className={`w-6 text-center h-max border border-white-smoke rounded-sm shadow-sm
+                <div className="grid grid-cols-2">
+                  <div>
+                    {holes.map((hole) => (
+                      <div className="grid grid-cols-3 h-7 px-8" key={hole._id}>
+                        <div className="flex items-center justify-center text-xs font-semibold">
+                          {hole.holeNumber}
+                        </div>
+                        <div className="flex items-center justify-center text-xs">
+                          {hole.distance}ft
+                        </div>
+                        <div className="flex items-center justify-center text-xs">
+                          {hole.par}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={`grid grid-cols-auto`}>
+                    {holes.map((hole) => (
+                      <div
+                        className={`grid grid-cols-${players.length} justify-items-center gap-10`}
+                        key={hole.holeNumber}
+                      >
+                        {players.map((player) => (
+                          <input
+                            type="text"
+                            className={`w-6 text-center h-max border border-white-smoke rounded-md shadow-sm
                             ${
                               playerScores[player.reference][
                                 hole.holeNumber - 1
                               ] === 1
-                                ? 'bg-jade text-off-white'
+                                ? 'bg-ace-blue text-off-white'
                                 : playerScores[player.reference][
                                     hole.holeNumber - 1
                                   ] ===
                                   hole.par - 2
-                                ? 'bg-washed-jade text-off-white'
+                                ? 'bg-jade text-off-white'
                                 : playerScores[player.reference][
                                     hole.holeNumber - 1
                                   ] ===
                                   hole.par - 1
-                                ? 'bg-disabled-font-jade text-off-white'
+                                ? 'bg-birdie-green text-white'
                                 : playerScores[player.reference][
                                     hole.holeNumber - 1
                                   ] ===
                                   hole.par + 1
-                                ? 'bg-rose'
+                                ? 'bg-bogey-red'
                                 : playerScores[player.reference][
                                     hole.holeNumber - 1
                                   ] ===
                                   hole.par + 2
-                                ? 'bg-red'
+                                ? 'bg-dblbogey'
+                                : playerScores[player.reference][
+                                    hole.holeNumber - 1
+                                  ] >=
+                                  hole.par + 3
+                                ? 'bg-trpbogey'
                                 : 'bg-white'
                             }
                           `}
-                          key={player.reference}
-                          value={
-                            playerScores[player.reference][hole.holeNumber - 1]
-                          }
-                          onChange={(e) =>
-                            handleInputChange(
-                              e,
-                              player.reference,
-                              hole.holeNumber,
-                            )
-                          }
-                        ></input>
+                            key={player.reference}
+                            value={
+                              playerScores[player.reference][
+                                hole.holeNumber - 1
+                              ]
+                            }
+                            onChange={(e) =>
+                              handleInputChange(
+                                e,
+                                player.reference,
+                                hole.holeNumber,
+                              )
+                            }
+                          ></input>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <div>Totals</div>
+                    <div className="flex gap-2">
+                      {players.map((player, index) => (
+                        <div key={player.reference}>
+                          <span className="font-semibold">
+                            {calculatePlayerTotals().performances[index] > 0
+                              ? '+' +
+                                calculatePlayerTotals().performances[index]
+                              : calculatePlayerTotals().performances[index]}
+                          </span>{' '}
+                          ({calculatePlayerTotals().totals[index]})
+                        </div>
                       ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <div>Totals</div>
-                  <div className="flex gap-2">
-                    {players.map((player, index) => (
-                      <div key={player.reference}>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2">
+              <div className="flex font-semibold text-lg pb-3">
+                Player overview
+              </div>
+              <div>
+                {players.map((player, index) => (
+                  <div className="grid grid-rows-2 pb-3" key={player._id}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-2 items-center">
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          className="text-xs bg-off-white text-gray px-1.5 py-1.5 rounded-full"
+                        />
+                        <div className="text-sm">{player.name}</div>
+                      </div>
+                      <div>
                         <span className="font-semibold">
                           {calculatePlayerTotals().performances[index] > 0
                             ? '+' + calculatePlayerTotals().performances[index]
@@ -427,40 +487,15 @@ export default function Scorecard() {
                         </span>{' '}
                         ({calculatePlayerTotals().totals[index]})
                       </div>
-                    ))}
+                    </div>
+                    <div className="pt-1">
+                      <StackedBarChart
+                        performances={graphColumnWidths[index]}
+                      />
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            </div>
-            <div className="flex font-semibold">Player overview</div>
-            <div>
-              {players.map((player, index) => (
-                <div key={player._id}>
-                  <div className="flex justify-between items-center">
-                    <div className="flex gap-2 items-center">
-                      <FontAwesomeIcon icon={faUser} className="pr-1 text-sm" />
-                      <div>{player.name}</div>
-                    </div>
-                    <div>
-                      <span className="font-semibold">
-                        {calculatePlayerTotals().performances[index] > 0
-                          ? '+' + calculatePlayerTotals().performances[index]
-                          : calculatePlayerTotals().performances[index]}
-                      </span>{' '}
-                      ({calculatePlayerTotals().totals[index]})
-                    </div>
-                  </div>
-                  <StackedPerformanceChart
-                    aces={performances[index].acesCount}
-                    eagles={performances[index].eaglesCount}
-                    birdies={performances[index].birdiesCount}
-                    pars={performances[index].parsCount}
-                    bogey={performances[index].bogeysCount}
-                    doubleBogeys={performances[index].dblBogeyCount}
-                    tripleBogeys={performances[index].trpBogeyCount}
-                  />
-                </div>
-              ))}
             </div>
           </>
         ) : (

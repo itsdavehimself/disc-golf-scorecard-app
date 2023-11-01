@@ -118,9 +118,9 @@ export default function ScoresBarChart({
             tripleBogeys,
           ],
           backgroundColor: [
-            '#22a875',
+            '#00A1E6',
+            '#22A875',
             '#6bc3a1',
-            '#afdccb',
             '#fff',
             '#f7bdb1',
             '#f7927c',
