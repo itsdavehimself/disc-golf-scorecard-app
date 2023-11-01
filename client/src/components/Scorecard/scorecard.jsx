@@ -439,7 +439,10 @@ export default function Scorecard() {
                     className={`grid grid-cols-${players.length} justify-items-center gap-10`}
                   >
                     {players.map((player, index) => (
-                      <div key={player.reference}>
+                      <div
+                        className="flex flex-row gap-1"
+                        key={player.reference}
+                      >
                         <span className="flex items-center justify-center font-semibold">
                           {calculatePlayerTotals().performances[index] > 0
                             ? '+' + calculatePlayerTotals().performances[index]
