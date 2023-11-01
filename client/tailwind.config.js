@@ -21,6 +21,11 @@ export default {
       rose: '#FFDEDD',
       white: '#ffffff',
       modal: 'rgba(0,0,0,0.5)',
+      'birdie-green': '#6bc3a1',
+      'ace-blue': '#00A1E6',
+      'bogey-red': '#f7bdb1',
+      dblbogey: '#f7927c',
+      trpbogey: '#f66747',
     },
     extend: {
       backgroundImage: {
@@ -38,9 +43,6 @@ export default {
       translate: {
         '70r': '70%',
         '78r': '78%',
-      },
-      transitionProperty: {
-        height: 'height',
       },
     },
   },
