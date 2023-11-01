@@ -444,21 +444,20 @@ export default function Scorecard() {
                       </div>
                     ))}
                   </div>
-                  <div className="flex gap-2">
-                    <div>Totals</div>
-                    <div className="flex gap-2">
-                      {players.map((player, index) => (
-                        <div key={player.reference}>
-                          <span className="font-semibold">
-                            {calculatePlayerTotals().performances[index] > 0
-                              ? '+' +
-                                calculatePlayerTotals().performances[index]
-                              : calculatePlayerTotals().performances[index]}
-                          </span>{' '}
-                          ({calculatePlayerTotals().totals[index]})
-                        </div>
-                      ))}
-                    </div>
+                  <div className="text-center">Totals</div>
+                  <div
+                    className={`grid grid-cols-${players.length} justify-items-center gap-10`}
+                  >
+                    {players.map((player, index) => (
+                      <div key={player.reference}>
+                        <span className="flex items-center justify-center font-semibold">
+                          {calculatePlayerTotals().performances[index] > 0
+                            ? '+' + calculatePlayerTotals().performances[index]
+                            : calculatePlayerTotals().performances[index]}
+                        </span>{' '}
+                        ({calculatePlayerTotals().totals[index]})
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
