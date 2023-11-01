@@ -6,7 +6,12 @@ const requireAuth = require('../middleware/requireAuth');
 router.use(requireAuth);
 
 const {
-  getAllFriends, getFriend, updateFriendScorecards, deleteFriendScorecard, deleteFriend, addFriend,
+  getAllFriends,
+  getFriend,
+  deleteFriendScorecard,
+  deleteFriend,
+  addFriend,
+  updateFriend,
 } = require('../controllers/friendController');
 
 router.get('/', getAllFriends);
@@ -15,7 +20,7 @@ router.get('/:id', getFriend);
 
 router.post('/', addFriend);
 
-router.put('/:id', updateFriendScorecards);
+router.put('/:id', updateFriend);
 
 router.delete('/:friendId/scorecard/:scorecardId', deleteFriendScorecard);
 

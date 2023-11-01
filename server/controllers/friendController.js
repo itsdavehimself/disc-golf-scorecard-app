@@ -43,23 +43,40 @@ exports.addFriend = asyncHandler(async (req, res) => {
   return res.status(200).json(newFriend);
 });
 
-exports.updateFriendScorecards = asyncHandler(async (req, res) => {
+exports.updateFriend = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { scorecards } = req.body;
+  const { scorecards, newName } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'Friend does not exist' });
+  if (scorecards) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Friend does not exist' });
+    }
+
+    const friend = await Friend.findOneAndUpdate(
+      { _id: id },
+      { $push: { scorecards: { $each: scorecards } } },
+    );
+
+    if (!friend) {
+      return res.status(404).json({ error: 'Friend does not exist' });
+    }
+    res.status(200).json({ friend });
+  } else if (newName) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Friend does not exist' });
+    }
+
+    const friend = await Friend.findOneAndUpdate(
+      { _id: id },
+      { name: newName },
+      { new: true },
+    );
+
+    if (!friend) {
+      return res.status(404).json({ error: 'Friend does not exist' });
+    }
+    res.status(200).json({ friend });
   }
-
-  const friend = await Friend.findOneAndUpdate(
-    { _id: id },
-    { $push: { scorecards: { $each: scorecards } } },
-  );
-
-  if (!friend) {
-    return res.status(404).json({ error: 'Friend does not exist' });
-  }
-  res.status(200).json({ friend });
 });
 
 exports.deleteFriendScorecard = asyncHandler(async (req, res) => {
