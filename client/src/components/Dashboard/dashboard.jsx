@@ -83,7 +83,7 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="rounded-lg bg-white shadow-lg">
-        <div className="flex text-lg px-2 pt-2 text-black items-center font-semibold">
+        <div className="flex text-lg px-3 pt-2 text-black items-center font-semibold">
           Last 5 rounds
         </div>
         <div>
