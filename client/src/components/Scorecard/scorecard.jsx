@@ -60,16 +60,6 @@ export default function Scorecard() {
     Object.values(performance).map((count) => count),
   );
 
-  // const graphColors = [
-  //   'ace-blue',
-  //   'jade',
-  //   'birdie-green',
-  //   'white',
-  //   'bogey-red',
-  //   'dblbogey',
-  //   'trpbogey',
-  // ];
-
   const navigate = useNavigate();
   const nameForModal = 'scorecard';
 
