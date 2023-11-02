@@ -4,6 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import DashboardStats from '../Dashboard/dashboardStats';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import LoadingScreen from '../Loading/loadingScreen';
 
 export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);
@@ -68,7 +69,7 @@ export default function AllScorecards() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

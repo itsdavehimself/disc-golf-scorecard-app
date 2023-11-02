@@ -21,6 +21,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import FriendMenu from './friendMenu';
 import EditNameModal from './editNameModal';
+import LoadingScreen from '../Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -493,7 +494,7 @@ export default function FriendProfile() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

@@ -15,6 +15,7 @@ import AllFriends from './components/AllFriends/AllFriends';
 import FriendProfile from './components/FriendProfile/FriendProfile';
 import AllCourses from './components/AllCourses/allCourses';
 import MyStats from './containers/myStats';
+import LoadingScreen from './components/Loading/loadingScreen';
 
 export default function App() {
   const { user, isLoading } = useAuthContext();
@@ -25,7 +26,7 @@ export default function App() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

@@ -3,6 +3,7 @@ import ScorecardDetails from '../ScorecardDetails/scorecardDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 import DashboardStats from './dashboardStats';
+import LoadingScreen from '../Loading/loadingScreen';
 
 export default function Dashboard() {
   const [scorecards, setScorecards] = useState(null);
@@ -66,7 +67,7 @@ export default function Dashboard() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

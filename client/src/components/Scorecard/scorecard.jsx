@@ -14,6 +14,7 @@ import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
 import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
 import { calculateParPerformance } from '../../utilities/userStatsUtilities';
 import StackedBarChart from './stackedBarChart';
+import LoadingScreen from '../Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -277,7 +278,7 @@ export default function Scorecard() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

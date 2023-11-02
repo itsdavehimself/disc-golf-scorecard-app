@@ -3,6 +3,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import CourseCard from '../CourseCard/courseCard';
+import LoadingScreen from '../Loading/loadingScreen';
 
 export default function AllCourses() {
   const [searchValueInput, setSearchValueInput] = useState('');
@@ -28,7 +29,7 @@ export default function AllCourses() {
   }, [user]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

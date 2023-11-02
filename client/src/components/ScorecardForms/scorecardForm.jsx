@@ -10,6 +10,7 @@ import {
   faUser,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import LoadingScreen from '../Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
@@ -294,7 +295,7 @@ export default function ScorecardForm() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

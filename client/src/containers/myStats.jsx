@@ -15,6 +15,7 @@ import {
 import YearFilterModal from '../components/YearFilterModal/yearFilterModal';
 import ScoresBarChart from '../components/ScoresBarChart/scoresBarChart';
 import PlayedCourses from '../components/PlayedCourses/playedCourses';
+import LoadingScreen from '../components/Loading/loadingScreen';
 
 export default function MyStats() {
   const { user } = useAuthContext();
@@ -399,7 +400,7 @@ export default function MyStats() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (

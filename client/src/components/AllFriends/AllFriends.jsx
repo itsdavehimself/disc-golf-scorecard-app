@@ -7,6 +7,7 @@ import {
   faAngleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from '../Loading/loadingScreen';
 
 export default function AllFriends() {
   const [friends, setFriends] = useState([]);
@@ -47,7 +48,7 @@ export default function AllFriends() {
   }, [user]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
