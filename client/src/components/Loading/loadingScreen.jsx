@@ -7,7 +7,7 @@ export default function LoadingScreen() {
   useEffect(() => {
     const loadingPhrases = [
       'Embarking on a woodland disc hunt...',
-      'Unloading entire bag off the tee...',
+      'Unloading the entire bag off the tee...',
       'Awaiting calmer winds...',
       'Hitting every tree on the fairway...',
       'Listening for chains...',
@@ -27,7 +27,7 @@ export default function LoadingScreen() {
   }, []);
 
   return (
-    <div className="bg-white w-screen flex flex-col items-center justify-center px-3">
+    <div className="bg-white w-screen flex flex-col items-center justify-center px-6">
       <div>
         <LottiePlayerComponent />
       </div>
