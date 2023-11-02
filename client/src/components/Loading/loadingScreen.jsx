@@ -7,7 +7,7 @@ export default function LoadingScreen() {
   useEffect(() => {
     const loadingPhrases = [
       'Embarking on a woodland disc hunt...',
-      'Commencing teebox disc dump...',
+      'Unloading entire bag off the tee...',
       'Awaiting calmer winds...',
       'Hitting every tree on the fairway...',
       'Listening for chains...',
