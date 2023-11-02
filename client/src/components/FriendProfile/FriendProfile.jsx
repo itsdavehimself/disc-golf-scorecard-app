@@ -209,7 +209,7 @@ export default function FriendProfile() {
     };
 
     fetchData();
-  }, [id, user]);
+  }, [id, user, friendName]);
 
   const showAllResults = () => {
     const scorecardsWithUser = allScorecards.filter((scorecard) => {
