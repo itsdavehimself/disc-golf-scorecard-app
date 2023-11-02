@@ -106,7 +106,7 @@ export default function AllScorecards() {
             ))}
         </div>
         <div className="flex items-center justify-center pb-4">
-          <Logo fill="rgba(34,168,117,0.8)" stroke="rgba(34,168,117,0.8)" />{' '}
+          <Logo fill="rgba(0,0,0,0.3)" stroke="rgba(0,0,0,0.3)" />
         </div>
       </div>
     </div>

@@ -1,11 +1,9 @@
-import * as React from 'react';
-
 function Logo(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24.000000pt"
-      height="24.000000pt"
+      width="20.000000pt"
+      height="20.000000pt"
       viewBox="0 0 1500.000000 1500.000000"
       {...props}
     >
