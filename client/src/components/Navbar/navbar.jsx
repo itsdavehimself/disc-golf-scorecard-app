@@ -200,9 +200,6 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 <Link to="https://github.com/itsdavehimself">
                   <button onClick={handleMenu}>David&apos;s Github</button>
                 </Link>
-                <Link to="/settings">
-                  <button onClick={handleMenu}>Settings</button>
-                </Link>
                 <button onClick={handleClick}>Logout</button>
               </div>
             </div>
