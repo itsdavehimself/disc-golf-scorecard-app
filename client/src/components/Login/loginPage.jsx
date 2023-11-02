@@ -102,9 +102,6 @@ const Login = () => {
               >
                 Login
               </button>
-              <div className="flex items-center justify-center">
-                <button className=" text-black">Forgot password?</button>
-              </div>
             </div>
             {error && (
               <div className="flex items-center justify-center text-black text-sm py-2 bg-rose border rounded-md border-red">
