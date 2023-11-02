@@ -9,12 +9,12 @@ export default function LoadingScreen() {
       'Embarking on a woodland disc hunt...',
       'Unloading the entire bag off the tee...',
       'Awaiting calmer winds...',
-      'Hitting every tree on the fairway...',
-      'Listening for chains...',
-      'Running after a rollaway...',
-      'Wading through a pond...',
-      'Climbing a pine tree...',
-      'Trading discs in the parking lot...',
+      'Hitting every tree on the course...',
+      'Listening for those sweet chains...',
+      'Chasing after a downhill rollaway...',
+      'Wading through a murky pond...',
+      'Climbing a towering pine tree...',
+      'Trading plastic in the parking lot...',
     ];
 
     const chooseLoadingPhrase = () => {
