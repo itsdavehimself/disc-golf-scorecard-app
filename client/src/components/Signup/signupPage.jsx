@@ -72,89 +72,92 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col bg-off-white h-screen gap-4 px-7 md:items-center justify-center w-screen">
-      <div className="flex flex-col gap-4">
-        <h3 className="flex flex-col md:items-center md:text-center justify-center text-black text-4xl font-semibold">
-          Ace or tree, <br></br>track it here.
-        </h3>
-        <p className="text-black text-lg">
-          Join ChainSeeker now. It&apos;s free!
-        </p>
-      </div>
-      <form
-        className="flex flex-col gap-5 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col">
-          <label>Email </label>
-          <input
-            className={`${
-              isEmailError
-                ? 'ring-red ring-2'
-                : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black rounded-md shadow-md p-2 focus:outline-none`}
-            type="email"
-            onChange={handleEmailChange}
-            value={email}
-          ></input>
-          {isEmailError && (
-            <div className="text-sm pt-1 text-vermillion">
-              Please enter a valid email
-            </div>
-          )}
+    <div className="flex flex-col bg-off-white h-screen gap-4 px-3 md:items-center justify-center w-screen">
+      <div className="bg-white rounded-lg shadow-lg px-5 py-6">
+        <div className="flex flex-col gap-4">
+          <h3 className="flex flex-col md:items-center md:text-center justify-center text-black text-4xl font-semibold">
+            Ace or tree, <br></br>track it here.
+          </h3>
+          <p className="text-black text-lg pb-3">
+            Join ChainSeeker now. It&apos;s free!
+          </p>
         </div>
-        <div className="flex flex-col">
-          <label>Username </label>
-          <input
-            className={`${
-              isUsernameError
-                ? 'ring-red ring-2'
-                : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black rounded-md shadow-md p-2 focus:outline-none`}
-            type="text"
-            onChange={handleUserChange}
-            value={username}
-            autoComplete="username"
-          ></input>
-          {isUsernameError && (
-            <div className="text-sm pt-1 text-vermillion">
-              Your username must be between 4-14 characters long and contain
-              only numbers or letters.
-            </div>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label>Password </label>
-          <input
-            className={`${
-              isPasswordError
-                ? 'ring-red ring-2'
-                : 'border-white-smoke border focus:ring-2 focus:ring-jade'
-            } text-black rounded-md shadow-md p-2 focus:outline-none`}
-            type="password"
-            onChange={handlePasswordChange}
-            value={password}
-            autoComplete="current-password"
-          ></input>
-          {isPasswordError && (
-            <div className="text-sm pt-1 text-vermillion">
-              Your password must be between 8-20 characters long, contain at
-              least one number, one uppercase letter, and one symbol (!@#$%^&*).
-            </div>
-          )}
-        </div>
-        <button
-          disabled={isLoading}
-          className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
+        <form
+          className="flex flex-col gap-5 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4"
+          onSubmit={handleSubmit}
         >
-          Sign up!
-        </button>
-        {error && (
-          <div className="flex items-center justify-center text-black text-sm px-3 py-2 bg-rose border rounded-md border-red">
-            <div className="flex">{error[0].msg}</div>
+          <div className="flex flex-col">
+            <label>Email </label>
+            <input
+              className={`${
+                isEmailError
+                  ? 'ring-red ring-2'
+                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+              } text-black rounded-md shadow-md p-2 focus:outline-none`}
+              type="email"
+              onChange={handleEmailChange}
+              value={email}
+            ></input>
+            {isEmailError && (
+              <div className="text-sm pt-1 text-vermillion">
+                Please enter a valid email
+              </div>
+            )}
           </div>
-        )}
-      </form>
+          <div className="flex flex-col">
+            <label>Username </label>
+            <input
+              className={`${
+                isUsernameError
+                  ? 'ring-red ring-2'
+                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+              } text-black rounded-md shadow-md p-2 focus:outline-none`}
+              type="text"
+              onChange={handleUserChange}
+              value={username}
+              autoComplete="username"
+            ></input>
+            {isUsernameError && (
+              <div className="text-sm pt-1 text-vermillion">
+                Your username must be between 4-14 characters long and contain
+                only numbers or letters.
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <label>Password </label>
+            <input
+              className={`${
+                isPasswordError
+                  ? 'ring-red ring-2'
+                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+              } text-black rounded-md shadow-md p-2 focus:outline-none`}
+              type="password"
+              onChange={handlePasswordChange}
+              value={password}
+              autoComplete="current-password"
+            ></input>
+            {isPasswordError && (
+              <div className="text-sm pt-1 text-vermillion">
+                Your password must be between 8-20 characters long, contain at
+                least one number, one uppercase letter, and one symbol
+                (!@#$%^&*).
+              </div>
+            )}
+          </div>
+          <button
+            disabled={isLoading}
+            className="bg-jade py-3 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors"
+          >
+            Sign up!
+          </button>
+          {error && (
+            <div className="flex items-center justify-center text-black text-sm px-3 py-2 bg-rose border rounded-md border-red">
+              <div className="flex">{error[0].msg}</div>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
