@@ -7,14 +7,18 @@ export default function LoadingScreen() {
   useEffect(() => {
     const loadingPhrases = [
       'Embarking on a woodland disc hunt...',
-      'Commencing the teebox disc dump...',
+      'Commencing teebox disc dump...',
       'Awaiting calmer winds...',
       'Hitting every tree on the fairway...',
       'Listening for chains...',
+      'Running after a rollaway...',
+      'Wading through a pond...',
+      'Climbing a pine tree...',
+      'Trading discs in the parking lot...',
     ];
 
     const chooseLoadingPhrase = () => {
-      const randomNumber = Math.floor(Math.random() * 5);
+      const randomNumber = Math.floor(Math.random() * loadingPhrases.length);
       const phrase = loadingPhrases[randomNumber];
       setLoadingPhrase(phrase);
     };
