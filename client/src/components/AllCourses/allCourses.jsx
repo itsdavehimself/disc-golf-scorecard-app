@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import CourseCard from '../CourseCard/courseCard';
 import LoadingScreen from '../Loading/loadingScreen';
+import Logo from '../Logo/Logo';
 
 export default function AllCourses() {
   const [searchValueInput, setSearchValueInput] = useState('');
@@ -63,7 +64,9 @@ export default function AllCourses() {
               />
             ))}
         </div>
-        <div className="flex items-center justify-center pb-4">Chainseeker</div>
+        <div className="flex items-center justify-center pb-4">
+          <Logo fill="rgba(34,168,117,0.8)" stroke="rgba(34,168,117,0.8)" />{' '}
+        </div>
       </div>
     </div>
   );

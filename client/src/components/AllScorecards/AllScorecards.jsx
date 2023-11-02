@@ -5,6 +5,7 @@ import DashboardStats from '../Dashboard/dashboardStats';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LoadingScreen from '../Loading/loadingScreen';
+import Logo from '../Logo/Logo';
 
 export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);
@@ -104,8 +105,8 @@ export default function AllScorecards() {
               />
             ))}
         </div>
-        <div className="flex items-center justify-center pt-2 pb-4">
-          Chainseeker
+        <div className="flex items-center justify-center pb-4">
+          <Logo fill="rgba(34,168,117,0.8)" stroke="rgba(34,168,117,0.8)" />{' '}
         </div>
       </div>
     </div>

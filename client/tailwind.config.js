@@ -32,6 +32,7 @@ export default {
         'hero-pattern':
           "linear-gradient(to right bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/home-bg-med.jpg')",
       },
+
       backgroundSize: {
         90: '90%',
         50: '50%',
