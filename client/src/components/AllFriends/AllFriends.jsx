@@ -53,8 +53,8 @@ export default function AllFriends() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 pt-16">
-      <div className="bg-white rounded-lg shadow-lg mt-3">
+    <div className="flex flex-col bg-off-white w-full px-3 pt-16 items-center">
+      <div className="bg-white rounded-lg shadow-lg mt-3 w-full lg:w-1/2 xl:w-1/3">
         <div className="flex flex-row items-end justify-between pb-2">
           <div className="text-lg pt-3 px-3 text-black font-semibold">
             Your friends
