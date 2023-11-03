@@ -97,7 +97,7 @@ export default function Navbar({
             leaveTo="translate-x-full"
           >
             <div className="md:hidden">
-              <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white flex flex-col text-right text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div className="absolute inset-x-0 top-3 mx-2 rounded-lg shadow-lg bg-white flex flex-col text-right text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link to={'/login'}>
                   <button
                     onClick={handleMenu}
@@ -106,7 +106,11 @@ export default function Navbar({
                     Login
                   </button>
                 </Link>
-                <Link to={'/login'}>
+                <Link
+                  to="https://github.com/itsdavehimself/disc-golf-scorecard-app#readme"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <button
                     onClick={handleMenu}
                     className="text-black hover-text-jade px-3 py-2 cursor-pointer rounded-md"
