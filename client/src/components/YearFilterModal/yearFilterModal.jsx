@@ -41,7 +41,7 @@ export default function YearFilterModal({
     <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
       <div
         ref={outsideYearMenu}
-        className="relative flex flex-col justify-center gap-6 py-5 px-5 w-2/3 h-max mx-4 bg-off-white rounded-md"
+        className="relative flex flex-col justify-center gap-6 py-5 px-5 w-2/3 lg:w-1/4 xl:w-1/5 xl:max-w-xs h-max mx-4 bg-white rounded-md"
       >
         <p className="text-center">Choose a year to view stats</p>
         <div className="grid grid-rows-auto gap-2">
@@ -54,7 +54,7 @@ export default function YearFilterModal({
                   setIsYearMenuOpen(false);
                   filterByYear(yearObj.year);
                 }}
-                className="flex justify-between items-center bg-white-smoke h-12 px-4 py-1 rounded-md"
+                className="flex justify-between items-center bg-white h-12 px-4 py-1 rounded-md hover:cursor-pointer hover:bg-off-white transition-colors"
               >
                 <div className="font-semibold">{yearObj.year}</div>
                 <div className="text-xs">
