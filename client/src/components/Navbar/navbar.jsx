@@ -6,6 +6,7 @@ import { faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import PropTypes from 'prop-types';
+import Logo from '../Logo/Logo';
 
 export default function Navbar({ toggleSidebar, isSideBarOpen }) {
   const { logout } = useLogout();
@@ -34,7 +35,10 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <Link to={'/'}>
-                  <button>ChainSeeker</button>
+                  <button className="flex gap-1 items-center text-2xl text-black font-semibold">
+                    <Logo />
+                    ChainSeeker
+                  </button>
                 </Link>
               </div>
               <div className="hidden md:block">
@@ -133,7 +137,10 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
               <div className="flex items-center">
                 <div className="hidden md:flex">
                   <Link to={'/'}>
-                    <button className="font-semibold">ChainSeeker</button>
+                    <button className="flex gap-1 items-center text-2xl text-black font-semibold">
+                      <Logo />
+                      ChainSeeker
+                    </button>
                   </Link>
                 </div>
                 <button
