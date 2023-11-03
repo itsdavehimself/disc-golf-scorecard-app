@@ -8,27 +8,29 @@ export default function FriendMenu({
   setIsEditNameOpen,
 }) {
   return (
-    <div className="absolute z-50 top-24 right-8 flex flex-col bg-white rounded-lg shadow-lg h-auto w-40 border border-off-white text-black">
-      <button
-        onClick={() => {
-          setIsEditNameOpen(true);
-          setIsMenuOpen(false);
-        }}
-        className="py-3 flex flex-row items-center gap-2 pl-3"
-      >
-        <FontAwesomeIcon icon={faPenToSquare} />
-        Edit name
-      </button>
-      <button
-        className="py-3 flex flex-row items-center gap-2 pl-3"
-        onClick={() => {
-          setIsMenuOpen(false);
-          setIsConfirmOpen(true);
-        }}
-      >
-        <FontAwesomeIcon icon={faTrashCan} />
-        Delete friend
-      </button>
+    <div className="relative">
+      <div className="absolute z-10 right-4 top-4 flex flex-col bg-white rounded-lg shadow-lg h-auto w-40 border border-off-white text-black">
+        <button
+          onClick={() => {
+            setIsEditNameOpen(true);
+            setIsMenuOpen(false);
+          }}
+          className="py-3 flex flex-row items-center gap-2 pl-3"
+        >
+          <FontAwesomeIcon icon={faPenToSquare} />
+          Edit name
+        </button>
+        <button
+          className="py-3 flex flex-row items-center gap-2 pl-3"
+          onClick={() => {
+            setIsMenuOpen(false);
+            setIsConfirmOpen(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faTrashCan} />
+          Delete friend
+        </button>
+      </div>
     </div>
   );
 }

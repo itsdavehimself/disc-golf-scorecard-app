@@ -507,13 +507,6 @@ export default function FriendProfile() {
           friendName={friendName}
         />
       )}
-      {isMenuOpen && (
-        <FriendMenu
-          setIsConfirmOpen={setIsConfirmOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          setIsEditNameOpen={setIsEditNameOpen}
-        />
-      )}
       {isConfirmOpen && (
         <ConfirmDeleteModal
           setIsConfirmOpen={setIsConfirmOpen}
@@ -560,6 +553,13 @@ export default function FriendProfile() {
                 className="text-gray"
               />
             </button>
+            {isMenuOpen && (
+              <FriendMenu
+                setIsConfirmOpen={setIsConfirmOpen}
+                setIsMenuOpen={setIsMenuOpen}
+                setIsEditNameOpen={setIsEditNameOpen}
+              />
+            )}
           </div>
         </div>
 
