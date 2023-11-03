@@ -10,7 +10,6 @@ export default function EditNameModal({
 }) {
   const [newFriendName, setNewFriendName] = useState(friendName);
   const [newFriendNameError, setNewFriendNameError] = useState(false);
-  const [error, setError] = useState(null);
   const { user } = useAuthContext();
 
   const handleFriendNameChange = (e) => {
