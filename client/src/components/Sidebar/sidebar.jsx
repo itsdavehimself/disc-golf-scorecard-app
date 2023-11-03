@@ -18,7 +18,7 @@ export default function Sidebar() {
         <div className="md:flex flex-col md:sticky top-16 text-lg gap-4">
           <Link to={'/'}>
             <button
-              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white ${
+              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                 location.pathname === '/'
                   ? 'bg-jade text-white font-semibold hover:bg-jade'
                   : ''
@@ -29,7 +29,7 @@ export default function Sidebar() {
           </Link>
           <Link to={'/scorecards'}>
             <button
-              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white ${
+              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                 location.pathname === '/scorecards'
                   ? 'bg-jade text-white font-semibold hover:bg-jade'
                   : ''
@@ -41,7 +41,7 @@ export default function Sidebar() {
           </Link>
           <Link to="/mystats">
             <button
-              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white ${
+              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                 location.pathname === '/mystats'
                   ? 'bg-jade text-white font-semibold hover:bg-jade'
                   : ''
@@ -53,7 +53,7 @@ export default function Sidebar() {
           </Link>
           <Link to={'/friends'}>
             <button
-              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white ${
+              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                 location.pathname === '/friends'
                   ? 'bg-jade text-white font-semibold hover:bg-jade'
                   : ''
@@ -65,7 +65,7 @@ export default function Sidebar() {
           </Link>
           <Link to={'/courses'}>
             <button
-              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white ${
+              className={`flex gap-2 items-center text-black w-48 py-2 cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                 location.pathname === '/courses'
                   ? 'bg-jade text-white font-semibold hover:bg-jade'
                   : ''
