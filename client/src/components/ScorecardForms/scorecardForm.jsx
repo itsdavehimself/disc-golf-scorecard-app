@@ -304,7 +304,7 @@ export default function ScorecardForm() {
         <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
           <div
             ref={outsideAddFriend}
-            className="relative flex flex-col justify-center gap-6 py-5 px-5 w-full h-max mx-4 bg-white rounded-lg shadow-lg"
+            className="relative flex flex-col justify-center gap-6 py-5 px-5 w-full h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs xl:max-w-xs"
           >
             <div className="flex flex-col">
               <div className="text-xl font-semibold">Add friend</div>
@@ -335,7 +335,7 @@ export default function ScorecardForm() {
                   )}
                 </div>
               </div>
-              <button className="bg-jade py-3 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+              <button className="bg-jade py-3 rounded-md text-off-white font-semibold hover:cursor-pointer hover:bg-emerald transition-colors">
                 Add friend
               </button>
               <button onClick={handleCancelAddFriend} className="py-3">
@@ -345,8 +345,8 @@ export default function ScorecardForm() {
           </div>
         </div>
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16">
-        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3">
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
+        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3 lg:w-1/2 xl:w-1/3">
           <form onSubmit={handleSubmit}>
             <div
               ref={outsideDropDown}
@@ -400,7 +400,7 @@ export default function ScorecardForm() {
                 </div>
                 {coursesArr.map((courseItem) => (
                   <li
-                    className={`hover:bg-emerald hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
+                    className={`hover:bg-jade hover:text-white hover:cursor-pointer text-sm px-1 py-2 border-t border-off-white ${
                       courseItem.name === courseName &&
                       'bg-washed-jade text-white'
                     } ${
@@ -441,7 +441,7 @@ export default function ScorecardForm() {
                 onClick={() => {
                   setAddFriendOpen(!addFriendOpen);
                 }}
-                className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md"
+                className="flex items-center gap-2 text-jade border border-jade py-2 px-2 rounded-md hover:cursor-pointer hover:bg-jade hover:text-white transition-colors"
               >
                 <FontAwesomeIcon icon={faUserPlus} />{' '}
                 <span className="text-xs font-semibold">Add friend</span>
@@ -457,7 +457,7 @@ export default function ScorecardForm() {
                 onClick={handleCheckboxChange}
               >
                 <div
-                  className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg ${
+                  className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                     players.some((player) => player.reference === user.user._id)
                       ? 'bg-off-white'
                       : 'bg-white'
@@ -500,7 +500,7 @@ export default function ScorecardForm() {
                   onClick={handleCheckboxChange}
                 >
                   <div
-                    className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg ${
+                    className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
                       players.some((player) => player.reference === friend._id)
                         ? 'bg-off-white'
                         : 'bg-white'
