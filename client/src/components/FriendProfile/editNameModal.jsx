@@ -7,6 +7,7 @@ export default function EditNameModal({
   friend,
   friendName,
   setFriendName,
+  outsideEditNameModal,
 }) {
   const [newFriendName, setNewFriendName] = useState(friendName);
   const [newFriendNameError, setNewFriendNameError] = useState(false);
@@ -68,7 +69,10 @@ export default function EditNameModal({
 
   return (
     <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black">
-      <div className="relative flex flex-col justify-center gap-6 py-5 px-5 w-4/5 h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs  xl:max-w-xs">
+      <div
+        ref={outsideEditNameModal}
+        className="relative flex flex-col justify-center gap-6 py-5 px-5 w-4/5 h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs  xl:max-w-xs"
+      >
         <p className="text-center">Edit player name</p>
         <form
           className="flex flex-col items-center justify-center"
@@ -111,4 +115,7 @@ EditNameModal.propTypes = {
   friend: PropTypes.object,
   friendName: PropTypes.string,
   setFriendName: PropTypes.func,
+  outsideEditNameModal: PropTypes.shape({
+    current: PropTypes.instanceOf(Element),
+  }),
 };

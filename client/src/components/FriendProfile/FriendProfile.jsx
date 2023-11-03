@@ -487,6 +487,10 @@ export default function FriendProfile() {
     setIsConfirmOpen(false);
   });
 
+  const outsideEditNameModal = useClickOutside(() => {
+    setIsEditNameOpen(false);
+  });
+
   const handleConfirmDelete = () => {
     deleteFriend(id, user);
     setIsConfirmOpen(false);
@@ -505,6 +509,7 @@ export default function FriendProfile() {
           friend={friend}
           setFriendName={setFriendName}
           friendName={friendName}
+          outsideEditNameModal={outsideEditNameModal}
         />
       )}
       {isConfirmOpen && (
