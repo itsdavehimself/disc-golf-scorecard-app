@@ -133,7 +133,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
               <div className="flex items-center">
                 <div className="hidden md:flex">
                   <Link to={'/'}>
-                    <button>ChainSeeker</button>
+                    <button className="font-semibold">ChainSeeker</button>
                   </Link>
                 </div>
                 <button
@@ -192,7 +192,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white md:w-1/4 lg:w-1/5">
+            <div className="absolute inset-x-0 top-3 mx-2 rounded-lg shadow-lg bg-white md:w-1/4 lg:w-1/5">
               <div className="flex flex-col text-right items-end text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3 gap-4 text-black">
                 <Link to="https://github.com/itsdavehimself/disc-golf-scorecard-app">
                   <button onClick={handleMenu}>Project Repo</button>
@@ -214,7 +214,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
             leaveTo="-translate-x-full"
           >
             <div className="md:hidden">
-              <div className="absolute inset-x-0 top-3 mx-3 rounded-md bg-off-white flex flex-col text-left text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div className="absolute inset-x-0 top-3 mx-2 rounded-lg shadow-lg bg-white flex flex-col text-left text-lg pr-3 ox-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link to={'/'}>
                   <button
                     onClick={toggleSidebar}
