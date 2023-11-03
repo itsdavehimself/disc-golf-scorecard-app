@@ -32,7 +32,11 @@ export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar toggleSidebar={toggleSidebar} isSideBarOpen={isSideBarOpen} />
+        <Navbar
+          toggleSidebar={toggleSidebar}
+          isSideBarOpen={isSideBarOpen}
+          setIsSideBarOpen={setIsSideBarOpen}
+        />
         <div className="flex flex-row w-screen min-h-screen">
           {user && <Sidebar />}
           <Routes>

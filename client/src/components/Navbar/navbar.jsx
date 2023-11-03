@@ -8,7 +8,11 @@ import { Transition } from '@headlessui/react';
 import PropTypes from 'prop-types';
 import Logo from '../Logo/Logo';
 
-export default function Navbar({ toggleSidebar, isSideBarOpen }) {
+export default function Navbar({
+  toggleSidebar,
+  isSideBarOpen,
+  setIsSideBarOpen,
+}) {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const [open, setOpen] = useState(false);
@@ -17,6 +21,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
 
   const handleMenu = () => {
     setOpen((prev) => !prev);
+    setIsSideBarOpen(false);
   };
 
   const handleClick = () => {
@@ -153,7 +158,10 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                 </div>
                 <button
                   type="button"
-                  onClick={toggleSidebar}
+                  onClick={() => {
+                    setOpen(false);
+                    toggleSidebar();
+                  }}
                   className="md:hidden inline-flex items-center justify-center text-xl px-3 py-2
                 rounded-md text-black hover:text-jade hover-bg-honeydew
                 focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -290,4 +298,5 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
 Navbar.propTypes = {
   toggleSidebar: PropTypes.func,
   isSideBarOpen: PropTypes.bool,
+  setIsSideBarOpen: PropTypes.func,
 };
