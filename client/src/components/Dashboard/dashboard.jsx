@@ -71,29 +71,30 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3">
-      <div className="pt-16 items-center md:items-start">
-        <DashboardStats scorecards={scorecards} />
-        <div className="md:hidden my-3">
-          <Link to="/newround">
-            <button className="w-full bg-jade py-2 px-3 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+    <div className="flex flex-col bg-off-white w-full px-3 items-center">
+      <div className="pt-16 items-center md:items-start w-full">
+        <div className="flex md:hidden mt-3 w-full justify-center">
+          <Link
+            to="/newround"
+            className="flex w-full items-center justify-center"
+          >
+            <button className="bg-jade w-full py-2 px-3 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
               Start a round
             </button>
           </Link>
         </div>
       </div>
-      <div className="rounded-lg bg-white shadow-lg">
+      <DashboardStats scorecards={scorecards} />
+      <div className="rounded-lg bg-white shadow-lg w-full lg:w-1/2 xl:w-1/3">
         <div className="flex text-lg px-3 pt-2 text-black items-center font-semibold">
           Last 5 rounds
         </div>
-        <div>
-          {scorecards &&
-            scorecards
-              .slice(0, 5)
-              .map((scorecard) => (
-                <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
-              ))}
-        </div>
+        {scorecards &&
+          scorecards
+            .slice(0, 5)
+            .map((scorecard) => (
+              <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
+            ))}
         <div className="flex text-black justify-center items-center">
           <Link to={'/scorecards'}>
             <button className="flex pt-2 pb-4 px-3 rounded-md text-sm font-semibold text-black cursor-pointer">
