@@ -346,7 +346,7 @@ export default function ScorecardForm() {
         </div>
       )}
       <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
-        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3 lg:w-1/2 xl:w-1/3">
+        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3 w-full lg:w-1/2 xl:w-1/3">
           <form onSubmit={handleSubmit}>
             <div
               ref={outsideDropDown}
