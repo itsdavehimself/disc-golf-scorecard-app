@@ -74,9 +74,9 @@ export default function AllScorecards() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 pt-16">
+    <div className="flex flex-col bg-off-white w-full px-3 pt-16 justify-center items-center">
       <DashboardStats scorecards={scorecards} />
-      <div className="bg-white rounded-lg mb-2 shadow-lg">
+      <div className="bg-white rounded-lg mb-2 shadow-lg w-full lg:w-1/2 xl:w-1/3">
         <div className="flex text-lg px-3 pt-3 pb-2 text-black items-center font-semibold">
           All Rounds
         </div>
