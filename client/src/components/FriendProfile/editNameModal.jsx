@@ -69,7 +69,7 @@ export default function EditNameModal({
 
   return (
     <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black">
-      <div className="relative flex flex-col justify-center gap-6 py-5 px-5 w-4/5 h-max mx-4 bg-white rounded-lg shadow-lg">
+      <div className="relative flex flex-col justify-center gap-6 py-5 px-5 w-4/5 h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs  xl:max-w-xs">
         <p className="text-center">Edit player name</p>
         <form
           className="flex flex-col items-center justify-center"
@@ -92,7 +92,7 @@ export default function EditNameModal({
               </div>
             )}
           </div>
-          <button className="bg-jade py-3 rounded-md text-white font-semibold cursor-pointer transition-colors w-48 mt-2">
+          <button className="bg-jade py-3 rounded-md text-white font-semibold cursor-pointer w-48 mt-2 hover:bg-emerald transition-colors">
             Save
           </button>
           <button
