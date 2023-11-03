@@ -50,7 +50,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                   </Link>
                   {!isSignUpRoute ? (
                     <Link to={'/signup'}>
-                      <button className="bg-jade px-3 py-2 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors ">
+                      <button className="bg-jade px-3 py-2 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors ">
                         Get Started
                       </button>
                     </Link>
@@ -60,7 +60,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
               <div className="-mr-2 flex md:hidden gap-2">
                 {!isSignUpRoute ? (
                   <Link to={'/signup'}>
-                    <button className="bg-jade px-3 py-2 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors ">
+                    <button className="bg-jade px-3 py-2 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors ">
                       Get Started
                     </button>
                   </Link>
@@ -160,18 +160,18 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
               <div className="hidden md:flex gap-4 items-center text-black">
                 {!isNewRoundRoute && (
                   <Link to="/newround">
-                    <button className="bg-jade px-3 py-2 rounded-md text-off-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
+                    <button className="bg-jade px-3 py-2 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
                       Start a round
                     </button>
                   </Link>
                 )}
                 <button
                   onClick={handleMenu}
-                  className="flex items-center justify-center space-x-2 px-2 py-2 rounded-md hover:bg-mint transition-colors"
+                  className="flex items-center justify-center space-x-2 px-2 py-2 rounded-md hover:bg-off-white transition-colors"
                 >
                   <div
                     className="inline-flex items-center justify-center text-lg h-8 w-8
-                rounded-full text-off-white bg-jade"
+                rounded-full text-white bg-jade"
                   >
                     <FontAwesomeIcon icon={faUser} />
                   </div>
@@ -183,7 +183,7 @@ export default function Navbar({ toggleSidebar, isSideBarOpen }) {
                   type="button"
                   onClick={handleMenu}
                   className="inline-flex items-center justify-center text-lg h-9 w-9
-                rounded-full text-off-white bg-jade"
+                rounded-full text-white bg-jade"
                 >
                   <FontAwesomeIcon icon={faUser} />
                 </button>
