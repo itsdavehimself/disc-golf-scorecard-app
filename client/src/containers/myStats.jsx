@@ -414,13 +414,13 @@ export default function MyStats() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-20">
-        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-20 items-center">
+        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg lg:w-1/2 xl:w-1/3">
           <button
             className={`${
               filterAllSelected
                 ? 'bg-jade text-white font-semibold'
-                : 'bg-white text-black'
+                : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
             onClick={showAllResults}
           >
@@ -430,7 +430,7 @@ export default function MyStats() {
             className={`${
               filterLastTenSelected
                 ? 'bg-jade text-white font-semibold'
-                : 'bg-white text-black'
+                : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
             onClick={filterLastTenRounds}
           >
@@ -440,7 +440,7 @@ export default function MyStats() {
             className={`${
               filterYearSelected
                 ? 'bg-jade text-white font-semibold'
-                : 'bg-white text-black'
+                : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
             onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
           >
@@ -450,7 +450,7 @@ export default function MyStats() {
         <div
           className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
         ></div>
-        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
+        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg lg:w-1/2 xl:w-1/3">
           <div className="text-center">
             <div className="font-semibold">{filteredScorecards.length}</div>
             <div className="text-sm">
@@ -466,7 +466,7 @@ export default function MyStats() {
             <div className="text-sm">THROWS</div>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg mb-3">
+        <div className="bg-white rounded-lg shadow-lg mb-3 lg:w-1/2 xl:w-1/3">
           <div className="font-semibold px-3 py-2">
             {playedCourses.length}{' '}
             {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
@@ -492,7 +492,7 @@ export default function MyStats() {
         </div>
         <div
           onClick={() => openScorecard(bestRound.scorecardId)}
-          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer"
+          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer lg:w-1/2 xl:w-1/3 hover:shadow-2xl transition-shadow"
         >
           <div className="col-start-1 col-end-10">
             <div className="font-semibold pb-2">Best Round</div>
@@ -538,7 +538,7 @@ export default function MyStats() {
           </div>
         </div>
 
-        <div>
+        <div className="lg:w-1/2 xl:w-1/3">
           <ScoresBarChart
             aces={parPerformance.aces}
             eagles={parPerformance.eagles}
