@@ -13,10 +13,10 @@ export default function CourseCard({ course, searchValueInput }) {
           : 'hidden'
       }`}
     >
-      <div className="w-full bg-white border-b border-white-smoke pb-3">
+      <div className="w-full bg-white border-b border-white-smoke pb-3 lg:w-96 lg:border-none">
         <div>
           <img
-            className="rounded-md h-40 w-full object-cover"
+            className="rounded-md h-40 sm:h-96 lg:h-64 w-full object-cover"
             src={course.image}
           ></img>
         </div>
