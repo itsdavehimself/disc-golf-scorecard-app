@@ -531,8 +531,8 @@ export default function FriendProfile() {
           filterByYear={filterByYear}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16">
-        <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2">
+      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
+        <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2 w-full lg:w-1/2 xl:w-1/3">
           <div className="col-start-1 col-end-10">
             <div className="text-2xl font-semibold">{friendName}</div>
             <div className="text-sm">
@@ -563,7 +563,7 @@ export default function FriendProfile() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg">
+        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <button
             className={`${
               filterAllSelected
@@ -598,7 +598,7 @@ export default function FriendProfile() {
         <div
           className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
         ></div>
-        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg">
+        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <div className="text-center">
             <div className="font-semibold">{totalScorecards.length}</div>
             <div className="text-sm">
@@ -614,7 +614,7 @@ export default function FriendProfile() {
             <div className="text-sm">THROWS</div>
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg mb-3 pb-2">
+        <div className="bg-white rounded-lg shadow-lg mb-3 pb-2 w-full lg:w-1/2 xl:w-1/3">
           <div className="font-semibold px-3 py-2">
             {playedCourses.length}{' '}
             {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
@@ -623,7 +623,7 @@ export default function FriendProfile() {
         </div>
         <div
           onClick={() => openScorecard(bestRound.scorecardId)}
-          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer"
+          className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer hover:shadow-2xl transition-shadow w-full lg:w-1/2 xl:w-1/3"
         >
           <div className="col-start-1 col-end-10">
             <div className="font-semibold pb-2">Best Round</div>
@@ -670,7 +670,7 @@ export default function FriendProfile() {
             />
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg py-2 mb-3">
+        <div className="bg-white rounded-lg shadow-lg py-2 mb-3 w-full lg:w-1/2 xl:w-1/3">
           <div className="text-center text-sm font-semibold pb-2">
             Your stats vs. {friendName}
           </div>
@@ -691,16 +691,18 @@ export default function FriendProfile() {
             </div>
           </div>
         </div>
-        <ScoresBarChart
-          aces={aces}
-          eagles={eagles}
-          birdies={birdies}
-          pars={pars}
-          bogey={bogey}
-          doubleBogeys={doubleBogeys}
-          tripleBogeys={tripleBogeys}
-          name={friendName}
-        />
+        <div className="w-full lg:w-1/2 xl:w-1/3">
+          <ScoresBarChart
+            aces={aces}
+            eagles={eagles}
+            birdies={birdies}
+            pars={pars}
+            bogey={bogey}
+            doubleBogeys={doubleBogeys}
+            tripleBogeys={tripleBogeys}
+            name={friendName}
+          />
+        </div>
       </div>
     </>
   );
