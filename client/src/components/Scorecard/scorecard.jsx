@@ -294,7 +294,7 @@ export default function Scorecard() {
       <div className="flex flex-col w-screen bg-off-white pt-16 text-black px-3 items-center">
         {courseExists ? (
           <>
-            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 lg:w-1/2 xl:w-1/3">
+            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
               <h1 className="text-xl font-semibold">{courseName}</h1>
               <div className="flex gap-2 text-gray text-sm pt-1">
                 <p className="flex items-center">
@@ -317,7 +317,7 @@ export default function Scorecard() {
                 {location}
               </p>
             </div>
-            <div className="bg-white rounded-lg shadow-lg py-3 lg:w-1/2 xl:w-1/3">
+            <div className="bg-white rounded-lg shadow-lg py-3 w-full lg:w-1/2 xl:w-1/3">
               <div className="flex justify-between pb-3 px-3">
                 <div className="flex font-semibold text-lg">Scorecard</div>
                 <div className="flex gap-2">
@@ -457,7 +457,7 @@ export default function Scorecard() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 lg:w-1/2 xl:w-1/3">
+            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
               <div className="flex font-semibold text-lg pb-3">
                 Player overview
               </div>
