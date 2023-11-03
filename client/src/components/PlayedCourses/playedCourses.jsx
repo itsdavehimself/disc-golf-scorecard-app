@@ -9,7 +9,7 @@ export default function PlayedCourses({ playedCourses }) {
   return (
     <div>
       <div
-        className="grid grid-cols-3 items-center px-3"
+        className="grid grid-cols-3 items-center px-3 hover:cursor-pointer hover:text-jade transition-colors"
         onClick={() => setIsCoursesOpen(!isCoursesOpen)}
       >
         <p className="col-start-1 col-end-3">
