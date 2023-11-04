@@ -40,7 +40,10 @@ const StackedBarChart = ({ performances }) => {
               className={`flex-grow text-sm font-semibold bar-category ${
                 index >= 0 && index <= 2 ? 'text-white' : ''
               } bg-${getCategoryColor(index)} text-center`}
-              style={{ width: `${proportion}%` }}
+              style={{
+                width: `${proportion}%`,
+                transition: 'width 0.75s ease',
+              }}
             >
               {performances[index]}
             </div>
