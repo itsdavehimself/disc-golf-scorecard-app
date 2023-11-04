@@ -56,6 +56,7 @@ export default function Scorecard() {
   const [error, setError] = useState(null);
   const [performances, setPerformances] = useState([]);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [savingButtonText, setSavingButtonText] = useState('Save scores');
 
   const graphColumnWidths = performances.map((performance) =>
     Object.values(performance).map((count) => count),
@@ -151,6 +152,7 @@ export default function Scorecard() {
 
   const handleScorecardSubmit = async (e) => {
     e.preventDefault();
+    setSavingButtonText('Saving...');
 
     const updatedScores = createPlayersWithScoresObj();
 
@@ -172,7 +174,10 @@ export default function Scorecard() {
     }
 
     if (saveScorecardResponse.ok) {
-      return;
+      setSavingButtonText('Saved');
+      setTimeout(() => {
+        setSavingButtonText('Save scores');
+      }, 3000);
     }
   };
 
@@ -322,12 +327,24 @@ export default function Scorecard() {
                 <div className="flex font-semibold text-lg">Scorecard</div>
                 <div className="flex gap-2">
                   <button
-                    className="bg-jade rounded-md text-off-white font-semibold cursor-pointer px-2 hover:bg-emerald transition-colors"
+                    className={`w-28 rounded-md font-semibold cursor-pointer px-2 hover:bg-emerald transition-colors text-white ${
+                      savingButtonText === 'Saved' ||
+                      savingButtonText === 'Saving...'
+                        ? 'bg-washed-jade hover:bg-washed-jade hover:cursor-default'
+                        : 'bg-jade'
+                    }`}
                     onClick={handleScorecardSubmit}
+                    disabled={
+                      savingButtonText === 'Saved' ||
+                      savingButtonText === 'Saving...'
+                    }
                   >
-                    Save scores
+                    {savingButtonText}
                   </button>
-                  <button onClick={() => setIsConfirmOpen(true)}>
+                  <button
+                    className="hover:text-gray transition-colors"
+                    onClick={() => setIsConfirmOpen(true)}
+                  >
                     <FontAwesomeIcon icon={faTrashCan} className="text-lg" />
                   </button>
                 </div>
