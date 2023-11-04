@@ -72,7 +72,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
           <p className="text-xs text-gray">
             {formattedDate} at {formattedTime}
           </p>
-          <div className="flex items-center justify-start pt-4 gap-4">
+          <div className="flex items-center justify-start pt-4 gap-4 overflow-x-auto">
             {scorecard.players.map((player, index) => (
               <div key={player._id} className="flex items-center gap-2">
                 <FontAwesomeIcon
