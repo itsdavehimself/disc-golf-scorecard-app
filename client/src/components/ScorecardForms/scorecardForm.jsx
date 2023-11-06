@@ -222,7 +222,6 @@ export default function ScorecardForm() {
         target.setAttribute('data-player-checked', 'false');
       }
     }
-    console.log(players);
   };
 
   useEffect(() => {
