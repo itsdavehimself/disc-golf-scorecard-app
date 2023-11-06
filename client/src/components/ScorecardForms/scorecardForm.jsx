@@ -222,6 +222,7 @@ export default function ScorecardForm() {
         target.setAttribute('data-player-checked', 'false');
       }
     }
+    console.log(players);
   };
 
   useEffect(() => {
@@ -453,7 +454,7 @@ export default function ScorecardForm() {
                 data-player-id="player1"
                 data-player-value={user.user._id}
                 data-player-type="User"
-                data-player-checked="false"
+                data-player-checked="true"
                 onClick={handleCheckboxChange}
               >
                 <div
