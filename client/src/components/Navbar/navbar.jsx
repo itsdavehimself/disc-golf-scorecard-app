@@ -149,7 +149,7 @@ export default function Navbar({
       )}
       {user && (
         <div className="bg-white fixed w-full">
-          <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto px-6 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="hidden md:flex">
@@ -198,7 +198,7 @@ export default function Navbar({
                   <div>{user.user.username}</div>
                 </button>
               </div>
-              <div className="-mr-2 flex md:hidden gap-2">
+              <div className="flex md:hidden gap-2">
                 <button
                   type="button"
                   onClick={handleMenu}
