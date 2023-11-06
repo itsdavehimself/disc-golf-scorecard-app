@@ -47,7 +47,7 @@ export default function ScorecardForm() {
   const [addFriendOpen, setAddFriendOpen] = useState(false);
   const [newFriendName, setNewFriendName] = useState(null);
   const [newFriendNameError, setNewFriendNameError] = useState(false);
-
+  const [playerBackgroundColors, setPlayerBackgroundColors] = useState({});
   const [isSelectOpen, setIsSelectOpen] = useState(false);
 
   const [error, setError] = useState(null);
@@ -214,11 +214,19 @@ export default function ScorecardForm() {
 
       if (!isChecked) {
         setPlayers((prevPlayers) => [...prevPlayers, playerObject]);
+        setPlayerBackgroundColors((prevColors) => ({
+          ...prevColors,
+          [playerId]: 'bg-off-white',
+        }));
         target.setAttribute('data-player-checked', 'true');
       } else {
         setPlayers((prevPlayers) =>
           prevPlayers.filter((player) => player.reference !== playerId),
         );
+        setPlayerBackgroundColors((prevColors) => ({
+          ...prevColors,
+          [playerId]: 'bg-white',
+        }));
         target.setAttribute('data-player-checked', 'false');
       }
     }
@@ -266,6 +274,9 @@ export default function ScorecardForm() {
             scores: [],
           },
         ]);
+        setPlayerBackgroundColors({
+          [user.user._id]: 'bg-off-white',
+        });
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -457,10 +468,8 @@ export default function ScorecardForm() {
                 onClick={handleCheckboxChange}
               >
                 <div
-                  className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
-                    players.some((player) => player.reference === user.user._id)
-                      ? 'bg-off-white'
-                      : 'bg-white'
+                  className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover-bg-off-white transition-colors ${
+                    playerBackgroundColors[user.user._id]
                   }`}
                 >
                   <div className="flex items-center justify-between col-start-1 col-end-10">
@@ -500,10 +509,8 @@ export default function ScorecardForm() {
                   onClick={handleCheckboxChange}
                 >
                   <div
-                    className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover:bg-off-white transition-colors ${
-                      players.some((player) => player.reference === friend._id)
-                        ? 'bg-off-white'
-                        : 'bg-white'
+                    className={`grid grid-cols-10 px-2 py-3 text-sm hover:cursor-pointer rounded-lg hover-bg-off-white transition-colors ${
+                      playerBackgroundColors[friend._id]
                     }`}
                   >
                     <div className="flex items-center justify-between col-start-1 col-end-10">
