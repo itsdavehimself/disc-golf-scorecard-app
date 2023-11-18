@@ -36,7 +36,7 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Homepage
 
-![Homepage](/client/src/assets/images/phone_newround.png =100x100)
+![Homepage](/client/src/assets/images/phone_newround.png)
 
 ### Dashboard
 
