@@ -40,28 +40,25 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Homepage
 
-<img src="/client/src/assets/images/phone_newround.png" alt="Homepage" width="50" />
+<img src="/client/src/assets/images/phone_newround.png" alt="Homepage" width="300" />
 
 ### Dashboard
 
-![Dashboard](/client/src/assets/images/phone_newround.png)
+<img src="/client/src/assets/images/phone_dashboard.png" alt="Homepage" width="300" />
 
 ### Scorecard
 
-![Scorecard](/client/src/assets/images/phone_scorecard.png)
-
+<img src="/client/src/assets/images/phone_scorecard.png" alt="Homepage" width="300" />
 ### My Stats
 
-![My Stats](/client/src/assets/images/phone_my_stats.png)
-
+<img src="/client/src/assets/images/phone_my_stats.png" alt="Homepage" width="300" />
 ### Friend List
 
-![Friend List](/client/src/assets/images/phone_friends.png)
+<img src="/client/src/assets/images/phone_friends.png" alt="Homepage" width="300" />
 
 ### Courses
 
-![Courses](/client/src/assets/images/phone-courses.png)
-
+<img src="/client/src/assets/images/phone_courses.png" alt="Homepage" width="300" />
 ### Responsive Design
 
 ![Responsive Design](/client/src/assets/images/phone_friend_stats.png)
