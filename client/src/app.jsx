@@ -81,7 +81,7 @@ export default function App() {
               }
             />
             <Route
-              path="/scorecard/:id"
+              path="/scorecards/:id"
               element={
                 user ? (
                   <Scorecard />
