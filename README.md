@@ -68,7 +68,6 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Frontend
 - React.js
-- React Hooks
 - Tailwind CSS
 - Lottie
 - Chart.js
