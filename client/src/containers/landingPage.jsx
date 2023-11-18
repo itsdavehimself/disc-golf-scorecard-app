@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import dashboardImg from '../../assets/images/phone_dashboard.png';
-import scorecardImg from '../../assets/images/phone_scorecard.png';
-import friendsImg from '../../assets/images/phone_friends.png';
-import myStatsImg from '../../assets/images/phone_my_stats.png';
-import newRoundImg from '../../assets/images/phone_newround.png';
-import friendStatsImg from '../../assets/images/phone_friend_stats.png';
+import dashboardImg from '../assets/images/phone_dashboard.png';
+import scorecardImg from '../assets/images/phone_scorecard.png';
+import friendsImg from '../assets/images/phone_friends.png';
+import myStatsImg from '../assets/images/phone_my_stats.png';
+import newRoundImg from '../assets/images/phone_newround.png';
+import friendStatsImg from '../assets/images/phone_friend_stats.png';
 
 export default function LandingPage() {
   return (

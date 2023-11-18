@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useFriendListContext } from '../../hooks/useFriendContext';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useFriendListContext } from '../hooks/useFriendContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,7 +10,7 @@ import {
   faUser,
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
-import LoadingScreen from '../Loading/loadingScreen';
+import LoadingScreen from '../components/Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();

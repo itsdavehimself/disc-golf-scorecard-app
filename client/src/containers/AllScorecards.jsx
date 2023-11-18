@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import ScorecardDetails from '../ScorecardDetails/scorecardDetails';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { Link } from 'react-router-dom';
-import DashboardStats from './dashboardStats';
-import LoadingScreen from '../Loading/loadingScreen';
+import ScorecardDetails from '../components/ScorecardDetails/scorecardDetails';
+import { useAuthContext } from '../hooks/useAuthContext';
+import DashboardStats from '../components/Dashboard/dashboardStats';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import LoadingScreen from '../components/Loading/loadingScreen';
+import Logo from '../components/Logo/Logo';
 
-export default function Dashboard() {
+export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValueInput, setSearchValueInput] = useState('');
 
   const { user } = useAuthContext();
 
@@ -71,36 +74,39 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 items-center">
-      <div className="pt-16 items-center md:items-start w-full">
-        <div className="flex md:hidden mt-3 w-full justify-center">
-          <Link
-            to="/newround"
-            className="flex w-full items-center justify-center"
-          >
-            <button className="bg-jade w-full py-2 px-3 rounded-md text-white font-semibold cursor-pointer hover:bg-emerald transition-colors">
-              Start a round
-            </button>
-          </Link>
-        </div>
-      </div>
+    <div className="flex flex-col bg-off-white w-full px-3 pt-16 justify-center items-center">
       <DashboardStats scorecards={scorecards} />
-      <div className="rounded-lg bg-white shadow-lg w-full lg:w-1/2 xl:w-1/3">
-        <div className="flex text-lg px-3 pt-2 text-black items-center font-semibold">
-          Last 5 rounds
+      <div className="bg-white rounded-lg mb-2 shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <div className="flex text-lg px-3 pt-3 pb-2 text-black items-center font-semibold">
+          All Rounds
         </div>
-        {scorecards &&
-          scorecards
-            .slice(0, 5)
-            .map((scorecard) => (
-              <ScorecardDetails key={scorecard._id} scorecard={scorecard} />
+        <div className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="text-sm text-black"
+          />
+          <input
+            type="text"
+            onChange={(e) => {
+              setSearchValueInput(e.target.value);
+            }}
+            value={searchValueInput}
+            placeholder="Search by friend or course name"
+            className="bg-off-white w-full p-1 outline-none pl-2 rounded-lg"
+          ></input>
+        </div>
+        <div>
+          {scorecards &&
+            scorecards.map((scorecard) => (
+              <ScorecardDetails
+                key={scorecard._id}
+                scorecard={scorecard}
+                searchValueInput={searchValueInput}
+              />
             ))}
-        <div className="flex text-black justify-center items-center">
-          <Link to={'/scorecards'}>
-            <button className="flex pt-2 pb-4 px-3 rounded-md text-sm font-semibold text-black cursor-pointer">
-              See all rounds
-            </button>
-          </Link>
+        </div>
+        <div className="flex items-center justify-center pb-4">
+          <Logo fill="rgba(0,0,0,0.3)" stroke="rgba(0,0,0,0.3)" />
         </div>
       </div>
     </div>

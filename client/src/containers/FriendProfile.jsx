@@ -1,27 +1,27 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import ScoresBarChart from '../ScoresBarChart/scoresBarChart';
-import PlayedCourses from '../PlayedCourses/playedCourses';
-import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
-import { deleteFriend } from '../../utilities/deleteFriendUtility';
+import { useAuthContext } from '../hooks/useAuthContext';
+import ScoresBarChart from '../components/ScoresBarChart/scoresBarChart';
+import PlayedCourses from '../components/PlayedCourses/playedCourses';
+import ConfirmDeleteModal from '../components/ConfirmDeleteModal/confirmDeleteModal';
+import { deleteFriend } from '../utilities/deleteFriendUtility';
 
 import {
   calculateWinLossTieStats,
   calculateParPerformance,
   calculateBestGame,
   calculateThrows,
-} from '../../utilities/friendProfileDataUtilities';
-import YearFilterModal from '../YearFilterModal/yearFilterModal';
+} from '../utilities/friendProfileDataUtilities';
+import YearFilterModal from '../components/YearFilterModal/yearFilterModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faAngleRight,
   faEllipsisVertical,
 } from '@fortawesome/free-solid-svg-icons';
-import FriendMenu from './friendMenu';
-import EditNameModal from './editNameModal';
-import LoadingScreen from '../Loading/loadingScreen';
+import FriendMenu from '../components/FriendProfile/friendMenu';
+import EditNameModal from '../components/FriendProfile/editNameModal';
+import LoadingScreen from '../components/Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();

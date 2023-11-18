@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { useEffect, useState, useRef } from 'react';
 import { format, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,11 +10,11 @@ import {
   faTrashCan,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import ConfirmDeleteModal from '../ConfirmDeleteModal/confirmDeleteModal';
-import { deleteScorecard } from '../../utilities/deleteScorecardUtility';
-import { calculateParPerformance } from '../../utilities/userStatsUtilities';
-import StackedBarChart from './stackedBarChart';
-import LoadingScreen from '../Loading/loadingScreen';
+import ConfirmDeleteModal from '../components/ConfirmDeleteModal/confirmDeleteModal';
+import { deleteScorecard } from '../utilities/deleteScorecardUtility';
+import { calculateParPerformance } from '../utilities/userStatsUtilities';
+import StackedBarChart from '../components/Scorecard/stackedBarChart';
+import LoadingScreen from '../components/Loading/loadingScreen';
 
 let useClickOutside = (handler) => {
   const domNode = useRef();
