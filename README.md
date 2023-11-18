@@ -44,27 +44,27 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Dashboard
 
-<img src="/client/src/assets/images/phone_dashboard.png" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/phone_dashboard.png" alt="Dashboard" width="500" />
 
 ### Scorecard
 
-<img src="/client/src/assets/images/phone_scorecard.png" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/phone_scorecard.png" alt="Scorecard" width="500" />
 
 ### My Stats
 
-<img src="/client/src/assets/images/phone_my_stats.png" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/phone_my_stats.png" alt="My Stats" width="500" />
 
 ### Friend List
 
-<img src="/client/src/assets/images/phone_friends.png" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/phone_friends.png" alt="Friend List" width="500" />
 
 ### Courses
 
-<img src="/client/src/assets/images/phone_courses.png" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/phone_courses.png" alt="Courses" width="500" />
 
 ### Responsive Design
 
-<img src="/client/src/assets/images/responsive-design.gif" alt="Homepage" width="500" />
+<img src="/client/src/assets/images/responsive-design.gif" alt="Responsive Design"/>
 
 
 ## Technologies
