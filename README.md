@@ -28,6 +28,7 @@ This project is more than just a showcase of my skills; it's a passion project b
 - [Live Demo](#demo)
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
+- [Features](#features)
 
 ## Demo
 
@@ -88,3 +89,13 @@ If you'd like to explore the app, you can do so by visiting this link here.
 - ESLint
 - Prettier
 
+## Features
+
+- User authentication with JWT
+- Responsive design for various screen sizes
+- CRUD operations for managing user data
+- Salting and hashing for encryption of password data
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
