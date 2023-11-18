@@ -61,9 +61,10 @@ If you'd like to explore the app, you can do so by visiting this link here.
 ### Courses
 
 <img src="/client/src/assets/images/phone_courses.png" alt="Homepage" width="500" />
+
 ### Responsive Design
 
-![Responsive Design](/client/src/assets/images/phone_friend_stats.png)
+<img src="/client/src/assets/images/responsive-design.gif" alt="Homepage" width="500" />
 
 
 ## Technologies
