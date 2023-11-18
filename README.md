@@ -40,7 +40,7 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Homepage
 
-![Homepage](/client/src/assets/images/phone_newround.png)
+![Homepage](/client/src/assets/images/phone_courses.png)
 
 ### Dashboard
 
@@ -60,7 +60,7 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Courses
 
-![Courses](/client/src/assets/images/phone_newround.png)
+![Courses](/client/src/assets/images/phone_courses.png)
 
 ### Responsive Design
 
