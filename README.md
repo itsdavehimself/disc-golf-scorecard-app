@@ -99,3 +99,22 @@ If you'd like to explore the app, you can do so by visiting this link here.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Attribution
+
+The photos used in this app are sourced from the following photographers. We appreciate their creative work and contributions.
+
+1. [Joshua Choate](https://pixabay.com/users/jatocreate-5529266/)
+2. [24173760](https://pixabay.com/users/24173760-24173760/)
+3. [Andreas Thöne](https://pixabay.com/users/crosslap-8204922/)
+4. [jrbotkin777](https://pixabay.com/users/jrbotkin777-20842270/)
+5. [27707](https://pixabay.com/users/27707-27707/)
+6. [Ted Johnsson](https://unsplash.com/@ted_johnsson)
+7. [Kevin B](https://www.pexels.com/@captainb/)
+
+
+All photos are used in accordance with their respective licenses.
+
+
+## Contact
+Email: davidsmolen@gmail.com
