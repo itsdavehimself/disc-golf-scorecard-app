@@ -67,27 +67,25 @@ If you'd like to explore the app, you can do so by visiting this link here.
 ## Technologies
 
 ### Frontend
-
-- **JavaScript Framework:** React.js
-- **State Management:** React Hooks
-- **Styling:** Tailwind CSS
-- **Animation:** Lottie
-- **Charting Library:** Chart.js
-- **Build Tool:** Vite
+- React.js
+- React Hooks
+- Tailwind CSS
+- Lottie
+- Chart.js
+- Vite
 
 ### Backend
-
-- **Runtime:** Node.js
-- **Web Framework:** Express.js
+- Express.js
+- Node.js
 
 ### Database
-
-- **Database System:** MongoDB
+- MongoDB
 
 ### Development Tools
-- **Package Manager:** npm
-- **Version Control:** Git, GitHub
-- **IDE:** Visual Studio Code
-- **Linting:** ESLint
-- **Code Formatting:** Prettier
+- npm
+- Git
+- GitHub
+- Visual Studio Code
+- ESLint
+- Prettier
 
