@@ -40,11 +40,11 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Homepage
 
-![Homepage](/client/src/assets/images/phone-courses.png)
+![Homepage](/client/src/assets/images/phone_newround.png)
 
 ### Dashboard
 
-![Dashboard](/client/src/assets/images/phone_dashboard.png)
+![Dashboard](/client/src/assets/images/phone_newround.png)
 
 ### Scorecard
 
@@ -60,7 +60,7 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 ### Courses
 
-![Courses](/client/src/assets/images/phone_courses.png)
+![Courses](/client/src/assets/images/phone-courses.png)
 
 ### Responsive Design
 
@@ -116,7 +116,6 @@ The photos used in this app are sourced from the following photographers. I appr
 
 
 All photos are used in accordance with their respective licenses.
-
 
 ## Contact
 Email: davidsmolen@gmail.com
