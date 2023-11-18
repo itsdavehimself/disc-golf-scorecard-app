@@ -27,6 +27,7 @@ This project is more than just a showcase of my skills; it's a passion project b
 - [Table of Contents](#table-of-contents)
 - [Live Demo](#demo)
 - [Screenshots](#screenshots)
+- [Technologies](#technologies)
 
 ## Demo
 
@@ -61,3 +62,32 @@ If you'd like to explore the app, you can do so by visiting this link here.
 ### Responsive Design
 
 ![Responsive Design](/client/src/assets/images/phone_friend_stats.png)
+
+
+## Technologies
+
+### Frontend
+
+- **JavaScript Framework:** React.js
+- **State Management:** React Hooks
+- **Styling:** Tailwind CSS
+- **Animation:** Lottie
+- **Charting Library:** Chart.js
+- **Build Tool:** Vite
+
+### Backend
+
+- **Runtime:** Node.js
+- **Web Framework:** Express.js
+
+### Database
+
+- **Database System:** MongoDB
+
+### Development Tools
+- **Package Manager:** npm
+- **Version Control:** Git, GitHub
+- **IDE:** Visual Studio Code
+- **Linting:** ESLint
+- **Code Formatting:** Prettier
+
