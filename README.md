@@ -102,7 +102,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Attribution
 
-The photos used in this app are sourced from the following photographers. We appreciate their creative work and contributions.
+The photos used in this app are sourced from the following photographers. I appreciate their creative work and contributions.
 
 1. [Joshua Choate](https://pixabay.com/users/jatocreate-5529266/)
 2. [24173760](https://pixabay.com/users/24173760-24173760/)
