@@ -18,6 +18,7 @@ export default function CourseCard({ course, searchValueInput }) {
           <img
             className="rounded-md h-40 sm:h-96 lg:h-52 w-full object-cover"
             src={course.image}
+            alt={course.name}
           ></img>
         </div>
         <div className="flex justify-between items-center pt-1">
