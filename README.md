@@ -29,6 +29,8 @@ This project is more than just a showcase of my skills; it's a passion project b
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
 - [Features](#features)
+- [Attribution](#attribution)
+- [Contact](#contact)
 
 ## Demo
 
