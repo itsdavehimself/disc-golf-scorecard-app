@@ -4,6 +4,7 @@ import scorecardImg from '../assets/images/phone_scorecard.png';
 import friendsImg from '../assets/images/phone_friends.png';
 import friendStatsImg from '../assets/images/phone_friend_stats.png';
 import ReviewCard from '../components/ReviewCard';
+import RevealOnScroll from '../components/RevealOnScroll';
 
 export default function LandingPage() {
   return (
@@ -24,18 +25,20 @@ export default function LandingPage() {
       </div>
       <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-48 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
-          <div className="relative">
-            <img
-              src={dashboardImg}
-              alt="Dashboard"
-              className="w-11/12 lg:w-96"
-            ></img>
-            <img
-              src={scorecardImg}
-              alt="Scorecard"
-              className="w-11/12 lg:w-96 absolute top-16 left-24"
-            ></img>
-          </div>
+          <RevealOnScroll>
+            <div className="relative">
+              <img
+                src={dashboardImg}
+                alt="Dashboard"
+                className="w-11/12 lg:w-96"
+              ></img>
+              <img
+                src={scorecardImg}
+                alt="Scorecard"
+                className="w-11/12 lg:w-96 absolute top-16 left-24"
+              ></img>
+            </div>
+          </RevealOnScroll>
         </div>
         <div className="flex flex-col justify-center gap-6 mx-auto xl:pr-44">
           <h2 className="text-4xl font-semibold">
@@ -59,18 +62,20 @@ export default function LandingPage() {
       </div>
       <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-48 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
-          <div className="relative">
-            <img
-              src={friendsImg}
-              alt="Dashboard"
-              className="w-11/12 lg:w-96"
-            ></img>
-            <img
-              src={friendStatsImg}
-              alt="Scorecard"
-              className="w-11/12 lg:w-96 absolute top-16 left-24"
-            ></img>
-          </div>
+          <RevealOnScroll>
+            <div className="relative">
+              <img
+                src={friendsImg}
+                alt="Dashboard"
+                className="w-11/12 lg:w-96"
+              ></img>
+              <img
+                src={friendStatsImg}
+                alt="Scorecard"
+                className="w-11/12 lg:w-96 absolute top-16 left-24"
+              ></img>
+            </div>
+          </RevealOnScroll>
         </div>
         <div className="flex flex-col justify-center gap-6 mx-auto xl:pr-44">
           <h2 className="text-4xl font-semibold">
@@ -98,30 +103,42 @@ export default function LandingPage() {
           What&apos;s the tee about ChainSeeker?
         </h2>
         <div className="flex flex-wrap justify-center gap-6">
-          <ReviewCard
-            review="ChainSeeker is a disc golf dream! Creating profiles for friends makes it epic. So easy to use, and tracking my stats is a game-changer."
-            username="discmaster42"
-          />
-          <ReviewCard
-            review="My go-to app! Creating profiles for friends adds a social twist. Incredibly easy to use, plus stat tracking? Awesome! Perfect disc golf companion."
-            username="FairwayFred"
-          />
-          <ReviewCard
-            review="Fantastic app! Creating profiles for friends enhances the fun. User-friendly, stat tracking is a blast. A must for disc golfers!"
-            username="BirdBirdieBrian"
-          />
-          <ReviewCard
-            review="Simplifies scoring. Friend profiles add a cool dimension. Effortless to use, love tracking my stats. Top-notch disc golf companion!"
-            username="ChillDude22"
-          />
-          <ReviewCard
-            review="This app rocks! Friend profiles amp up the competition. User-friendly, intuitive design. Tracking stats? Seamless. Best disc golf tool ever!"
-            username="TreeDodger"
-          />
-          <ReviewCard
-            review="Excels in every way! Love creating profiles for friends. User-friendly and efficient. Stat tracking is a bonus. Elevates the disc golf experience!"
-            username="ParManRyan"
-          />
+          <RevealOnScroll>
+            <ReviewCard
+              review="ChainSeeker is a disc golf dream! Creating profiles for friends makes it epic. So easy to use, and tracking my stats is a game-changer."
+              username="discmaster42"
+            />
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <ReviewCard
+              review="My go-to app! Creating profiles for friends adds a social twist. Incredibly easy to use, plus stat tracking? Awesome! Perfect disc golf companion."
+              username="FairwayFred"
+            />
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <ReviewCard
+              review="Fantastic app! Creating profiles for friends enhances the fun. User-friendly, stat tracking is a blast. A must for disc golfers!"
+              username="BirdBirdieBrian"
+            />
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <ReviewCard
+              review="Simplifies scoring. Friend profiles add a cool dimension. Effortless to use, love tracking my stats. Top-notch disc golf companion!"
+              username="ChillDude22"
+            />
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <ReviewCard
+              review="This app rocks! Friend profiles amp up the competition. User-friendly, intuitive design. Tracking stats? Seamless. Best disc golf tool ever!"
+              username="TreeDodger"
+            />
+          </RevealOnScroll>
+          <RevealOnScroll>
+            <ReviewCard
+              review="Excels in every way! Love creating profiles for friends. User-friendly and efficient. Stat tracking is a bonus. Elevates the disc golf experience!"
+              username="ParManRyan"
+            />
+          </RevealOnScroll>
         </div>
       </div>
     </div>
