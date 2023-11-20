@@ -23,7 +23,7 @@ export default function LandingPage() {
         </Link>
       </div>
       <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-48 md:pt-36 px-12 text-black">
-        <div className="hidden md:flex relative justify-center">
+        <div className="hidden md:flex justify-center">
           <div className="relative">
             <img
               src={dashboardImg}
@@ -58,7 +58,7 @@ export default function LandingPage() {
         </div>
       </div>
       <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-48 md:pt-36 px-12 text-black">
-        <div className="hidden md:flex relative justify-center">
+        <div className="hidden md:flex justify-center">
           <div className="relative">
             <img
               src={friendsImg}
