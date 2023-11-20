@@ -37,7 +37,7 @@ export default function App() {
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />
-        <div className="flex flex-row w-screen min-h-screen">
+        <div className="flex flex-row w-full min-h-screen">
           {user && <Sidebar />}
           <Routes>
             <Route path="/" element={user ? <Dashboard /> : <LandingPage />} />

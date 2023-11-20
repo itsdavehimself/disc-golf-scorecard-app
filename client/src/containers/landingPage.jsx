@@ -8,7 +8,7 @@ import ReviewCard from '../components/ReviewCard';
 export default function LandingPage() {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col justify-center items-center bg-hero-pattern h-[90vh] w-screen bg-cover bg-bottom md:bg-cover md:bg-center ">
+      <div className="flex flex-col justify-center items-center bg-hero-pattern h-[90vh] bg-cover bg-bottom md:bg-cover md:bg-center ">
         <h2 className=" text-white text-4xl xl:text-5xl font-semibold text-center px-1 pb-5">
           Your disc golf scorecard companion
         </h2>
