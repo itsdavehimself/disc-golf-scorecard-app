@@ -73,12 +73,12 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col bg-off-white h-screen gap-4 px-3 items-center justify-center w-screen">
-      <div className="bg-white rounded-lg shadow-lg px-5 py-6 w-full sm:w-1/2 md:w-1/2 lg:max-w-sm xl:max-w-sm">
-        <div className="flex flex-col gap-4">
+      <div className="bg-white rounded-lg shadow-lg px-5 py-6 w-full sm:w-2/3 md:w-1/2 lg:max-w-md xl:max-w-md">
+        <div className="flex flex-col gap-8">
           <h3 className="flex flex-col md:items-center md:text-center justify-center text-black text-4xl font-semibold">
             Ace or tree, <br></br>track it here.
           </h3>
-          <p className="text-black text-lg pb-3">
+          <p className="text-black text-lg pb-8 md:items-center md:text-center">
             Join ChainSeeker now. It&apos;s free!
           </p>
         </div>
