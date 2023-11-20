@@ -104,40 +104,52 @@ export default function LandingPage() {
         </h2>
         <div className="flex flex-wrap justify-center gap-6">
           <RevealOnScroll>
-            <ReviewCard
-              review="ChainSeeker is a disc golf dream! Creating profiles for friends makes it epic. So easy to use, and tracking my stats is a game-changer."
-              username="discmaster42"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="ChainSeeker is a disc golf dream! Creating profiles for friends makes it epic. So easy to use, and tracking my stats is a game-changer."
+                username="discmaster42"
+              />
+            </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <ReviewCard
-              review="My go-to app! Creating profiles for friends adds a social twist. Incredibly easy to use, plus stat tracking? Awesome! Perfect disc golf companion."
-              username="FairwayFred"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="My go-to app! Creating profiles for friends adds a social twist. Incredibly easy to use, plus stat tracking? Awesome! Perfect disc golf companion."
+                username="FairwayFred"
+              />
+            </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <ReviewCard
-              review="Fantastic app! Creating profiles for friends enhances the fun. User-friendly, stat tracking is a blast. A must for disc golfers!"
-              username="BirdBirdieBrian"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="Fantastic app! Creating profiles for friends enhances the fun. User-friendly, stat tracking is a blast. A must for disc golfers!"
+                username="BirdBirdieBrian"
+              />
+            </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <ReviewCard
-              review="Simplifies scoring. Friend profiles add a cool dimension. Effortless to use, love tracking my stats. Top-notch disc golf companion!"
-              username="ChillDude22"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="Simplifies scoring. Friend profiles add a cool dimension. Effortless to use, love tracking my stats. Top-notch disc golf companion!"
+                username="ChillDude22"
+              />
+            </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <ReviewCard
-              review="This app rocks! Friend profiles amp up the competition. User-friendly, intuitive design. Tracking stats? Seamless. Best disc golf tool ever!"
-              username="TreeDodger"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="This app rocks! Friend profiles amp up the competition. User-friendly, intuitive design. Tracking stats? Seamless. Best disc golf tool ever!"
+                username="TreeDodger"
+              />
+            </div>
           </RevealOnScroll>
           <RevealOnScroll>
-            <ReviewCard
-              review="Excels in every way! Love creating profiles for friends. User-friendly and efficient. Stat tracking is a bonus. Elevates the disc golf experience!"
-              username="ParManRyan"
-            />
+            <div className="flex justify-center">
+              <ReviewCard
+                review="Excels in every way! Love creating profiles for friends. User-friendly and efficient. Stat tracking is a bonus. Elevates the disc golf experience!"
+                username="ParManRyan"
+              />
+            </div>
           </RevealOnScroll>
         </div>
       </div>
