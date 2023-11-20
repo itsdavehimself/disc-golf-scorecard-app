@@ -1,12 +1,12 @@
-import { useLogout } from '../../hooks/useLogout';
+import { useLogout } from '../hooks/useLogout';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
 import PropTypes from 'prop-types';
-import Logo from '../Logo/Logo';
+import Logo from './Logo';
 
 export default function Navbar({
   toggleSidebar,

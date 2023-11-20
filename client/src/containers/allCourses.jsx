@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import CourseCard from '../components/CourseCard/courseCard';
+import CourseCard from '../components/courseCard';
 import LoadingScreen from '../components/Loading/loadingScreen';
-import Logo from '../components/Logo/Logo';
+import Logo from '../components/Logo';
 
 export default function AllCourses() {
   const [searchValueInput, setSearchValueInput] = useState('');

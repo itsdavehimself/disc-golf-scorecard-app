@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
-import ScoresBarChart from '../components/ScoresBarChart/scoresBarChart';
-import PlayedCourses from '../components/PlayedCourses/playedCourses';
-import ConfirmDeleteModal from '../components/ConfirmDeleteModal/confirmDeleteModal';
+import ScoresBarChart from '../components/scoresBarChart';
+import PlayedCourses from '../components/playedCourses';
+import ConfirmDeleteModal from '../components/confirmDeleteModal';
 import { deleteFriend } from '../utilities/deleteFriendUtility';
 
 import {
@@ -12,7 +12,7 @@ import {
   calculateBestGame,
   calculateThrows,
 } from '../utilities/friendProfileDataUtilities';
-import YearFilterModal from '../components/YearFilterModal/yearFilterModal';
+import YearFilterModal from '../components/yearFilterModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,

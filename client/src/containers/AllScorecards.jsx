@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import ScorecardDetails from '../components/ScorecardDetails/scorecardDetails';
+import ScorecardDetails from '../components/scorecardDetails';
 import { useAuthContext } from '../hooks/useAuthContext';
-import DashboardStats from '../components/Dashboard/dashboardStats';
+import DashboardStats from '../components/dashboardStats';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LoadingScreen from '../components/Loading/loadingScreen';
-import Logo from '../components/Logo/Logo';
+import Logo from '../components/Logo';
 
 export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);

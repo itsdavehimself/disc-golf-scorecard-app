@@ -10,10 +10,10 @@ import {
   faTrashCan,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import ConfirmDeleteModal from '../components/ConfirmDeleteModal/confirmDeleteModal';
+import ConfirmDeleteModal from '../components/confirmDeleteModal';
 import { deleteScorecard } from '../utilities/deleteScorecardUtility';
 import { calculateParPerformance } from '../utilities/userStatsUtilities';
-import StackedBarChart from '../components/Scorecard/stackedBarChart';
+import StackedBarChart from '../components/stackedBarChart';
 import LoadingScreen from '../components/Loading/loadingScreen';
 
 let useClickOutside = (handler) => {

@@ -12,9 +12,9 @@ import {
   faAngleRight,
   faThumbTack,
 } from '@fortawesome/free-solid-svg-icons';
-import YearFilterModal from '../components/YearFilterModal/yearFilterModal';
-import ScoresBarChart from '../components/ScoresBarChart/scoresBarChart';
-import PlayedCourses from '../components/PlayedCourses/playedCourses';
+import YearFilterModal from '../components/yearFilterModal';
+import ScoresBarChart from '../components/scoresBarChart';
+import PlayedCourses from '../components/playedCourses';
 import LoadingScreen from '../components/Loading/loadingScreen';
 
 export default function MyStats() {

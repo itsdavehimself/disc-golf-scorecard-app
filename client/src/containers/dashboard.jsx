@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import ScorecardDetails from '../components/ScorecardDetails/scorecardDetails';
+import ScorecardDetails from '../components/scorecardDetails';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from 'react-router-dom';
-import DashboardStats from '../components/Dashboard/dashboardStats';
+import DashboardStats from '../components/dashboardStats';
 import LoadingScreen from '../components/Loading/loadingScreen';
 
 export default function Dashboard() {

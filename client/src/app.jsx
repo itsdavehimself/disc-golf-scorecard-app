@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar/navbar';
+import Navbar from './components/navbar';
 import { useAuthContext } from './hooks/useAuthContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -6,10 +6,10 @@ import LandingPage from './containers/landingPage';
 import Login from './containers/loginPage';
 import Signup from './containers/signupPage';
 import Dashboard from './containers/dashboard';
-import Sidebar from './components/Sidebar/sidebar';
+import Sidebar from './components/sidebar';
 import ScorecardForm from './containers/scorecardForm';
 import Scorecard from './containers/scorecard';
-import NotFound from './components/NotFound/notFound';
+import NotFound from './components/notFound';
 import AllScorecards from './containers/AllScorecards';
 import AllFriends from './containers/AllFriends';
 import FriendProfile from './containers/FriendProfile';
