@@ -22,5 +22,5 @@ export default function ReviewCard({ review, username }) {
 
 ReviewCard.propTypes = {
   review: PropTypes.string,
-  username: PropTypes.username,
+  username: PropTypes.string,
 };
