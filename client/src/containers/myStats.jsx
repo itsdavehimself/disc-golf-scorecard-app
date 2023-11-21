@@ -168,8 +168,10 @@ export default function MyStats() {
 
     if (filter === 'All') {
       filteredScorecards = allScorecards;
+      setFilterYear('Year');
     } else if (filter === 'LastTen') {
       filteredScorecards = allScorecards.slice(-10);
+      setFilterYear('Year');
     } else if (filter === 'Year') {
       filteredScorecards = [];
       allScorecards.forEach((scorecard) => {
