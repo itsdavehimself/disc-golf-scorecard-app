@@ -187,7 +187,7 @@ export default function ScorecardForm() {
       } else {
         setCourse(null);
         setPlayers([]);
-        navigate(`/scorecard/${scorecardId}`);
+        navigate(`/scorecards/${scorecardId}`);
       }
     }
   };
