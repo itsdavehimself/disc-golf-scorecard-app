@@ -7,6 +7,10 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import LoadingScreen from '../components/Loading/loadingScreen';
 import Logo from '../components/Logo';
 
+const getCourseForScorecard = (scorecard, courses) => {
+  return courses.find((course) => course.course._id === scorecard.course) || {};
+};
+
 export default function AllScorecards() {
   const [scorecards, setScorecards] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,27 +42,31 @@ export default function AllScorecards() {
           }
 
           const courseResponses = await Promise.all(coursePromises);
-          const roundDataArr = [];
+          const coursesList = await Promise.all(
+            courseResponses.map((promise) => promise.json()),
+          );
 
-          for (let i = 0; i < courseResponses.length; i++) {
-            if (courseResponses[i].ok) {
-              const courseData = await courseResponses[i].json();
-              const roundData = {
-                city: courseData.course.city,
-                holes: courseData.course.holes,
-                name: courseData.course.name,
-                par: courseData.course.par,
-                state: courseData.course.state,
-                _id: scorecardJSON[i]._id,
-                course: scorecardJSON[i].course,
-                players: scorecardJSON[i].players,
-                date: scorecardJSON[i].date,
-                startTime: scorecardJSON[i].startTime,
-                userId: scorecardJSON[i].userId,
-              };
-              roundDataArr.push(roundData);
-            }
-          }
+          const roundDataArr = scorecardJSON.map((scorecard) => {
+            const courseForScorecard = getCourseForScorecard(
+              scorecard,
+              coursesList,
+            );
+
+            return {
+              city: courseForScorecard.course?.city || '',
+              holes: courseForScorecard.course?.holes || '',
+              name: courseForScorecard.course?.name || '',
+              par: courseForScorecard.course?.par || '',
+              state: courseForScorecard.course?.state || '',
+              _id: scorecard._id,
+              course: scorecard.course,
+              players: scorecard.players,
+              date: scorecard.date,
+              startTime: scorecard.startTime,
+              userId: scorecard.userId,
+            };
+          });
+
           setScorecards(roundDataArr);
           setIsLoading(false);
         }
