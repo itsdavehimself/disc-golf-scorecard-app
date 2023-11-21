@@ -5,7 +5,7 @@ export default function YearFilterModal({
   allScorecards,
   setFilterYear,
   setIsYearMenuOpen,
-  filterByYear,
+  showFilteredResults,
 }) {
   const years = allScorecards.map((scorecard) =>
     scorecard.date.substring(0, 4),
@@ -52,7 +52,7 @@ export default function YearFilterModal({
                 onClick={() => {
                   setFilterYear(yearObj.year);
                   setIsYearMenuOpen(false);
-                  filterByYear(yearObj.year);
+                  showFilteredResults('Year', yearObj.year);
                 }}
                 className="flex justify-between items-center bg-white h-12 px-4 py-1 rounded-md hover:cursor-pointer hover:bg-off-white transition-colors"
               >
@@ -77,7 +77,7 @@ YearFilterModal.propTypes = {
   allScorecards: PropTypes.array,
   setIsYearMenuOpen: PropTypes.func,
   setFilterYear: PropTypes.func,
-  filterByYear: PropTypes.func,
+  showFilteredResults: PropTypes.func,
   outsideYearMenu: PropTypes.shape({
     current: PropTypes.instanceOf(Element),
   }),

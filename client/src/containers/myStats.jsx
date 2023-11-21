@@ -41,9 +41,7 @@ export default function MyStats() {
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
   const [filterYear, setFilterYear] = useState('Year');
   const [isLoading, setIsLoading] = useState(true);
-  const [filterAllSelected, setFilterAllSelected] = useState(true);
-  const [filterLastTenSelected, setFilterLastTenSelected] = useState(false);
-  const [filterYearSelected, setFilterYearSelected] = useState(false);
+  const [filterType, setFilterType] = useState('All');
 
   const navigate = useNavigate();
 
@@ -163,10 +161,26 @@ export default function MyStats() {
       }
     };
     fetchData();
-  }, [user]);
+  }, []);
 
-  const showAllResults = () => {
-    const filteredScorecards = allScorecards;
+  const showFilteredResults = (filter, year) => {
+    let filteredScorecards = null;
+
+    if (filter === 'All') {
+      filteredScorecards = allScorecards;
+    } else if (filter === 'LastTen') {
+      filteredScorecards = allScorecards.slice(-10);
+    } else if (filter === 'Year') {
+      filteredScorecards = [];
+      allScorecards.forEach((scorecard) => {
+        const scorecardYear = scorecard.date.substring(0, 4);
+
+        if (scorecardYear === year) {
+          filteredScorecards.push(scorecard);
+        }
+      });
+      setFilterYear(year);
+    }
 
     const playedCourseIdList = [];
     filteredScorecards.forEach((scorecard) => {
@@ -226,165 +240,7 @@ export default function MyStats() {
       tripleBogeys: trpBogeyCount,
     });
 
-    setFilterAllSelected(true);
-    setFilterLastTenSelected(false);
-    setFilterYearSelected(false);
-    setFilterYear('Year');
-    setFilteredScorecards(filteredScorecards);
-    setThrows(calculatedThrows);
-    setPlayedCourses(filteredPlayedCourses);
-    setMostPlayedCount(maxCount);
-    setBestRound(bestGame);
-    setMostPlayedCourse(mostPlayedCourse);
-    setThrows(calculatedThrows);
-    setPlayedHoles(rawScoresArr.length);
-  };
-
-  const filterLastTenRounds = () => {
-    const filteredScorecards = allScorecards.slice(-10);
-
-    const playedCourseIdList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      playedCourseIdList.push(course);
-    });
-
-    const { mostPlayedCourse, maxCount } = findMostPlayedCourse(
-      playedCourseIdList,
-      allCourses,
-    );
-
-    const uniqueCourseIdList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      if (!uniqueCourseIdList.includes(course)) {
-        uniqueCourseIdList.push(course);
-      }
-    });
-
-    const filteredPlayedCourses = allCourses.filter((course) =>
-      uniqueCourseIdList.includes(course._id),
-    );
-
-    const { rawScoresArr, parArray, gameObjArr } =
-      createScoreAndParArrays(filteredScorecards);
-
-    const calculatedThrows = calculateThrows(rawScoresArr);
-
-    const bestGame = calculateBestGame(gameObjArr);
-
-    const matchingCourse = allCourses.find((course) => {
-      return bestGame && course._id === bestGame.course;
-    });
-
-    if (matchingCourse) {
-      setBestRoundCourse(matchingCourse);
-    }
-
-    const {
-      acesCount,
-      eaglesCount,
-      birdiesCount,
-      parsCount,
-      bogeysCount,
-      dblBogeyCount,
-      trpBogeyCount,
-    } = calculateParPerformance(rawScoresArr, parArray);
-
-    setParPerformance({
-      aces: acesCount,
-      eagles: eaglesCount,
-      birdies: birdiesCount,
-      pars: parsCount,
-      bogeys: bogeysCount,
-      doubleBogeys: dblBogeyCount,
-      tripleBogeys: trpBogeyCount,
-    });
-
-    setFilterAllSelected(false);
-    setFilterLastTenSelected(true);
-    setFilterYearSelected(false);
-    setFilterYear('Year');
-    setFilteredScorecards(filteredScorecards);
-    setThrows(calculatedThrows);
-    setPlayedCourses(filteredPlayedCourses);
-    setMostPlayedCount(maxCount);
-    setBestRound(bestGame);
-    setMostPlayedCourse(mostPlayedCourse);
-    setThrows(calculatedThrows);
-    setPlayedHoles(rawScoresArr.length);
-  };
-
-  const filterByYear = (year) => {
-    const filteredScorecards = [];
-    allScorecards.forEach((scorecard) => {
-      const scorecardYear = scorecard.date.substring(0, 4);
-
-      if (scorecardYear === year) {
-        filteredScorecards.push(scorecard);
-      }
-    });
-    const playedCourseIdList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      playedCourseIdList.push(course);
-    });
-
-    const { mostPlayedCourse, maxCount } = findMostPlayedCourse(
-      playedCourseIdList,
-      allCourses,
-    );
-
-    const uniqueCourseIdList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      if (!uniqueCourseIdList.includes(course)) {
-        uniqueCourseIdList.push(course);
-      }
-    });
-
-    const filteredPlayedCourses = allCourses.filter((course) =>
-      uniqueCourseIdList.includes(course._id),
-    );
-
-    const { rawScoresArr, parArray, gameObjArr } =
-      createScoreAndParArrays(filteredScorecards);
-
-    const calculatedThrows = calculateThrows(rawScoresArr);
-
-    const bestGame = calculateBestGame(gameObjArr);
-
-    const matchingCourse = allCourses.find((course) => {
-      return bestGame && course._id === bestGame.course;
-    });
-
-    if (matchingCourse) {
-      setBestRoundCourse(matchingCourse);
-    }
-
-    const {
-      acesCount,
-      eaglesCount,
-      birdiesCount,
-      parsCount,
-      bogeysCount,
-      dblBogeyCount,
-      trpBogeyCount,
-    } = calculateParPerformance(rawScoresArr, parArray);
-
-    setParPerformance({
-      aces: acesCount,
-      eagles: eaglesCount,
-      birdies: birdiesCount,
-      pars: parsCount,
-      bogeys: bogeysCount,
-      doubleBogeys: dblBogeyCount,
-      tripleBogeys: trpBogeyCount,
-    });
-
-    setFilterAllSelected(false);
-    setFilterLastTenSelected(false);
-    setFilterYearSelected(true);
+    setFilterType(filter);
     setFilteredScorecards(filteredScorecards);
     setThrows(calculatedThrows);
     setPlayedCourses(filteredPlayedCourses);
@@ -411,34 +267,34 @@ export default function MyStats() {
           allScorecards={allScorecards}
           setFilterYear={setFilterYear}
           setIsYearMenuOpen={setIsYearMenuOpen}
-          filterByYear={filterByYear}
+          showFilteredResults={showFilteredResults}
         />
       )}
       <div className="flex flex-col bg-off-white w-full px-3 text-black pt-20 items-center">
         <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <button
             className={`${
-              filterAllSelected
+              filterType === 'All'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
-            onClick={showAllResults}
+            onClick={() => showFilteredResults('All')}
           >
             All
           </button>
           <button
             className={`${
-              filterLastTenSelected
+              filterType === 'LastTen'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
-            onClick={filterLastTenRounds}
+            onClick={() => showFilteredResults('LastTen')}
           >
             Last 10
           </button>
           <button
             className={`${
-              filterYearSelected
+              filterType === 'Year'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black hover:bg-off-white transition-colors'
             }  rounded-md w-full py-0.5`}
