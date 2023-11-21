@@ -161,7 +161,7 @@ export default function MyStats() {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   const showFilteredResults = (filter, year) => {
     let filteredScorecards = null;
