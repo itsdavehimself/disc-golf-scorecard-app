@@ -1,3 +1,5 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const deleteScorecardReferences = async (
   friendPlayerRefs,
   scorecardId,
@@ -6,7 +8,7 @@ const deleteScorecardReferences = async (
   try {
     const deleteRequest = friendPlayerRefs.map(async (friendRef) => {
       const delFriendRefResponse = await fetch(
-        `http://localhost:8080/api/friends/${friendRef}/scorecard/${scorecardId}`,
+        `${API_BASE_URL}/friends/${friendRef}/scorecard/${scorecardId}`,
         {
           method: 'DELETE',
           headers: {
@@ -32,7 +34,7 @@ export const deleteScorecard = async (scorecardId, user, players) => {
     .map((friend) => friend.reference);
 
   const deleteScorecardResponse = await fetch(
-    `http://localhost:8080/api/scorecards/${scorecardId}`,
+    `${API_BASE_URL}/scorecards/${scorecardId}`,
     {
       method: 'DELETE',
       headers: {

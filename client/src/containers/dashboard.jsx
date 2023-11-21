@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import DashboardStats from '../components/dashboardStats';
 import LoadingScreen from '../components/Loading/loadingScreen';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Dashboard() {
   const [scorecards, setScorecards] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,14 +16,11 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const scorecardResponse = await fetch(
-          'http://localhost:8080/api/scorecards',
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
+        const scorecardResponse = await fetch(`${API_BASE_URL}/scorecards`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
           },
-        );
+        });
         if (scorecardResponse.ok) {
           const scorecardJSON = await scorecardResponse.json();
 
@@ -29,7 +28,7 @@ export default function Dashboard() {
 
           for (const scorecard of scorecardJSON) {
             const coursePromise = fetch(
-              `http://localhost:8080/api/courses/${scorecard.course}`,
+              `${API_BASE_URL}/courses/${scorecard.course}`,
             );
             coursePromises.push(coursePromise);
           }

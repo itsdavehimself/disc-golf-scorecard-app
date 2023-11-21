@@ -17,6 +17,8 @@ import ScoresBarChart from '../components/scoresBarChart';
 import PlayedCourses from '../components/playedCourses';
 import LoadingScreen from '../components/Loading/loadingScreen';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function MyStats() {
   const { user } = useAuthContext();
   const [allCourses, setAllCourses] = useState([]);
@@ -72,17 +74,12 @@ export default function MyStats() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const scorecardsResponse = await fetch(
-          `http://localhost:8080/api/scorecards`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
+        const scorecardsResponse = await fetch(`${API_BASE_URL}/scorecards`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
           },
-        );
-        const coursesResponse = await fetch(
-          'http://localhost:8080/api/courses',
-        );
+        });
+        const coursesResponse = await fetch(`${API_BASE_URL}/courses`);
         const [scorecardsJSON, coursesJSON] = await Promise.all([
           scorecardsResponse,
           coursesResponse,

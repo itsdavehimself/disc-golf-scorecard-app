@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import LoadingScreen from '../components/Loading/loadingScreen';
 import Logo from '../components/Logo';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function AllFriends() {
   const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +27,7 @@ export default function AllFriends() {
 
   useEffect(() => {
     const fetchFriends = async () => {
-      const response = await fetch('http://localhost:8080/api/friends', {
+      const response = await fetch(`${API_BASE_URL}/friends`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

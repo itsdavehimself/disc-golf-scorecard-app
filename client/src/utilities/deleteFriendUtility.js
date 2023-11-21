@@ -1,13 +1,12 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const deleteFriend = async (id, user) => {
-  const deleteFriendResponse = await fetch(
-    `http://localhost:8080/api/friends/${id}`,
-    {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
+  const deleteFriendResponse = await fetch(`${API_BASE_URL}/friends/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${user.token}`,
     },
-  );
+  });
 
   const json = await deleteFriendResponse.json();
 

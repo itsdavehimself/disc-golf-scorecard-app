@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function EditNameModal({
   setIsEditNameOpen,
   friend,
@@ -28,7 +30,7 @@ export default function EditNameModal({
 
     try {
       const newNameResponse = await fetch(
-        `http://localhost:8080/api/friends/${friend._id}`,
+        `${API_BASE_URL}/friends/${friend._id}`,
         {
           method: 'PUT',
           body: JSON.stringify({
@@ -42,7 +44,7 @@ export default function EditNameModal({
       );
 
       const namesInScorecardsResponse = await fetch(
-        `http://localhost:8080/api/scorecards`,
+        `${API_BASE_URL}/scorecards`,
         {
           method: 'PATCH',
           body: JSON.stringify({

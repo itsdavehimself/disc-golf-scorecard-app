@@ -33,6 +33,8 @@ let useClickOutside = (handler) => {
   return domNode;
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function ScorecardForm() {
   const { friends, dispatch } = useFriendListContext();
   const [course, setCourse] = useState(null);
@@ -74,19 +76,16 @@ export default function ScorecardForm() {
     if (newFriendNameError) {
       return;
     }
-    const newFriendResponse = await fetch(
-      `http://localhost:8080/api/friends/`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          name: newFriendName,
-        }),
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          'Content-Type': 'application/json',
-        },
+    const newFriendResponse = await fetch(`${API_BASE_URL}/friends/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        name: newFriendName,
+      }),
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        'Content-Type': 'application/json',
       },
-    );
+    });
     const json = await newFriendResponse.json();
 
     if (!newFriendResponse.ok) {
@@ -105,7 +104,7 @@ export default function ScorecardForm() {
     const currentDateTime = new Date();
 
     const courseDetailsResponse = await fetch(
-      `http://localhost:8080/api/courses/${course}`,
+      `${API_BASE_URL}/courses/${course}`,
     );
     const courseDetails = await courseDetailsResponse.json();
 
@@ -138,7 +137,7 @@ export default function ScorecardForm() {
       players: playerObjects,
     };
 
-    const response = await fetch('http://localhost:8080/api/scorecards', {
+    const response = await fetch(`${API_BASE_URL}/scorecards`, {
       method: 'POST',
       body: JSON.stringify(scorecard),
       headers: {
@@ -162,7 +161,7 @@ export default function ScorecardForm() {
         await Promise.all(
           friendsPlaying.map(async (friend) => {
             const friendResponse = await fetch(
-              `http://localhost:8080/api/friends/${friend.reference}`,
+              `${API_BASE_URL}/friends/${friend.reference}`,
               {
                 method: 'PUT',
                 body: JSON.stringify({
@@ -236,20 +235,17 @@ export default function ScorecardForm() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const coursesResponse = fetch('http://localhost:8080/api/courses');
-        const friendsResponse = fetch('http://localhost:8080/api/friends', {
+        const coursesResponse = fetch(`${API_BASE_URL}/courses`);
+        const friendsResponse = fetch(`${API_BASE_URL}/friends`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         });
-        const scorecardResponse = await fetch(
-          'http://localhost:8080/api/scorecards',
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
+        const scorecardResponse = await fetch(`${API_BASE_URL}/scorecards`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
           },
-        );
+        });
 
         const [courses, friends, scorecards] = await Promise.all([
           coursesResponse,

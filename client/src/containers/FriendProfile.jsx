@@ -43,6 +43,8 @@ let useClickOutside = (handler) => {
   return domNode;
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function FriendProfile() {
   const { id } = useParams();
   const { user } = useAuthContext();
@@ -92,7 +94,7 @@ export default function FriendProfile() {
     const fetchData = async () => {
       try {
         const friendDataResponse = await fetch(
-          `http://localhost:8080/api/friends/${id}`,
+          `${API_BASE_URL}/friends/${id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
@@ -100,16 +102,14 @@ export default function FriendProfile() {
           },
         );
         const scorecardsResponse = await fetch(
-          `http://localhost:8080/api/scorecards/user/${id}`,
+          `${API_BASE_URL}/scorecards/user/${id}`,
           {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
           },
         );
-        const courseResponse = await fetch(
-          `http://localhost:8080/api/courses/`,
-        );
+        const courseResponse = await fetch(`${API_BASE_URL}/courses/`);
         const [friend, scorecards, coursesJSON] = await Promise.all([
           friendDataResponse,
           scorecardsResponse,

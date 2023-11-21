@@ -36,6 +36,8 @@ let useClickOutside = (handler) => {
   return domNode;
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function Scorecard() {
   const { id } = useParams();
   const { user } = useAuthContext();
@@ -157,7 +159,7 @@ export default function Scorecard() {
     const updatedScores = createPlayersWithScoresObj();
 
     const saveScorecardResponse = await fetch(
-      `http://localhost:8080/api/scorecards/${scorecardId}`,
+      `${API_BASE_URL}/scorecards/${scorecardId}`,
       {
         method: 'PATCH',
         body: JSON.stringify(updatedScores),
@@ -190,7 +192,7 @@ export default function Scorecard() {
   useEffect(() => {
     const fetchData = async () => {
       const scorecardResponse = await fetch(
-        `http://localhost:8080/api/scorecards/${id}`,
+        `${API_BASE_URL}/scorecards/${id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -205,7 +207,7 @@ export default function Scorecard() {
       }
 
       const courseResponse = await fetch(
-        `http://localhost:8080/api/courses/${scorecardJson.scorecard[0].course}`,
+        `${API_BASE_URL}/courses/${scorecardJson.scorecard[0].course}`,
       );
       const courseJson = await courseResponse.json();
 

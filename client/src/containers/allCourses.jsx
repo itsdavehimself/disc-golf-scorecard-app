@@ -6,6 +6,8 @@ import CourseCard from '../components/courseCard';
 import LoadingScreen from '../components/Loading/loadingScreen';
 import Logo from '../components/Logo';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function AllCourses() {
   const [searchValueInput, setSearchValueInput] = useState('');
   const [courses, setCourses] = useState([]);
@@ -15,7 +17,7 @@ export default function AllCourses() {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('http://localhost:8080/api/courses');
+      const response = await fetch(`${API_BASE_URL}/courses`);
       const json = await response.json();
 
       if (response.ok) {
