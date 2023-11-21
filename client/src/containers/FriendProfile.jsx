@@ -56,13 +56,15 @@ export default function FriendProfile() {
   const [userWins, setUserWins] = useState(0);
   const [friendWins, setFriendWins] = useState(0);
   const [ties, setTies] = useState(0);
-  const [aces, setAces] = useState(0);
-  const [eagles, setEagles] = useState(0);
-  const [birdies, setBirdies] = useState(0);
-  const [pars, setPars] = useState(0);
-  const [bogey, setBogey] = useState(0);
-  const [doubleBogeys, setDoubleBogeys] = useState(0);
-  const [tripleBogeys, setTripleBogeys] = useState(0);
+  const [parPerformance, setParPerformance] = useState({
+    aces: 0,
+    birdies: 0,
+    eagles: 0,
+    pars: 0,
+    bogeys: 0,
+    doubleBogeys: 0,
+    tripleBogeys: 0,
+  });
   const [throws, setThrows] = useState(0);
   const [bestRound, setBestRound] = useState([]);
   const [allCourses, setAllCourses] = useState([]);
@@ -71,9 +73,7 @@ export default function FriendProfile() {
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
   const [filterYear, setFilterYear] = useState('Year');
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [filterAllSelected, setFilterAllSelected] = useState(true);
-  const [filterLastTenSelected, setFilterLastTenSelected] = useState(false);
-  const [filterYearSelected, setFilterYearSelected] = useState(false);
+  const [filterType, setFilterType] = useState('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isEditNameOpen, setIsEditNameOpen] = useState(false);
 
@@ -166,6 +166,7 @@ export default function FriendProfile() {
           dblBogeyCount,
           trpBogeyCount,
         } = calculateParPerformance(rawScoresArr, parArray);
+
         const totalThrows = calculateThrows(rawScoresArr);
 
         const courseList = [];
@@ -188,6 +189,16 @@ export default function FriendProfile() {
           courseList.includes(course._id),
         );
 
+        setParPerformance({
+          aces: acesCount,
+          eagles: eaglesCount,
+          birdies: birdiesCount,
+          pars: parsCount,
+          bogeys: bogeyCount,
+          doubleBogeys: dblBogeyCount,
+          tripleBogeys: trpBogeyCount,
+        });
+
         setPlayedCourses(matchingCourses);
         setBestRound(bestGame);
         setHoles(rawScoresArr.length);
@@ -195,13 +206,6 @@ export default function FriendProfile() {
         setUserWins(userPoints);
         setFriendWins(friendPoints);
         setTies(ties);
-        setAces(acesCount);
-        setBirdies(birdiesCount);
-        setEagles(eaglesCount);
-        setPars(parsCount);
-        setBogey(bogeyCount);
-        setDoubleBogeys(dblBogeyCount);
-        setTripleBogeys(trpBogeyCount);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -211,96 +215,24 @@ export default function FriendProfile() {
     fetchData();
   }, [id, user, friendName]);
 
-  const showAllResults = () => {
-    const scorecardsWithUser = allScorecards.filter((scorecard) => {
-      return scorecard.players.some((player) => player.type === 'User');
-    });
+  const showFilteredResults = (filter, year) => {
+    let filteredScorecards = null;
 
-    setScorecardsWithUser(scorecardsWithUser);
+    if (filter === 'All') {
+      filteredScorecards = allScorecards;
+    } else if (filter === 'LastTen') {
+      filteredScorecards = allScorecards.slice(-10);
+    } else if (filter === 'Year') {
+      filteredScorecards = [];
+      allScorecards.forEach((scorecard) => {
+        const scorecardYear = scorecard.date.substring(0, 4);
 
-    const rawScoresArr = [];
-    const parArray = [];
-    const gameObjArr = [];
-
-    allScorecards.forEach((scorecard) => {
-      scorecard.players.forEach((player) => {
-        if (player.reference === id) {
-          const gameObj = {
-            scorecard: player.scores,
-            scorecardId: scorecard._id,
-            course: scorecard.course,
-            date: scorecard.date,
-            players: scorecard.players,
-          };
-          gameObjArr.push(gameObj);
-
-          player.scores.forEach((score) => {
-            rawScoresArr.push(score.score);
-            parArray.push(score.holePar);
-          });
+        if (scorecardYear === year) {
+          filteredScorecards.push(scorecard);
         }
       });
-    });
-
-    const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
-      scorecardsWithUser,
-      id,
-    );
-    const bestGame = calculateBestGame(gameObjArr);
-    const {
-      acesCount,
-      eaglesCount,
-      birdiesCount,
-      parsCount,
-      bogeyCount,
-      dblBogeyCount,
-      trpBogeyCount,
-    } = calculateParPerformance(rawScoresArr, parArray);
-    const totalThrows = calculateThrows(rawScoresArr);
-
-    const courseList = [];
-    allScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      if (!courseList.includes(course)) {
-        courseList.push(course);
-      }
-    });
-
-    const matchingCourse = allCourses.find((course) => {
-      return bestGame && course._id === bestGame.course;
-    });
-
-    if (matchingCourse) {
-      setBestRoundCourseName(matchingCourse);
+      setFilterYear(year);
     }
-
-    const matchingCourses = allCourses.filter((course) =>
-      courseList.includes(course._id),
-    );
-
-    setFilterAllSelected(true);
-    setFilterLastTenSelected(false);
-    setFilterYearSelected(false);
-    setFilterYear('Year');
-    setTotalScorecards(allScorecards);
-    setPlayedCourses(matchingCourses);
-    setBestRound(bestGame);
-    setHoles(rawScoresArr.length);
-    setThrows(totalThrows);
-    setUserWins(userPoints);
-    setFriendWins(friendPoints);
-    setTies(ties);
-    setAces(acesCount);
-    setBirdies(birdiesCount);
-    setEagles(eaglesCount);
-    setPars(parsCount);
-    setBogey(bogeyCount);
-    setDoubleBogeys(dblBogeyCount);
-    setTripleBogeys(trpBogeyCount);
-  };
-
-  const filterLastTenRounds = () => {
-    const filteredScorecards = allScorecards.slice(-10);
     const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
       return scorecard.players.some((player) => player.type === 'User');
     });
@@ -345,102 +277,11 @@ export default function FriendProfile() {
       dblBogeyCount,
       trpBogeyCount,
     } = calculateParPerformance(rawScoresArr, parArray);
+
     const totalThrows = calculateThrows(rawScoresArr);
 
     const courseList = [];
-    filteredScorecards.forEach((scorecard) => {
-      const course = scorecard.course;
-      if (!courseList.includes(course)) {
-        courseList.push(course);
-      }
-    });
-
-    const matchingCourse = allCourses.find((course) => {
-      return bestGame && course._id === bestGame.course;
-    });
-
-    if (matchingCourse) {
-      setBestRoundCourseName(matchingCourse);
-    }
-
-    const matchingCourses = allCourses.filter((course) =>
-      courseList.includes(course._id),
-    );
-
-    setFilterAllSelected(false);
-    setFilterLastTenSelected(true);
-    setFilterYearSelected(false);
-    setFilterYear('Year');
-    setTotalScorecards(filteredScorecards);
-    setPlayedCourses(matchingCourses);
-    setBestRound(bestGame);
-    setHoles(rawScoresArr.length);
-    setThrows(totalThrows);
-    setUserWins(userPoints);
-    setFriendWins(friendPoints);
-    setTies(ties);
-    setAces(acesCount);
-    setBirdies(birdiesCount);
-    setEagles(eaglesCount);
-    setPars(parsCount);
-    setBogey(bogeyCount);
-    setDoubleBogeys(dblBogeyCount);
-    setTripleBogeys(trpBogeyCount);
-  };
-
-  const filterByYear = (year) => {
-    const filteredScorecards = [];
     allScorecards.forEach((scorecard) => {
-      const scorecardYear = scorecard.date.substring(0, 4);
-
-      if (scorecardYear === year) {
-        filteredScorecards.push(scorecard);
-      }
-    });
-
-    const scorecardsWithUser = filteredScorecards.filter((scorecard) => {
-      return scorecard.players.some((player) => player.type === 'User');
-    });
-    setScorecardsWithUser(scorecardsWithUser);
-    const rawScoresArr = [];
-    const parArray = [];
-    const gameObjArr = [];
-    filteredScorecards.forEach((scorecard) => {
-      scorecard.players.forEach((player) => {
-        if (player.reference === id) {
-          const gameObj = {
-            scorecard: player.scores,
-            scorecardId: scorecard._id,
-            course: scorecard.course,
-            date: scorecard.date,
-            players: scorecard.players,
-          };
-          gameObjArr.push(gameObj);
-          player.scores.forEach((score) => {
-            rawScoresArr.push(score.score);
-            parArray.push(score.holePar);
-          });
-        }
-      });
-    });
-    const { userPoints, friendPoints, ties } = calculateWinLossTieStats(
-      scorecardsWithUser,
-      id,
-    );
-    const bestGame = calculateBestGame(gameObjArr);
-    const {
-      acesCount,
-      eaglesCount,
-      birdiesCount,
-      parsCount,
-      bogeyCount,
-      dblBogeyCount,
-      trpBogeyCount,
-    } = calculateParPerformance(rawScoresArr, parArray);
-    const totalThrows = calculateThrows(rawScoresArr);
-
-    const courseList = [];
-    filteredScorecards.forEach((scorecard) => {
       const course = scorecard.course;
       if (!courseList.includes(course)) {
         courseList.push(course);
@@ -459,9 +300,17 @@ export default function FriendProfile() {
       courseList.includes(course._id),
     );
 
-    setFilterAllSelected(false);
-    setFilterLastTenSelected(false);
-    setFilterYearSelected(true);
+    setParPerformance({
+      aces: acesCount,
+      eagles: eaglesCount,
+      birdies: birdiesCount,
+      pars: parsCount,
+      bogeys: bogeyCount,
+      doubleBogeys: dblBogeyCount,
+      tripleBogeys: trpBogeyCount,
+    });
+
+    setFilterType(filter);
     setTotalScorecards(filteredScorecards);
     setPlayedCourses(matchingCourses);
     setBestRound(bestGame);
@@ -470,13 +319,6 @@ export default function FriendProfile() {
     setUserWins(userPoints);
     setFriendWins(friendPoints);
     setTies(ties);
-    setAces(acesCount);
-    setBirdies(birdiesCount);
-    setEagles(eaglesCount);
-    setPars(parsCount);
-    setBogey(bogeyCount);
-    setDoubleBogeys(dblBogeyCount);
-    setTripleBogeys(trpBogeyCount);
   };
 
   const outsideYearMenu = useClickOutside(() => {
@@ -526,7 +368,7 @@ export default function FriendProfile() {
           allScorecards={allScorecards}
           setFilterYear={setFilterYear}
           setIsYearMenuOpen={setIsYearMenuOpen}
-          filterByYear={filterByYear}
+          showFilteredResults={showFilteredResults}
         />
       )}
       <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
@@ -571,27 +413,27 @@ export default function FriendProfile() {
         <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <button
             className={`${
-              filterAllSelected
+              filterType === 'All'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black'
             }  rounded-md w-full py-0.5`}
-            onClick={showAllResults}
+            onClick={() => showFilteredResults('All')}
           >
             All
           </button>
           <button
             className={`${
-              filterLastTenSelected
+              filterType === 'LastTen'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black'
             }  rounded-md w-full py-0.5`}
-            onClick={filterLastTenRounds}
+            onClick={() => showFilteredResults('LastTen')}
           >
             Last 10
           </button>
           <button
             className={`${
-              filterYearSelected
+              filterType === 'Year'
                 ? 'bg-jade text-white font-semibold'
                 : 'bg-white text-black'
             }  rounded-md w-full py-0.5`}
@@ -698,13 +540,13 @@ export default function FriendProfile() {
         </div>
         <div className="w-full lg:w-1/2 xl:w-1/3">
           <ScoresBarChart
-            aces={aces}
-            eagles={eagles}
-            birdies={birdies}
-            pars={pars}
-            bogey={bogey}
-            doubleBogeys={doubleBogeys}
-            tripleBogeys={tripleBogeys}
+            aces={parPerformance.aces}
+            eagles={parPerformance.eagles}
+            birdies={parPerformance.birdies}
+            pars={parPerformance.pars}
+            bogey={parPerformance.bogeys}
+            doubleBogeys={parPerformance.doubleBogeys}
+            tripleBogeys={parPerformance.tripleBogeys}
             name={friendName}
           />
         </div>
