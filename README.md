@@ -27,6 +27,8 @@ This project is more than just a showcase of my skills; it's a passion project b
 - [Table of Contents](#table-of-contents)
 - [Live Demo](#demo)
 - [Screenshots](#screenshots)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Technologies](#technologies)
 - [Features](#features)
 - [Attribution](#attribution)
@@ -35,6 +37,12 @@ This project is more than just a showcase of my skills; it's a passion project b
 ## Demo
 
 If you'd like to explore the app, you can do so by visiting this link here.
+
+Feel free to create your own account by using an email and password,
+or you can use the sample account credentials:
+
+username: Mateo
+password: Password123!
 
 ## Screenshots
 
@@ -66,10 +74,63 @@ If you'd like to explore the app, you can do so by visiting this link here.
 
 <img src="/client/src/assets/images/responsive-design.gif" alt="Responsive Design"/>
 
+## Installation
+
+### Preqrequisites
+
+- Ensure you have Node.js and npm installed on your machine.
+- You need a MongoDB Atlas account for database connectivity.
+
+### Cloning the repository
+
+1. Clone the repository: `git clone https://github.com/itsdavehimself/disc-golf-scorecard-app.git`
+
+2. Navigate to the project directory: `cd disc-golf-scorecard-app`
+
+### Server Setup
+
+3. Navigate to the server directory and install dependencies: `cd server && npm install`
+
+4. Create a .env file `touch .env`
+
+5. Inside the .env file, create a port variable: `PORT=8080`
+
+6. Next create a URI variable for the MongoDB database: `URI='mongodb+srv://your_username:your_password@cluster0.gnnj1tx.mongodb.net/your_database?retryWrites=true&w=majority&appName=AtlasApp'`
+
+Be sure to replace 'your_username', 'your_password', and 'your_database' with your actualy MongoDB credentials.
+
+7. Lastly, create a SECRET variable used for authenticating logins. It can be any random string of letters, numbers, and symbols, for example: `SECRET='#9XhZ@oD5TjLbN*wR$Gy8p2z!Q6AqFs7UvHc1rKmV'`
+
+8. Navigate back to the parent directory `cd ..`
+
+### Client Setup
+
+9. Navigate to the client directory and install dependencies: `cd client && npm install`
+
+10. Again, create another .env file `touch .env`
+
+11. Inside the .env file, create an API url variable: `VITE_API_BASE_URL=http://localhost:8080/api`
+
+### Starting the App
+
+12. While inside the client directory, you can start the client by running the following code: `npm run dev`
+
+13. In a new terminal, navigate to the server folder `cd server`
+
+14. Start the server `npm run dev`
+
+## Usage
+
+1. Open your browser and navigate to http://localhost:5173
+
+2. You will need to create an account to login if you are running the app locally.
+
+3. When logged in, you will be taken to the dashboard where you can explore the different features. I suggest creating a few scorecards and friends, so that you will get to explore the statistics pages for yourself and the friend profiles.
 
 ## Technologies
 
 ### Frontend
+
 - React.js
 - Tailwind CSS
 - Lottie
@@ -77,13 +138,16 @@ If you'd like to explore the app, you can do so by visiting this link here.
 - Vite
 
 ### Backend
+
 - Express.js
 - Node.js
 
 ### Database
+
 - MongoDB
 
 ### Development Tools
+
 - npm
 - Git
 - GitHub
@@ -114,8 +178,8 @@ The photos used in this app are sourced from the following photographers. I appr
 6. [Ted Johnsson](https://unsplash.com/@ted_johnsson)
 7. [Kevin B](https://www.pexels.com/@captainb/)
 
-
 All photos are used in accordance with their respective licenses.
 
 ## Contact
+
 Email: davidsmolen@gmail.com
