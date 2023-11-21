@@ -85,7 +85,7 @@ export default function FriendProfile() {
   const navigate = useNavigate();
 
   const openScorecard = (scorecardId) => {
-    navigate(`/scorecard/${scorecardId}`);
+    navigate(`/scorecards/${scorecardId}`);
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import friendsImg from '../assets/images/phone_friends.png';
 import friendStatsImg from '../assets/images/phone_friend_stats.png';
 import ReviewCard from '../components/ReviewCard';
 import RevealOnScroll from '../components/RevealOnScroll';
+import Footer from '../components/Footer';
 
 export default function LandingPage() {
   return (
@@ -153,6 +154,7 @@ export default function LandingPage() {
           </RevealOnScroll>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

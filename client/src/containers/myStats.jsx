@@ -68,7 +68,7 @@ export default function MyStats() {
   };
 
   const openScorecard = (scorecardId) => {
-    navigate(`/scorecard/${scorecardId}`);
+    navigate(`/scorecards/${scorecardId}`);
   };
 
   useEffect(() => {

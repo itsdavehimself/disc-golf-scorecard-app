@@ -9,7 +9,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   const playerPerformances = [];
 
   const openScorecard = () => {
-    navigate(`/scorecard/${scorecard._id}`);
+    navigate(`/scorecards/${scorecard._id}`);
   };
 
   const filteredScores = scorecard.players.map((player) => {
