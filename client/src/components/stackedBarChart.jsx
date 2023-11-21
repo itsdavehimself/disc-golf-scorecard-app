@@ -31,8 +31,8 @@ const StackedBarChart = ({ performances }) => {
   }, [performances]);
 
   return (
-    <div className="rounded-md overflow-x-hidden border-off-white border-2 h-6 text-black">
-      <div className="flex">
+    <section className="rounded-md overflow-x-hidden border-off-white border-2 h-6 text-black">
+      <main className="flex">
         {proportions.map((proportion, index) =>
           proportion > 0 ? (
             <div
@@ -49,8 +49,8 @@ const StackedBarChart = ({ performances }) => {
             </div>
           ) : null,
         )}
-      </div>
-    </div>
+      </main>
+    </section>
   );
 };
 

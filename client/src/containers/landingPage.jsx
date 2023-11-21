@@ -9,8 +9,8 @@ import Footer from '../components/Footer';
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-col justify-center items-center bg-hero-pattern h-[100vh] bg-cover bg-bottom md:bg-cover md:bg-center ">
+    <section className="flex flex-col">
+      <main className="flex flex-col justify-center items-center bg-hero-pattern h-[100vh] bg-cover bg-bottom md:bg-cover md:bg-center ">
         <h2 className=" text-white text-4xl xl:text-5xl font-semibold text-center px-1 pb-5">
           Your disc golf scorecard companion
         </h2>
@@ -23,8 +23,8 @@ export default function LandingPage() {
             Get Started
           </button>
         </Link>
-      </div>
-      <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-48 md:pt-36 px-12 text-black">
+      </main>
+      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-48 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
           <RevealOnScroll>
             <div className="relative">
@@ -60,8 +60,8 @@ export default function LandingPage() {
             </button>
           </Link>
         </div>
-      </div>
-      <div className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-48 md:pt-36 px-12 text-black">
+      </section>
+      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-48 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
           <RevealOnScroll>
             <div className="relative">
@@ -98,63 +98,63 @@ export default function LandingPage() {
             </button>
           </Link>
         </div>
-      </div>
-      <div className="flex flex-col items-center px-8 xl:px-72 pb-36 text-black bg-off-white">
+      </section>
+      <section className="flex flex-col items-center px-8 xl:px-72 pb-36 text-black bg-off-white">
         <h2 className="text-4xl font-semibold py-20 text-center">
           What&apos;s the tee about ChainSeeker?
         </h2>
         <div className="flex flex-wrap justify-center gap-6">
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="ChainSeeker is a disc golf dream! Creating profiles for friends makes it epic. So easy to use, and tracking my stats is a game-changer."
                 username="discmaster42"
               />
-            </div>
+            </article>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="My go-to app! Creating profiles for friends adds a social twist. Incredibly easy to use, plus stat tracking? Awesome! Perfect disc golf companion."
                 username="FairwayFred"
               />
-            </div>
+            </article>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="Fantastic app! Creating profiles for friends enhances the fun. User-friendly, stat tracking is a blast. A must for disc golfers!"
                 username="BirdBirdieBrian"
               />
-            </div>
+            </article>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="Simplifies scoring. Friend profiles add a cool dimension. Effortless to use, love tracking my stats. Top-notch disc golf companion!"
                 username="ChillDude22"
               />
-            </div>
+            </article>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="This app rocks! Friend profiles amp up the competition. User-friendly, intuitive design. Tracking stats? Seamless. Best disc golf tool ever!"
                 username="TreeDodger"
               />
-            </div>
+            </article>
           </RevealOnScroll>
           <RevealOnScroll>
-            <div className="flex justify-center">
+            <article className="flex justify-center">
               <ReviewCard
                 review="Excels in every way! Love creating profiles for friends. User-friendly and efficient. Stat tracking is a bonus. Elevates the disc golf experience!"
                 username="ParManRyan"
               />
-            </div>
+            </article>
           </RevealOnScroll>
         </div>
-      </div>
+      </section>
       <Footer />
-    </div>
+    </section>
   );
 }

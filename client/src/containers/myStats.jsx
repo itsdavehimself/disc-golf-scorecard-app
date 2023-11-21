@@ -272,8 +272,8 @@ export default function MyStats() {
           showFilteredResults={showFilteredResults}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-20 items-center">
-        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
+      <section className="flex flex-col bg-off-white w-full px-3 text-black pt-20 items-center">
+        <section className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <button
             className={`${
               filterType === 'All'
@@ -304,11 +304,11 @@ export default function MyStats() {
           >
             {filterYear}
           </button>
-        </div>
+        </section>
         <div
           className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
         ></div>
-        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <section className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <div className="text-center">
             <div className="font-semibold">{filteredScorecards.length}</div>
             <div className="text-sm">
@@ -323,15 +323,15 @@ export default function MyStats() {
             <div className="font-semibold">{throws}</div>
             <div className="text-sm">THROWS</div>
           </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg mb-3 w-full lg:w-1/2 xl:w-1/3">
+        </section>
+        <section className="bg-white rounded-lg shadow-lg mb-3 w-full lg:w-1/2 xl:w-1/3">
           <div className="font-semibold px-3 py-2">
             {playedCourses.length}{' '}
             {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
           </div>
           <PlayedCourses playedCourses={playedCourses} />
           <div className="py-2 px-3">
-            <div className="font-semibold">Most Played Course</div>
+            <header className="font-semibold">Most Played Course</header>
             <div className="flex flex-row gap-2 items-center">
               <FontAwesomeIcon icon={faThumbTack} />
               <div>
@@ -347,13 +347,13 @@ export default function MyStats() {
               </div>
             </div>
           </div>
-        </div>
-        <div
+        </section>
+        <section
           onClick={() => openScorecard(bestRound.scorecardId)}
           className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer w-full lg:w-1/2 xl:w-1/3 hover:shadow-2xl transition-shadow"
         >
           <div className="col-start-1 col-end-10">
-            <div className="font-semibold pb-2">Best Round</div>
+            <header className="font-semibold pb-2">Best Round</header>
             {bestRound ? (
               <div className="text-sm">
                 <span className="font-semibold">
@@ -394,9 +394,9 @@ export default function MyStats() {
               className="text-md text-gray group-hover:text-jade transition"
             />
           </div>
-        </div>
+        </section>
 
-        <div className="w-full lg:w-1/2 xl:w-1/3">
+        <section className="w-full lg:w-1/2 xl:w-1/3">
           <ScoresBarChart
             aces={parPerformance.aces}
             eagles={parPerformance.eagles}
@@ -407,8 +407,8 @@ export default function MyStats() {
             tripleBogeys={parPerformance.tripleBogeys}
             name={user.user.username}
           />
-        </div>
-      </div>
+        </section>
+      </section>
     </>
   );
 }

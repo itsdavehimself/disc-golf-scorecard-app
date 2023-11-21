@@ -7,8 +7,8 @@ export default function PlayedCourses({ playedCourses }) {
   const [isCoursesOpen, setIsCoursesOpen] = useState(false);
 
   return (
-    <div>
-      <div
+    <section>
+      <header
         className="grid grid-cols-3 items-center px-3 hover:cursor-pointer hover:text-jade transition-colors"
         onClick={() => setIsCoursesOpen(!isCoursesOpen)}
       >
@@ -21,8 +21,8 @@ export default function PlayedCourses({ playedCourses }) {
             className={`${isCoursesOpen && 'rotate-180'}`}
           />
         </div>
-      </div>
-      <div
+      </header>
+      <main
         className={`text-sm bg-light-gray overflow-y-auto transition-height duration-500 ease-in-out ${
           isCoursesOpen ? 'h-36' : 'hidden'
         }`}
@@ -46,8 +46,8 @@ export default function PlayedCourses({ playedCourses }) {
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }
 

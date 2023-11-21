@@ -8,17 +8,17 @@ export default function AddFriendModal({
   handleFriendNameChange,
 }) {
   return (
-    <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
+    <section className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
       <div
         ref={outsideAddFriend}
         className="relative flex flex-col justify-center gap-6 py-5 px-5 w-full h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs xl:max-w-xs"
       >
-        <div className="flex flex-col">
+        <header className="flex flex-col">
           <div className="text-xl font-semibold">Add friend</div>
           <p className="text-sm pt-1">
             Create a profile to track scores and statistics for your friend.
           </p>
-        </div>
+        </header>
         <form
           className="flex flex-col gap-2 justify-center"
           onSubmit={handleNewFriendSubmit}
@@ -50,7 +50,7 @@ export default function AddFriendModal({
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
 

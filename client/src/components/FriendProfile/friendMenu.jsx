@@ -8,7 +8,7 @@ export default function FriendMenu({
   setIsEditNameOpen,
 }) {
   return (
-    <div className="relative">
+    <section className="relative">
       <div className="absolute z-10 right-4 top-4 flex flex-col bg-white rounded-lg shadow-lg h-auto w-40 border border-off-white text-black lg:text-sm lg:w-36">
         <button
           onClick={() => {
@@ -31,7 +31,7 @@ export default function FriendMenu({
           Delete friend
         </button>
       </div>
-    </div>
+    </section>
   );
 }
 

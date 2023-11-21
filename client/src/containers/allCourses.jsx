@@ -34,10 +34,10 @@ export default function AllCourses() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 pt-20">
+    <section className="flex flex-col bg-off-white w-full px-3 pt-20">
       <div className="bg-white rounded-lg mb-2 shadow-lg">
         <div className="flex flex-col justify-center items-center pt-4">
-          <div className="flex items-center justify-center bg-off-white pl-2 rounded-lg w-80 md:w-2/3 lg:w-1/2 xl:w-1/3 lg:mb-4">
+          <header className="flex items-center justify-center bg-off-white pl-2 rounded-lg w-80 md:w-2/3 lg:w-1/2 xl:w-1/3 lg:mb-4">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               className="text-sm text-black"
@@ -51,8 +51,8 @@ export default function AllCourses() {
               placeholder="Search course name or location"
               className="bg-off-white w-full p-1 outline-none pl-2 rounded-lg"
             ></input>
-          </div>
-          <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:gap-6">
+          </header>
+          <article className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-center lg:gap-6">
             {courses &&
               courses.map((course) => (
                 <CourseCard
@@ -61,12 +61,12 @@ export default function AllCourses() {
                   searchValueInput={searchValueInput}
                 />
               ))}
-          </div>
+          </article>
           <div className="flex items-center justify-center pb-4">
             <Logo fill="rgba(0,0,0,0.3)" stroke="rgba(0,0,0,0.3)" />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

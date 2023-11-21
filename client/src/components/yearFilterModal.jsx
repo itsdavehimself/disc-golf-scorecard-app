@@ -38,13 +38,15 @@ export default function YearFilterModal({
   });
 
   return (
-    <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
-      <div
+    <section className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal">
+      <main
         ref={outsideYearMenu}
         className="relative flex flex-col justify-center gap-6 py-5 px-5 w-2/3 lg:w-1/4 xl:w-1/5 xl:max-w-xs h-max mx-4 bg-white rounded-md"
       >
-        <p className="text-center">Choose a year to view stats</p>
-        <div className="grid grid-rows-auto gap-2">
+        <header>
+          <p className="text-center">Choose a year to view stats</p>
+        </header>
+        <section className="grid grid-rows-auto gap-2">
           {yearCounts.length > 0 ? (
             yearCounts.map((yearObj) => (
               <div
@@ -66,10 +68,10 @@ export default function YearFilterModal({
           ) : (
             <div className="text-center font-semibold">No Data Available</div>
           )}
-        </div>
+        </section>
         <button onClick={() => setIsYearMenuOpen(false)}>Cancel</button>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }
 

@@ -82,13 +82,13 @@ export default function AllScorecards() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 pt-16 justify-center items-center">
+    <section className="flex flex-col bg-off-white w-full px-3 pt-16 justify-center items-center">
       <DashboardStats scorecards={scorecards} />
-      <div className="bg-white rounded-lg mb-2 shadow-lg w-full lg:w-1/2 xl:w-1/3">
-        <div className="flex text-lg px-3 pt-3 pb-2 text-black items-center font-semibold">
+      <main className="bg-white rounded-lg mb-2 shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <header className="flex text-lg px-3 pt-3 pb-2 text-black items-center font-semibold">
           All Rounds
-        </div>
-        <div className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
+        </header>
+        <section className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className="text-sm text-black"
@@ -102,8 +102,8 @@ export default function AllScorecards() {
             placeholder="Search by friend or course name"
             className="bg-off-white w-full p-1 outline-none pl-2 rounded-lg"
           ></input>
-        </div>
-        <div>
+        </section>
+        <section>
           {scorecards &&
             scorecards.map((scorecard) => (
               <ScorecardDetails
@@ -112,11 +112,11 @@ export default function AllScorecards() {
                 searchValueInput={searchValueInput}
               />
             ))}
-        </div>
+        </section>
         <div className="flex items-center justify-center pb-4">
           <Logo fill="rgba(0,0,0,0.3)" stroke="rgba(0,0,0,0.3)" />
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }

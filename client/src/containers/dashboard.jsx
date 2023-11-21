@@ -71,8 +71,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 items-center">
-      <div className="pt-16 items-center md:items-start w-full">
+    <section className="flex flex-col bg-off-white w-full px-3 items-center">
+      <section className="pt-16 items-center md:items-start w-full">
         <div className="flex md:hidden mt-3 w-full justify-center">
           <Link
             to="/newround"
@@ -83,12 +83,12 @@ export default function Dashboard() {
             </button>
           </Link>
         </div>
-      </div>
+      </section>
       <DashboardStats scorecards={scorecards} />
-      <div className="rounded-lg bg-white shadow-lg w-full lg:w-1/2 xl:w-1/3">
-        <div className="flex text-lg px-3 pt-2 text-black items-center font-semibold">
+      <main className="rounded-lg bg-white shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <header className="flex text-lg px-3 pt-2 text-black items-center font-semibold">
           Last 5 rounds
-        </div>
+        </header>
         {scorecards &&
           scorecards
             .slice(0, 5)
@@ -102,7 +102,7 @@ export default function Dashboard() {
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }

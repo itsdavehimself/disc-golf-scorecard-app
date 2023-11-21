@@ -42,17 +42,17 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col bg-off-white h-screen gap-4 px-3 items-center justify-center w-screen">
-      <div className="bg-white rounded-lg shadow-lg px-5 py-6 w-full sm:w-1/2 md:w-1/2 lg:max-w-sm xl:max-w-sm">
-        <div className="flex flex-col gap-8">
+    <section className="flex flex-col bg-off-white h-screen gap-4 px-3 items-center justify-center w-screen">
+      <main className="bg-white rounded-lg shadow-lg px-5 py-6 w-full sm:w-1/2 md:w-1/2 lg:max-w-sm xl:max-w-sm">
+        <header className="flex flex-col gap-8">
           <div>
             <h1 className="text-5xl text-black text-center">ChainSeeker</h1>
           </div>
           <h3 className="text-black text-2xl font-bold text-center">
             Login to your account
           </h3>
-        </div>
-        <div className="py-6">
+        </header>
+        <section className="py-6">
           <form
             className="flex flex-col gap-5 text-black"
             onSubmit={handleSubmit}
@@ -109,9 +109,9 @@ const Login = () => {
               </div>
             )}
           </form>
-        </div>
-      </div>
-    </div>
+        </section>
+      </main>
+    </section>
   );
 };
 

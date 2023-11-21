@@ -321,10 +321,10 @@ export default function ScorecardForm() {
           outsideAddFriend={outsideAddFriend}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
-        <div className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3 w-full lg:w-1/2 xl:w-1/3">
+      <section className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
+        <main className="bg-white rounded-lg shadow-lg px-3 py-3 mt-3 w-full lg:w-1/2 xl:w-1/3">
           <form onSubmit={handleSubmit}>
-            <div
+            <section
               ref={outsideDropDown}
               className="relative font-md w-full hover:cursor-pointer"
             >
@@ -410,8 +410,8 @@ export default function ScorecardForm() {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="flex items-center justify-between my-4">
+            </section>
+            <section className="flex items-center justify-between my-4">
               <h3 className="font-semibold">Who&apos;s playing?</h3>
               <div
                 onClick={() => {
@@ -422,8 +422,8 @@ export default function ScorecardForm() {
                 <FontAwesomeIcon icon={faUserPlus} />{' '}
                 <span className="text-xs font-semibold">Add friend</span>
               </div>
-            </div>
-            <div className="flex flex-col gap-2">
+            </section>
+            <section className="flex flex-col gap-2">
               <div
                 data-player-name={user.user.username}
                 data-player-id="player1"
@@ -515,10 +515,10 @@ export default function ScorecardForm() {
               >
                 Start round
               </button>
-            </div>
+            </section>
           </form>
-        </div>
-      </div>
+        </main>
+      </section>
     </>
   );
 }

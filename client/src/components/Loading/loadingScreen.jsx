@@ -27,13 +27,13 @@ export default function LoadingScreen() {
   }, []);
 
   return (
-    <div className="bg-white w-screen flex flex-col items-center justify-center px-6">
+    <section className="bg-white w-screen flex flex-col items-center justify-center px-6">
       <div>
         <LottiePlayerComponent />
       </div>
       <div className="flex items-center justify-center text-center text-lg font-semibold text-jade">
         {loadingPhrase}
       </div>
-    </div>
+    </section>
   );
 }

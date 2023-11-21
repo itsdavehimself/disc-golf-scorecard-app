@@ -53,15 +53,15 @@ export default function AllFriends() {
   }
 
   return (
-    <div className="flex flex-col bg-off-white w-full px-3 pt-16 items-center">
+    <section className="flex flex-col bg-off-white w-full px-3 pt-16 items-center">
       <div className="bg-white rounded-lg shadow-lg mt-3 w-full lg:w-1/2 xl:w-1/3">
-        <div className="flex flex-row items-end justify-between pb-2">
+        <header className="flex flex-row items-end justify-between pb-2">
           <div className="text-lg pt-3 px-3 text-black font-semibold">
             Your friends
           </div>
           <div className="flex pr-2 text-sm">{friends.length} players</div>
-        </div>
-        <div className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
+        </header>
+        <section className="flex items-center justify-center bg-off-white pl-2 mx-3 rounded-lg">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
             className="text-sm text-black"
@@ -75,11 +75,11 @@ export default function AllFriends() {
             placeholder="Search friend"
             className="bg-off-white w-full p-1 outline-none pl-2 rounded-lg"
           ></input>
-        </div>
-        <div>
+        </section>
+        <main>
           {friends &&
             friends.map((friend) => (
-              <div
+              <article
                 onClick={() => openFriend(friend._id)}
                 className={`my-2 mx-2 px-3 bg-white rounded-lg text-black text-sm hover:cursor-pointer hover:bg-white-smoke transition-colors group ${
                   friend.name
@@ -114,13 +114,13 @@ export default function AllFriends() {
                     />
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
-        </div>
+        </main>
         <div className="flex items-center justify-center pb-4">
           <Logo fill="rgba(0,0,0,0.3)" stroke="rgba(0,0,0,0.3)" />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

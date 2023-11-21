@@ -13,8 +13,8 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="bg-white md:w-80">
-      <div className="hidden md:flex flex-col pt-16 items-start pl-5 h-full">
+    <section className="bg-white md:w-80">
+      <nav className="hidden md:flex flex-col pt-16 items-start pl-5 h-full">
         <div className="md:flex flex-col md:sticky top-16 text-lg gap-4">
           <Link to={'/'}>
             <button
@@ -76,7 +76,7 @@ export default function Sidebar() {
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+      </nav>
+    </section>
   );
 }

@@ -371,9 +371,9 @@ export default function FriendProfile() {
           showFilteredResults={showFilteredResults}
         />
       )}
-      <div className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
-        <div className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2 w-full lg:w-1/2 xl:w-1/3">
-          <div className="col-start-1 col-end-10">
+      <section className="flex flex-col bg-off-white w-full px-3 text-black pt-16 items-center">
+        <section className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 my-3 py-2 w-full lg:w-1/2 xl:w-1/3">
+          <header className="col-start-1 col-end-10">
             <div className="text-2xl font-semibold">{friendName}</div>
             <div className="text-sm">
               <div className="pt-1.5">
@@ -392,7 +392,7 @@ export default function FriendProfile() {
                 </span>
               </div>
             </div>
-          </div>
+          </header>
           <div className="flex justify-end text-lg">
             <button onClick={handleOpenMenu} className="pl-2 h-6 w-6">
               <FontAwesomeIcon
@@ -408,9 +408,9 @@ export default function FriendProfile() {
               />
             )}
           </div>
-        </div>
+        </section>
 
-        <div className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <section className="grid grid-cols-3 justify-items-center gap-14 py-1 px-3 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <button
             className={`${
               filterType === 'All'
@@ -441,11 +441,11 @@ export default function FriendProfile() {
           >
             {filterYear}
           </button>
-        </div>
+        </section>
         <div
           className={`text-sm ${isYearMenuOpen ? 'h-auto' : 'hidden'}`}
         ></div>
-        <div className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
+        <section className="flex justify-between text-black py-2 my-3 px-5 bg-white rounded-lg shadow-lg w-full lg:w-1/2 xl:w-1/3">
           <div className="text-center">
             <div className="font-semibold">{totalScorecards.length}</div>
             <div className="text-sm">
@@ -460,20 +460,20 @@ export default function FriendProfile() {
             <div className="font-semibold">{throws}</div>
             <div className="text-sm">THROWS</div>
           </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg mb-3 pb-2 w-full lg:w-1/2 xl:w-1/3">
+        </section>
+        <section className="bg-white rounded-lg shadow-lg mb-3 pb-2 w-full lg:w-1/2 xl:w-1/3">
           <div className="font-semibold px-3 py-2">
             {playedCourses.length}{' '}
             {playedCourses.length === 1 ? 'Course' : 'Courses'} Played
           </div>
           <PlayedCourses playedCourses={playedCourses} />
-        </div>
-        <div
+        </section>
+        <section
           onClick={() => openScorecard(bestRound.scorecardId)}
           className="grid grid-cols-10 bg-white rounded-lg shadow-lg px-3 py-2 mb-3 group hover:cursor-pointer hover:shadow-2xl transition-shadow w-full lg:w-1/2 xl:w-1/3"
         >
           <div className="col-start-1 col-end-10">
-            <div className="font-semibold pb-2">Best Round</div>
+            <header className="font-semibold pb-2">Best Round</header>
             {bestRound ? (
               <div className="text-sm">
                 <span className="font-semibold">
@@ -516,11 +516,11 @@ export default function FriendProfile() {
               className="text-md text-gray group-hover:text-jade transition"
             />
           </div>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg py-2 mb-3 w-full lg:w-1/2 xl:w-1/3">
-          <div className="text-center text-sm font-semibold pb-2">
+        </section>
+        <section className="bg-white rounded-lg shadow-lg py-2 mb-3 w-full lg:w-1/2 xl:w-1/3">
+          <header className="text-center text-sm font-semibold pb-2">
             Your stats vs. {friendName}
-          </div>
+          </header>
           <div className="grid grid-cols-3 text-center">
             <div className="">
               <div className="text-xl font-bold">{userWins}</div>
@@ -537,8 +537,8 @@ export default function FriendProfile() {
               <div className="text-sm">{ties === 1 ? 'TIE' : 'TIES'}</div>
             </div>
           </div>
-        </div>
-        <div className="w-full lg:w-1/2 xl:w-1/3">
+        </section>
+        <section className="w-full lg:w-1/2 xl:w-1/3">
           <ScoresBarChart
             aces={parPerformance.aces}
             eagles={parPerformance.eagles}
@@ -549,8 +549,8 @@ export default function FriendProfile() {
             tripleBogeys={parPerformance.tripleBogeys}
             name={friendName}
           />
-        </div>
-      </div>
+        </section>
+      </section>
     </>
   );
 }

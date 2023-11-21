@@ -53,7 +53,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
   );
 
   return (
-    <div
+    <section
       onClick={openScorecard}
       className={`px-2 my-2 mx-2 rounded-lg text-black text-sm hover:cursor-pointer hover:bg-white-smoke transition-colors group ${
         scorecard.name
@@ -72,7 +72,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
           <p className="text-xs text-gray">
             {formattedDate} at {formattedTime}
           </p>
-          <div className="flex items-center justify-start pt-4 gap-4 overflow-x-auto">
+          <main className="flex items-center justify-start pt-4 gap-4 overflow-x-auto">
             {scorecard.players.map((player, index) => (
               <div key={player._id} className="flex items-center gap-2">
                 <FontAwesomeIcon
@@ -98,7 +98,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
                 </div>
               </div>
             ))}
-          </div>
+          </main>
         </div>
         <div className="flex items-center justify-end pr-2">
           <FontAwesomeIcon
@@ -107,7 +107,7 @@ export default function ScorecardDetails({ scorecard, searchValueInput = '' }) {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

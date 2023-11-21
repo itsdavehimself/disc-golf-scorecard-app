@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <div className="flex flex-col gap-16 md:grid md:grid-cols-2 md:gap-0 border-t border-light-gray px-8 md:px-24 xl:px-72 pt-12 pb-24">
-      <div className="flex flex-col mx-auto gap-4">
+    <footer className="flex flex-col gap-16 md:grid md:grid-cols-2 md:gap-0 border-t border-light-gray px-8 md:px-24 xl:px-72 pt-12 pb-24">
+      <section className="flex flex-col mx-auto gap-4">
         <h3 className="text-3xl md:text-xl font-semibold">About the project</h3>
         <p className="text-sm">
           ChainSeeker is my first ever full-stack web development project,
@@ -15,8 +15,8 @@ export default function Footer() {
           with the goal of enhancing the disc golf experience, initially for my
           personal use and that of a few friends. See you on the fairway!
         </p>
-      </div>
-      <div className="md:mx-auto">
+      </section>
+      <section className="md:mx-auto">
         <div className="flex flex-col items-start gap-4">
           <h3 className="text-3xl md:text-xl font-semibold">Links</h3>
           <Link
@@ -39,7 +39,7 @@ export default function Footer() {
             </button>
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </footer>
   );
 }

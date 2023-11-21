@@ -134,12 +134,12 @@ export default function ScoresBarChart({
   }, [aces, eagles, birdies, pars, bogey, doubleBogeys, tripleBogeys]);
 
   return (
-    <div className="w-full md:col-span-2 relative h-72 pb-4 py-2 m-auto bg-white rounded-lg shadow-lg">
-      <div className="text-sm font-semibold text-black text-center">
+    <section className="w-full md:col-span-2 relative h-72 pb-4 py-2 m-auto bg-white rounded-lg shadow-lg">
+      <header className="text-sm font-semibold text-black text-center">
         {name}&apos;s Par Performance
-      </div>
+      </header>
       <Bar data={chartData} options={chartOptions} />
-    </div>
+    </section>
   );
 }
 

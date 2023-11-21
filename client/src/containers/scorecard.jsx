@@ -296,10 +296,10 @@ export default function Scorecard() {
           nameForModal={nameForModal}
         />
       )}
-      <div className="flex flex-col w-screen bg-off-white pt-16 text-black px-3 items-center">
+      <section className="flex flex-col w-screen bg-off-white pt-16 text-black px-3 items-center">
         {courseExists ? (
           <>
-            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
+            <header className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
               <h1 className="text-xl font-semibold">{courseName}</h1>
               <div className="flex gap-2 text-gray text-sm pt-1">
                 <p className="flex items-center">
@@ -321,9 +321,9 @@ export default function Scorecard() {
                 />
                 {location}
               </p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg py-3 w-full lg:w-1/2 xl:w-1/3">
-              <div className="flex justify-between pb-3 px-3">
+            </header>
+            <main className="bg-white rounded-lg shadow-lg py-3 w-full lg:w-1/2 xl:w-1/3">
+              <section className="flex justify-between pb-3 px-3">
                 <div className="flex font-semibold text-lg">Scorecard</div>
                 <div className="flex gap-2">
                   <button
@@ -348,8 +348,8 @@ export default function Scorecard() {
                     <FontAwesomeIcon icon={faTrashCan} className="text-lg" />
                   </button>
                 </div>
-              </div>
-              <div className="flex flex-col px-4">
+              </section>
+              <section className="flex flex-col px-4">
                 <div className="grid grid-cols-2">
                   <div className="grid grid-cols-3 px-8">
                     <div className="flex items-center justify-center text-xs">
@@ -471,10 +471,10 @@ export default function Scorecard() {
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
+              </section>
+            </main>
 
-            <div className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
+            <section className="bg-white rounded-lg shadow-lg my-3 px-3 py-2 w-full lg:w-1/2 xl:w-1/3">
               <div className="flex font-semibold text-lg pb-3">
                 Player overview
               </div>
@@ -506,12 +506,12 @@ export default function Scorecard() {
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
           </>
         ) : (
           <div>Scorecard does not exist</div>
         )}
-      </div>
+      </section>
     </>
   );
 }

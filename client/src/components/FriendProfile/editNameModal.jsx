@@ -68,7 +68,7 @@ export default function EditNameModal({
   };
 
   return (
-    <div className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black">
+    <section className="flex items-center justify-center absolute z-50 w-screen h-screen bg-modal text-black">
       <div
         ref={outsideEditNameModal}
         className="relative flex flex-col justify-center gap-6 py-5 px-5 w-4/5 h-max mx-4 bg-white rounded-lg shadow-lg md:max-w-xs lg:max-w-xs  xl:max-w-xs"
@@ -106,7 +106,7 @@ export default function EditNameModal({
           </button>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
 
