@@ -97,7 +97,7 @@ password: Password123!
 
 6. Next create a URI variable for the MongoDB database: `URI='mongodb+srv://your_username:your_password@cluster0.gnnj1tx.mongodb.net/your_database?retryWrites=true&w=majority&appName=AtlasApp'`
 
-Be sure to replace 'your_username', 'your_password', and 'your_database' with your actualy MongoDB credentials.
+Be sure to replace 'your_username', 'your_password', and 'your_database' with your actual MongoDB credentials.
 
 7. Lastly, create a SECRET variable used for authenticating logins. It can be any random string of letters, numbers, and symbols, for example: `SECRET='#9XhZ@oD5TjLbN*wR$Gy8p2z!Q6AqFs7UvHc1rKmV'`
 
@@ -121,7 +121,7 @@ Be sure to replace 'your_username', 'your_password', and 'your_database' with yo
 
 ## Usage
 
-1. Open your browser and navigate to http://localhost:5173
+1. Open your browser and navigate to `http://localhost:5173`
 
 2. You will need to create an account to login if you are running the app locally.
 
