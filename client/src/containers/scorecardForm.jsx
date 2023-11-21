@@ -180,7 +180,7 @@ export default function ScorecardForm() {
             if (friendResponse.ok) {
               setCourse(null);
               setPlayers([]);
-              navigate(`/scorecard/${scorecardId}`);
+              navigate(`/scorecards/${scorecardId}`);
             }
           }),
         );
