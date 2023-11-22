@@ -62,7 +62,7 @@ const Login = () => {
               <input
                 className={`${
                   isUsernameError
-                    ? 'ring-red ring-2'
+                    ? 'appearance-none ring-red ring-2'
                     : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
                 } text-black rounded-md shadow-md p-2 focus:outline-none`}
                 type="text"
@@ -81,7 +81,7 @@ const Login = () => {
               <input
                 className={`${
                   isPasswordError
-                    ? 'ring-red ring-2'
+                    ? 'appearance-none ring-red ring-2'
                     : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
                 } text-black rounded-md shadow-md p-2 focus:outline-none`}
                 type="password"

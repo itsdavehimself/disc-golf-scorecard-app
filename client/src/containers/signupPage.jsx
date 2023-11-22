@@ -88,8 +88,8 @@ const Signup = () => {
             <input
               className={`${
                 isEmailError
-                  ? 'ring-red ring-2'
-                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+                  ? 'appearance-none ring-red ring-2'
+                  : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
               } text-black rounded-md shadow-md p-2 focus:outline-none`}
               type="email"
               onChange={handleEmailChange}
@@ -106,8 +106,8 @@ const Signup = () => {
             <input
               className={`${
                 isUsernameError
-                  ? 'ring-red ring-2'
-                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+                  ? 'appearance-none ring-red ring-2'
+                  : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
               } text-black rounded-md shadow-md p-2 focus:outline-none`}
               type="text"
               onChange={handleUserChange}
@@ -126,8 +126,8 @@ const Signup = () => {
             <input
               className={`${
                 isPasswordError
-                  ? 'ring-red ring-2'
-                  : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+                  ? 'appearance-none ring-red ring-2'
+                  : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
               } text-black rounded-md shadow-md p-2 focus:outline-none`}
               type="password"
               onChange={handlePasswordChange}
