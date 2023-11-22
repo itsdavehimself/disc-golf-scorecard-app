@@ -24,7 +24,7 @@ export default function LandingPage() {
           </button>
         </Link>
       </main>
-      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-48 md:pt-36 px-12 text-black">
+      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 pt-12 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
           <RevealOnScroll>
             <div className="relative">
@@ -61,7 +61,7 @@ export default function LandingPage() {
           </Link>
         </div>
       </section>
-      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-48 md:pt-36 px-12 text-black">
+      <section className="flex md:grid md:grid-cols-2 md:gap-28 lg:gap-18 py-24 md:pt-36 px-12 text-black">
         <div className="hidden md:flex justify-center">
           <RevealOnScroll>
             <div className="relative">
