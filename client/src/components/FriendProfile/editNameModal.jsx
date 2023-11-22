@@ -86,8 +86,8 @@ export default function EditNameModal({
             value={newFriendName}
             className={`${
               newFriendNameError
-                ? 'ring-red ring-2'
-                : 'border-white-smoke border focus:ring-2 focus:ring-jade'
+                ? 'appearance-none ring-red ring-2'
+                : 'appearance-none border-white-smoke border focus:ring-2 focus:ring-jade'
             } text-black rounded-md shadow-md p-2 focus:outline-none`}
           ></input>
           <div className="h-5">
