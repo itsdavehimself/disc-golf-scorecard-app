@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const usersRoutes = require('./routes/users');
 const scorecardRoutes = require('./routes/scorecards');
@@ -19,6 +20,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.URI }),
   })
 );
 app.use(passport.initialize());
