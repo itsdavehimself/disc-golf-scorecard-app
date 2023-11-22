@@ -100,7 +100,7 @@ export default function LandingPage() {
         </div>
       </section>
       <section className="flex flex-col items-center px-8 xl:px-72 pb-36 text-black bg-off-white">
-        <h2 className="text-4xl font-semibold py-20 text-center">
+        <h2 className="text-4xl font-semibold pt-14 md:p-20 md:pb-12 text-center">
           What&apos;s the tee about ChainSeeker?
         </h2>
         <div className="flex flex-wrap justify-center gap-6">
