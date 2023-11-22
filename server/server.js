@@ -43,7 +43,7 @@ app.use('/api/courses', courseRoutes);
 
 app.use('/api/friends', friendRoutes);
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server is listening at http://0.0.0.0:${port}`);
