@@ -36,7 +36,7 @@ This project is more than just a showcase of my skills; it's a passion project b
 
 ## Demo
 
-If you'd like to explore the app, you can do so by visiting this link here.
+If you'd like to explore the app, you can do so by visiting https://magical-jalebi-893a82.netlify.app/
 
 Feel free to create your own account by using an email and password,
 or you can use the sample account credentials:
