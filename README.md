@@ -46,10 +46,6 @@ or you can use the sample account credentials:
 
 ## Screenshots
 
-### Homepage
-
-<img src="/client/src/assets/images/phone_newround.png" alt="Homepage" width="500" />
-
 ### Dashboard
 
 <img src="/client/src/assets/images/phone_dashboard.png" alt="Dashboard" width="500" />
