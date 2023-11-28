@@ -105,7 +105,7 @@ Be sure to replace 'your_username', 'your_password', and 'your_database' with yo
 
 10. Again, create another .env file `touch .env`
 
-11. Inside the .env file, create an API url variable: `VITE_API_BASE_URL=http://localhost:8080/api`
+11. Inside the .env file, create an API url variable: `VITE_API_BASE_URL=http://localhost:3000/api`
 
 ### Starting the App
 
