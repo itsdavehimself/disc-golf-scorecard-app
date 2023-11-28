@@ -73,7 +73,7 @@ export default function FriendProfile() {
   const [playedCourses, setPlayedCourses] = useState([]);
   const [bestRoundCourseName, setBestRoundCourseName] = useState({});
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
-  const [filterYear, setFilterYear] = useState('Year');
+  const [filterYear, setFilterYear] = useState(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [filterType, setFilterType] = useState('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -220,10 +220,8 @@ export default function FriendProfile() {
 
     if (filter === 'All') {
       filteredScorecards = allScorecards;
-      setFilterYear('Year');
     } else if (filter === 'LastTen') {
       filteredScorecards = allScorecards.slice(-10);
-      setFilterYear('Year');
     } else if (filter === 'Year') {
       filteredScorecards = [];
       allScorecards.forEach((scorecard) => {
@@ -441,7 +439,7 @@ export default function FriendProfile() {
             }  rounded-md w-full py-0.5`}
             onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
           >
-            {filterYear}
+            {(filterType === 'Year' && filterYear) || 'Year'}
           </button>
         </section>
         <div
