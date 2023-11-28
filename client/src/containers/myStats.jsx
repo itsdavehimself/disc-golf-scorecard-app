@@ -41,7 +41,7 @@ export default function MyStats() {
     tripleBogeys: 0,
   });
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
-  const [filterYear, setFilterYear] = useState('Year');
+  const [filterYear, setFilterYear] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [filterType, setFilterType] = useState('All');
 
@@ -165,10 +165,8 @@ export default function MyStats() {
 
     if (filter === 'All') {
       filteredScorecards = allScorecards;
-      setFilterYear('Year');
     } else if (filter === 'LastTen') {
       filteredScorecards = allScorecards.slice(-10);
-      setFilterYear('Year');
     } else if (filter === 'Year') {
       filteredScorecards = [];
       allScorecards.forEach((scorecard) => {
@@ -299,7 +297,7 @@ export default function MyStats() {
             }  rounded-md w-full py-0.5`}
             onClick={() => setIsYearMenuOpen(!isYearMenuOpen)}
           >
-            {filterYear}
+            {(filterType === 'Year' && filterYear) || 'Year'}
           </button>
         </section>
         <div
