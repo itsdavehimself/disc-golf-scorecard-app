@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 export const FriendListContext = createContext();
 
@@ -27,4 +28,8 @@ export const FriendListContextProvider = ({ children }) => {
       {children}
     </FriendListContext.Provider>
   );
+};
+
+FriendListContextProvider.propTypes = {
+  children: PropTypes.element,
 };
