@@ -35,7 +35,12 @@ mongoose
   .then(() => console.log('DB CONNECTED'))
   .catch((err) => console.log('DB Connection Error', err));
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: process.env.ORIGIN || 'http://localhost:5173',
+    credentials: true,
+  })
+);
 
 app.use('/api/users', usersRoutes);
 
